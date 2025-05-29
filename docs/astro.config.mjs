@@ -9,6 +9,7 @@ import starlightImageZoom from 'starlight-image-zoom'
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://aspire.dev',
+	base: `aspire`,
 	integrations: [
 		starlight({
 			title: 'Aspire',
@@ -76,7 +77,8 @@ export default defineConfig({
 				ContentPanel: './src/components/ContentPanel.astro',
 				SocialIcons: './src/components/SocialIcons.astro',
 				Search: './src/components/Search.astro',
-				Footer: './src/components/Footer.astro'
+				Footer: './src/components/Footer.astro',
+				MarkdownContent: './src/components/MarkdownContent.astro',
 			},
 			expressiveCode: {
 				/* TODO: decide which themes we want
@@ -86,18 +88,74 @@ export default defineConfig({
 			},
 			sidebar: [
 				{
+					label: 'Home',
+					link: '/'
+				},
+				{
 					label: 'Welcome',
 					items: [
 						{ label: 'Overview', slug: 'get-started/overview' },
 						{ label: 'Prerequisites', slug: 'get-started/prerequisites' },
 						{ label: 'Installation', slug: 'get-started/installation' },
-						{ label: 'First app', slug: 'get-started/first-app' }
+						{ label: 'First app', slug: 'get-started/first-app', badge: 'Quickstart' }
 					],
 				},
 				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
+					label: 'Build',
+					badge: {
+						text: 'Concepts',
+						variant: 'note'
+					},
+					autogenerate: { directory: 'build' },
 				},
+				{
+					label: 'Dashboard',
+					items: [
+						{ label: 'Overview', slug: '' },
+						{
+							label: 'Features', slug: '', badge: {
+								text: 'UX',
+								variant: 'caution'
+							},
+						},
+						{
+							label: 'Standalone', slug: '', badge: {
+								text: 'Container',
+								variant: 'danger'
+							},
+						},
+						{ label: 'Configuration', slug: '' },
+						{ label: 'Browser telemetry', slug: '' },
+					]
+				},
+				{
+					label: 'Integrations',
+					collapsed: true,
+					autogenerate: { directory: 'integrations' },
+				},
+				{
+					label: 'Custom Integrations',
+					collapsed: true,
+					items: [
+						{ label: 'Create hosting integration', slug: '' },
+						{ label: 'Create client integration', slug: '' },
+						{ label: 'Secure integrations', slug: '' },
+					]
+				},
+				{
+					label: 'Deploy',
+					collapsed: true,
+					autogenerate: { directory: 'deploy' },
+				},
+				{
+					label: 'Reference',
+					badge: {
+						text: 'API',
+						variant: 'tip'
+					},
+					collapsed: true,
+					autogenerate: { directory: 'reference' },
+				}
 			],
 			plugins: [
 				catppuccin(),
