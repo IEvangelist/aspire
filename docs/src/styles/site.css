@@ -136,10 +136,15 @@
 /* Header font family declarations */
 h1, h2, h3, h4, h5, h6,
 .hero #_top,
-.site-title,
-.tagline {
+.tagline,
+.site-title {
 	font-family: var(--font-heading);
 	font-weight: 600; /* Semibold */
+}
+
+.hero .sl-link-button {
+	font-family: var(--font-heading);
+	font-weight: 600; /* Bold */
 }
 
 @media (min-width: 72rem) {
