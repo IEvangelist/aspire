@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700');
 
 /* Dark mode colors. */
 :root {
-
 	/* https://betterwebtype.com/5-monospaced-fonts-with-coding-ligatures/ */
 	--__sl-font-mono: 'Fira Code';
 
+	/* Custom font families */
+	--font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+
 	--sl-color-accent-low: #0F042C;
-	--sl-color-accent: #512BD4;
+	--sl-color-accent: #9B5DE5;
 	--sl-color-accent-high: #B9AAEE;
 	--sl-color-white: #FDF0DA;
 	--sl-color-gray-1: #EEEAFB;
@@ -20,7 +22,7 @@
 
 	--color-dotnet-purple: #2c256b;
 	--background-gradient: linear-gradient(to bottom, var(--sl-color-bg), var(--color-dotnet-purple));
-	--color-purple: #512BD4;
+	--color-purple: #9B5DE5;
 	--color-magenta: #D600AA;
 	--color-flamingo: #F65163;
 	--color-blue: #0078D7;
@@ -40,7 +42,7 @@
 
 :root[data-theme='light'] {
 	--sl-color-accent-low: #EEEAFB;
-	--sl-color-accent: #512BD4;
+	--sl-color-accent: #9B5DE5;
 	--sl-color-accent-high: #311A7F;
 	--sl-color-white: #14053A;
 	--sl-color-gray-1: #24272F;
@@ -91,9 +93,9 @@
 
 	.hero #_top {
 		font-size: calc(var(--sl-text-6xl) * 2);
-		background: var(--sl-color-white);
-		background: radial-gradient(ellipse farthest-corner at center center,
-				var(--sl-color-white) 0%,
+		background: var(--sl-color-white);		
+		background: radial-gradient(ellipse 100% 80% at 50% 20%, 
+				var(--sl-color-white) 0%, 
 				var(--sl-color-accent) 100%);
 		background-clip: text;
 		-webkit-background-clip: text;
@@ -129,6 +131,15 @@
 	a:hover {
 		filter: brightness(110%);
 	}
+}
+
+/* Header font family declarations */
+h1, h2, h3, h4, h5, h6,
+.hero #_top,
+.site-title,
+.tagline {
+	font-family: var(--font-heading);
+	font-weight: 600; /* Semibold */
 }
 
 @media (min-width: 72rem) {
