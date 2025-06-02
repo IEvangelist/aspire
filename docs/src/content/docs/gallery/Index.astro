@@ -1,0 +1,28 @@
+---
+const response = await fetch('data/aspire-packages.json');
+const packages = await response.json();
+
+import { Badge, CardGrid } from '@astrojs/starlight/components';
+import IconLinkCard from '../../../components/IconLinkCard.astro';
+---
+
+## Aspire NuGet Packages
+
+<CardGrid>
+    {packages.map(pkg => (
+        <IconLinkCard
+            href={pkg.href}
+            title={pkg.title}
+            icon={pkg.icon}
+            description={`${pkg.description} (${(pkg.downloads ?? 0).toLocaleString()} downloads)`}
+        >
+            {pkg.tags?.length > 0 && (
+                <ul class="flex gap-2 mt-2 flex-wrap">
+                    {pkg.tags.map(tag => (
+                        <Badge text="{tag}" size="small" />
+                    ))}
+                </ul>
+            )}
+        </Card>
+    ))}
+</CardGrid>

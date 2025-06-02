@@ -1,0 +1,232 @@
+[
+  {
+    "title": "Aspire.Hosting",
+    "description": "Core abstractions for the .NET Aspire application model.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting",
+    "tags": [
+      "aspire",
+      "hosting"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.AppHost",
+    "description": "Core library and MSBuild logic for .NET Aspire AppHost projects.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.apphost/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.AppHost",
+    "tags": [
+      "aspire",
+      "hosting"
+    ]
+  },
+  {
+    "title": "Aspire.AppHost.Sdk",
+    "description": ".NET Aspire AppHost SDK. Must be referenced by .NET Aspire AppHost projects.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.apphost.sdk/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.AppHost.Sdk",
+    "tags": [
+      "aspire",
+      "apphost",
+      "sdk"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.Sdk",
+    "description": ".NET Aspire Hosting SDK. Enabled via <IsAspireHost>true</IsAspireHost>.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.sdk/8.2.2/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.Sdk",
+    "tags": [
+      "aspire",
+      "hosting",
+      "sdk"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.Azure",
+    "description": "Azure resource types for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.azure/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.Azure",
+    "tags": [
+      "aspire",
+      "hosting",
+      "azure"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.Orchestration.linux-x64",
+    "description": ".NET Aspire Orchestration Dependencies",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.orchestration.linux-x64/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.Orchestration.linux-x64",
+    "tags": []
+  },
+  {
+    "title": "Aspire.Hosting.Testing",
+    "description": "Testing support for the .NET Aspire application model.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.testing/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.Testing",
+    "tags": [
+      "aspire",
+      "testing"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.Redis",
+    "description": "Redis® support for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.redis/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.Redis",
+    "tags": [
+      "aspire",
+      "integration",
+      "hosting",
+      "redis"
+    ]
+  },
+  {
+    "title": "Aspire.StackExchange.Redis",
+    "description": "A generic Redis® client that integrates with Aspire, including health checks, logging, and telemetry.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.stackexchange.redis/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.StackExchange.Redis",
+    "tags": [
+      "aspire",
+      "integration",
+      "client",
+      "component",
+      "cloud",
+      "cache",
+      "caching",
+      "redis"
+    ]
+  },
+  {
+    "title": "Aspire.ProjectTemplates",
+    "description": ".NET Aspire Template Pack for Microsoft Template Engine",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.projecttemplates/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.ProjectTemplates",
+    "tags": []
+  },
+  {
+    "title": "Aspire.Dashboard.Sdk.linux-x64",
+    "description": "Dashboard browser interface for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.dashboard.sdk.linux-x64/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Dashboard.Sdk.linux-x64",
+    "tags": []
+  },
+  {
+    "title": "Aspire.Hosting.SqlServer",
+    "description": "Microsoft SQL Server support for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.sqlserver/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.SqlServer",
+    "tags": [
+      "aspire",
+      "integration",
+      "hosting",
+      "sqlserver",
+      "sql"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.NodeJs",
+    "description": "Node.js support for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.nodejs/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.NodeJs",
+    "tags": [
+      "aspire",
+      "integration",
+      "hosting",
+      "Node",
+      "Nodejs"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.PostgreSQL",
+    "description": "PostgreSQL® support for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.postgresql/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.PostgreSQL",
+    "tags": [
+      "aspire",
+      "integration",
+      "hosting",
+      "postgresql",
+      "postgres",
+      "npgsql",
+      "sql"
+    ]
+  },
+  {
+    "title": "Aspire.Hosting.Azure.Storage",
+    "description": "Azure Storage resource types for .NET Aspire.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.azure.storage/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Hosting.Azure.Storage",
+    "tags": [
+      "aspire",
+      "integration",
+      "hosting",
+      "azure"
+    ]
+  },
+  {
+    "title": "Aspire.Microsoft.EntityFrameworkCore.SqlServer",
+    "description": "A Microsoft SQL Server provider for Entity Framework Core that integrates with Aspire, including connection pooling, health check, logging, and telemetry.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.microsoft.entityframeworkcore.sqlserver/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Microsoft.EntityFrameworkCore.SqlServer",
+    "tags": [
+      "aspire",
+      "integration",
+      "client",
+      "component",
+      "cloud",
+      "data",
+      "database",
+      "ef",
+      "efcore",
+      "entityframework",
+      "entityframeworkcore",
+      "entity-framework-core",
+      "o/rm",
+      "sqlserver",
+      "sql"
+    ]
+  },
+  {
+    "title": "Aspire.Npgsql.EntityFrameworkCore.PostgreSQL",
+    "description": "A PostgreSQL® provider for Entity Framework Core that integrates with Aspire, including connection pooling, health checks, logging, and telemetry.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.npgsql.entityframeworkcore.postgresql/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Npgsql.EntityFrameworkCore.PostgreSQL",
+    "tags": [
+      "aspire",
+      "integration",
+      "client",
+      "component",
+      "cloud",
+      "data",
+      "database",
+      "ef",
+      "efcore",
+      "entityframework",
+      "entityframeworkcore",
+      "entity-framework-core",
+      "o/rm",
+      "postgressql",
+      "postgres",
+      "npgsql",
+      "sql"
+    ]
+  },
+  {
+    "title": "Aspire.Azure.Storage.Blobs",
+    "description": "A client for Azure Blob Storage that integrates with Aspire, including health checks, logging and telemetry.",
+    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.azure.storage.blobs/9.3.0/icon",
+    "href": "https://www.nuget.org/packages/Aspire.Azure.Storage.Blobs",
+    "tags": [
+      "aspire",
+      "integration",
+      "client",
+      "component",
+      "cloud",
+      "azure",
+      "storage",
+      "blobs",
+      "blob"
+    ]
+  }
+]
