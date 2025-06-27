@@ -1,37 +1,113 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
+import type { HTMLAttributes } from "astro/types";
 
 interface Source {
-	src: string;
-	type: 'video/mp4' | 'video/webm';
-	title?: string;
+    src: string;
+    type: "video/mp4" | "video/webm";
+    title?: string;
+    theme?: "light" | "dark"; // Optional theme property
 }
 
-interface Props extends Omit<HTMLAttributes<'video'>, 'title'> {
-	sources: Source[];
-	title?: string;
+interface Props extends Omit<HTMLAttributes<"video">, "title"> {
+    sources: Source[];
+    title?: string;
 }
 
 const { sources, title, ...rest } = Astro.props as Props;
+const sourcesJson = JSON.stringify(sources);
 ---
 
-<video class="looping-video"
-	autoplay
-	loop
-	muted
-	playsinline
-	title={title}
-	{...rest}
+<video
+    class="looping-video"
+    autoplay
+    loop
+    muted
+    playsinline
+    title={title}
+    data-sources={sourcesJson}
+    {...rest}
 >
-	{sources.map(({ src, type, title }) => (
-		<source src={src} type={type} title={title} />
-	))}
+    {
+        sources
+            .filter((s) => !s.theme)
+            .map(({ src, type, title }) => (
+                <source src={src} type={type} title={title} />
+            ))
+    }
 </video>
 
+<script>
+    function getCurrentTheme() {
+        const html = document.documentElement;
+        return html.getAttribute('data-theme') || 'light';
+    }
+
+    function getThemeSources(sources: any[], theme: string) {
+        const themed = sources.filter((s: { theme: any; }) => s.theme === theme);
+        if (themed.length > 0) return themed;
+        return sources.filter((s: { theme: any; }) => !s.theme);
+    }
+
+    function updateVideoSource() {
+        const video = document.querySelector('.looping-video');
+        if (!(video instanceof HTMLVideoElement)) return;
+        const sourcesAttr = video.getAttribute('data-sources');
+        if (!sourcesAttr) return;
+        let sources;
+        try {
+            sources = JSON.parse(sourcesAttr);
+        } catch {
+            return;
+        }
+        const theme = getCurrentTheme();
+        const themeSources = getThemeSources(sources, theme);
+        while (video.firstChild) video.removeChild(video.firstChild);
+        themeSources.forEach(({ src, type, title }) => {
+            const source = document.createElement('source');
+            source.src = src;
+            source.type = type;
+            if (title) source.title = title;
+            video.appendChild(source);
+        });
+        video.load();
+    }
+
+    async function initLoopingVideo() {
+        try {
+            updateVideoSource();
+
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (
+                        mutation.type === 'attributes' &&
+                        mutation.attributeName === 'data-theme' &&
+                        mutation.target === document.documentElement
+                    ) {
+                        updateVideoSource();
+                    }
+                });
+            });
+
+            observer.observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ['data-theme'],
+            });
+        } catch (error) {
+            console.error('Failed to update looping video:', error);
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initLoopingVideo);
+    } else {
+        initLoopingVideo();
+    }
+</script>
+
 <style>
-	video.looping-video {
-		border-radius: .5rem;
-		border: 1px solid var(--sl-color-gray-5);
-		box-shadow: var(--sl-shadow-md);
-	}
+    video.looping-video {
+        border-radius: 0.5rem;
+        border: 1px solid var(--sl-color-gray-5);
+        box-shadow: var(--sl-shadow-md);
+    }
 </style>
