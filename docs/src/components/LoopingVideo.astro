@@ -14,7 +14,8 @@ interface Props extends Omit<HTMLAttributes<'video'>, 'title'> {
 
 const { sources, title, ...rest } = Astro.props as Props;
 ---
-<video
+
+<video class="looping-video"
 	autoplay
 	loop
 	muted
@@ -26,3 +27,11 @@ const { sources, title, ...rest } = Astro.props as Props;
 		<source src={src} type={type} title={title} />
 	))}
 </video>
+
+<style>
+	video.looping-video {
+		border-radius: .5rem;
+		border: 1px solid var(--sl-color-gray-5);
+		box-shadow: var(--sl-shadow-md);
+	}
+</style>
