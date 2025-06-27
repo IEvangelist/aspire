@@ -485,19 +485,28 @@ builder.Build().Run();`
 
       let variant = '';
       
-      // Build variant key based on the actual variant names in the HTML
-      if (hasDatabase) variant += 'database';
-      if (hasApi) variant += 'Api';
-      
-      // Add Frontend (always present, but case matters)
-      if (hasDatabase || hasApi) {
-        variant += 'Frontend';
+      // Build variant key systematically to match all 16 combinations
+      // Start with database and api components
+      if (hasDatabase && hasApi) {
+        variant = 'databaseApiFrontend';
+      } else if (hasDatabase && !hasApi) {
+        variant = 'databaseFrontend';
+      } else if (!hasDatabase && hasApi) {
+        variant = 'apiFrontend';
       } else {
-        variant += 'frontend'; // lowercase when it's the first part
+        // Neither database nor api
+        variant = 'frontend';
       }
       
-      if (hasContainer) variant += 'Container';
-      if (hasDeployment) variant += 'Deployment';
+      // Add container suffix if present
+      if (hasContainer) {
+        variant += 'Container';
+      }
+      
+      // Add deployment suffix if present
+      if (hasDeployment) {
+        variant += 'Deployment';
+      }
 
       console.log('Generated variant:', variant); // Debug logging
       return variant;
