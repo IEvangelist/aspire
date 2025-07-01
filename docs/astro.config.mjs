@@ -134,6 +134,16 @@ export default defineConfig({
 						],
 					},
 					{
+						label: 'Reference',
+						link: '/reference/cli/overview',
+						icon: 'document',
+						items: [
+							{
+								label: 'Aspire CLI', autogenerate: { directory: 'reference/cli' }
+							}
+						]
+					},
+					{
 						label: 'Community',
 						link: '/community/videos',
 						icon: 'heart',
