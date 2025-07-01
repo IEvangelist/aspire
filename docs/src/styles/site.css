@@ -78,6 +78,10 @@ pre[data-language="console"] > code {
 	line-height: initial;
 }
 
+.sl-markdown-content code {
+	border-radius: .25rem;
+}
+
 /* Interactive elements */
 a:not(:disabled),
 select:not(:disabled) option:not(:disabled) {

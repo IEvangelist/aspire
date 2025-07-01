@@ -7,9 +7,9 @@ Aspire templates include a sophisticated dashboard for comprehensive app monitor
 Key features of the dashboard include:
 
 - Real-time tracking of logs, traces, and environment configurations.
-- User interface to [stop, start, and restart resources](explore.md#resource-actions).
-- Collects and displays logs and telemetry; [view structured logs, traces, and metrics](explore.md#monitoring-pages) in an intuitive UI.
-- Enhanced debugging with [GitHub Copilot](copilot.md), your AI-powered assistant built into the dashboard.
+- User interface to stop, start, and restart resources.
+- Collects and displays logs and telemetry; view structured logs, traces, and metrics in an intuitive UI.
+- Enhanced debugging with GitHub Copilot, your AI-powered assistant built into the dashboard.
 
 ## Use the dashboard with Aspire projects
 
@@ -25,17 +25,13 @@ import { Code, Tabs, TabItem } from '@astrojs/starlight/components';
 
 <Tabs>
   <TabItem label="Linux" icon="linux">
-	    ```bash
-        docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \
-            mcr.microsoft.com/dotnet/aspire-dashboard:9.0
-        ```
+      <Code title="Bash — Run Aspire from Docker" code={`docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \\
+    mcr.microsoft.com/dotnet/aspire-dashboard:9.0`} lang="bash" frame="terminal" />
   </TabItem>
 
   <TabItem label="Windows" icon="seti:windows">
-	  ```powershell
-        docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard `
-            mcr.microsoft.com/dotnet/aspire-dashboard:9.0
-        ```
+      <Code title="PowerShell — Run Aspire from Docker" code={`docker run --rm -it -p 18888:18888 -p 4317:18889 -d --name aspire-dashboard \`
+    mcr.microsoft.com/dotnet/aspire-dashboard:9.0`} lang="powershell" frame="terminal" />
   </TabItem>
 </Tabs>
 
