@@ -44,7 +44,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     }`}
                     data-index={index}
                 >
-                    <div class="card" data-card-index={index}>
+                    <div class="card" data-card-index={index} tabindex={index === initialIndex || index === prevIndex || index === nextIndex ? 0 : -1} role="button" aria-label={`Select testimonial from ${testimonial.name}`}>
                         <img
                             class="avatar"
                             src={
@@ -213,15 +213,25 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     (state.currentIndex + 1) % state.testimonials.length;
 
                 items.forEach((item, i) => {
-                    item.classList.remove("prev", "current", "next", "hidden");
-                    if (i === state.currentIndex) {
-                        item.classList.add("current");
-                    } else if (i === prevIndex) {
-                        item.classList.add("prev");
-                    } else if (i === nextIndex) {
-                        item.classList.add("next");
+                    const index = parseInt(item.getAttribute('data-index') || '0', 10);
+                    const card = item.querySelector('.card');
+                    
+                    // Remove all classes first
+                    item.classList.remove('current', 'prev', 'next', 'hidden');
+                    
+                    // Add appropriate class based on new state
+                    if (index === state.currentIndex) {
+                        item.classList.add('current');
+                        if (card) card.setAttribute('tabindex', '0');
+                    } else if (index === prevIndex) {
+                        item.classList.add('prev');
+                        if (card) card.setAttribute('tabindex', '0');
+                    } else if (index === nextIndex) {
+                        item.classList.add('next');
+                        if (card) card.setAttribute('tabindex', '0');
                     } else {
-                        item.classList.add("hidden");
+                        item.classList.add('hidden');
+                        if (card) card.setAttribute('tabindex', '-1');
                     }
                 });
 
@@ -317,10 +327,28 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     goToSlide(index);
                 });
             });
-
-            // Add touch event listeners for swipe support
-            carousel.addEventListener("touchstart", handleTouchStart, { passive: true });
-            carousel.addEventListener("touchend", handleTouchEnd, { passive: true });
+            
+            // Add click event listeners to the cards themselves
+            items.forEach((item) => {
+                const card = item.querySelector('.card');
+                if (card) {
+                    card.addEventListener("click", () => {
+                        const index = parseInt(item.getAttribute('data-index') || '0', 10);
+                        stopAutoRotate();
+                        goToSlide(index);
+                    });
+                    
+                    // Add keyboard navigation for accessibility
+                    card.addEventListener("keydown", (event: KeyboardEvent) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            const index = parseInt(item.getAttribute('data-index') || '0', 10);
+                            stopAutoRotate();
+                            goToSlide(index);
+                        }
+                    });
+                }
+            });
 
             // Initial update just to be safe
             updateDisplay();
@@ -452,6 +480,31 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
         margin: 0 auto;
         background-color: var(--carousel-card-bg);
         backdrop-filter: blur(5px);
+        cursor: pointer;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease;
+    }
+    
+    .carousel-item.prev .card:hover,
+    .carousel-item.next .card:hover,
+    .carousel-item.current .card:hover {
+        transform: translateY(-5px);
+        box-shadow:
+            0 15px 30px rgba(0, 0, 0, 0.12),
+            0 10px 10px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(0, 0, 0, 0.05);
+    }
+    
+    .carousel-item.prev .card:focus-visible,
+    .carousel-item.next .card:focus-visible,
+    .carousel-item.current .card:focus-visible {
+        outline: 3px solid var(--carousel-primary);
+        outline-offset: 3px;
+        box-shadow:
+            0 15px 30px rgba(0, 0, 0, 0.12),
+            0 10px 10px rgba(0, 0, 0, 0.15),
+            0 0 0 1px rgba(0, 0, 0, 0.05);
     }
 
     .card[data-card-index="0"] {
