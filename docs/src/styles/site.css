@@ -73,6 +73,7 @@
 
 /* Code blocks */
 pre[data-language="bash"] > code,
+pre[data-language="powershell"] > code,
 pre[data-language="console"] > code {
 	line-height: initial;
 }

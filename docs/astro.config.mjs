@@ -117,10 +117,15 @@ export default defineConfig({
 					},
 					{
 						label: 'Integrations',
-						link: '/integrations/gallery',
+						link: '/integrations/overview',
 						icon: 'puzzle',
 						items: [
-							{ label: 'Gallery', slug: 'integrations/gallery' },
+							{
+								label: 'Explore', items: [
+									{ label: 'Overview', slug: 'integrations/overview' },
+									{ label: 'Integration Gallery', slug: 'integrations/gallery' },
+								]
+							},
 							{
 								label: 'Database', items: [
 									{ label: 'PostgreSQL', slug: 'integrations/postgres' },
@@ -134,12 +139,33 @@ export default defineConfig({
 						],
 					},
 					{
+						label: 'Dashboard',
+						link: '/dashboard/overview',
+						icon: 'list-format',
+						items: [
+							{ label: 'Explore', autogenerate: { directory: 'dashboard' } },
+						]
+					},
+					{
 						label: 'Reference',
 						link: '/reference/cli/overview',
 						icon: 'document',
 						items: [
 							{
-								label: 'Aspire CLI', autogenerate: { directory: 'reference/cli' }
+								label: 'Aspire CLI', items: [
+									{ label: 'Overview', slug: 'reference/cli/overview' },
+									{ label: 'Install', slug: 'reference/cli/install' },
+									{
+										label: 'Commands', items: [
+											{ label: 'Aspire New', slug: 'reference/cli/commands/aspire-new' },
+											{ label: 'Aspire Run', slug: 'reference/cli/commands/aspire-run' },
+											{ label: 'Aspire Add', slug: 'reference/cli/commands/aspire-add' },
+											{ label: 'Aspire Publish', slug: 'reference/cli/commands/aspire-publish' },
+											{ label: 'Aspire Config', slug: 'reference/cli/commands/aspire-config' },
+											{ label: 'Aspire Exec', slug: 'reference/cli/commands/aspire-exec' },
+										]
+									}
+								]
 							}
 						]
 					},
