@@ -8,7 +8,6 @@ import starlightImageZoom from 'starlight-image-zoom'
 import starlightLinksValidator from 'starlight-links-validator'
 import starlightScrollToTop from 'starlight-scroll-to-top'
 import starlightSidebarTopics from 'starlight-sidebar-topics'
-import remarkMermaid from 'astro-mermaidjs/remark-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
@@ -148,24 +147,32 @@ export default defineConfig({
 						]
 					},
 					{
-						label: 'Reference',
+						label: 'CLI Reference',
 						link: '/reference/cli/overview',
+						icon: 'forward-slash',
+						items: [
+							{ label: 'Overview', slug: 'reference/cli/overview' },
+							{ label: 'Install', slug: 'reference/cli/install' },
+							{
+								label: 'Commands', items: [
+									{ label: 'Aspire New', slug: 'reference/cli/commands/aspire-new' },
+									{ label: 'Aspire Run', slug: 'reference/cli/commands/aspire-run' },
+									{ label: 'Aspire Add', slug: 'reference/cli/commands/aspire-add' },
+									{ label: 'Aspire Publish', slug: 'reference/cli/commands/aspire-publish' },
+									{ label: 'Aspire Config', slug: 'reference/cli/commands/aspire-config' },
+									{ label: 'Aspire Exec', slug: 'reference/cli/commands/aspire-exec' },
+								]
+							}
+						]
+					},
+					{
+						label: 'API Reference',
+						link: '/reference/api/overview',
 						icon: 'document',
 						items: [
 							{
-								label: 'Aspire CLI', items: [
-									{ label: 'Overview', slug: 'reference/cli/overview' },
-									{ label: 'Install', slug: 'reference/cli/install' },
-									{
-										label: 'Commands', items: [
-											{ label: 'Aspire New', slug: 'reference/cli/commands/aspire-new' },
-											{ label: 'Aspire Run', slug: 'reference/cli/commands/aspire-run' },
-											{ label: 'Aspire Add', slug: 'reference/cli/commands/aspire-add' },
-											{ label: 'Aspire Publish', slug: 'reference/cli/commands/aspire-publish' },
-											{ label: 'Aspire Config', slug: 'reference/cli/commands/aspire-config' },
-											{ label: 'Aspire Exec', slug: 'reference/cli/commands/aspire-exec' },
-										]
-									}
+								label: 'Aspire API', items: [
+									{ label: 'Overview', slug: 'reference/api/overview' }
 								]
 							}
 						]
