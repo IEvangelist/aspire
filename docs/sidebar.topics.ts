@@ -16,7 +16,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
             },
             {
                 label: 'Concepts', items: [
-                    { label: 'Overview', slug: 'get-started/overview' },
+                    { label: 'Welcome', slug: 'get-started/overview' },
                     { label: 'What is Aspire?', slug: 'get-started/what-is-aspire' },
                     { label: 'The AppHost', slug: 'get-started/app-host' },
                     { label: 'Understanding Resources', slug: 'get-started/resources' },
