@@ -85,18 +85,6 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
         ]
     },
     {
-        label: 'API Reference',
-        link: '/reference/api/overview',
-        icon: 'document',
-        items: [
-            {
-                label: 'Aspire API', items: [
-                    { label: 'Overview', slug: 'reference/api/overview' }
-                ]
-            }
-        ]
-    },
-    {
         label: 'Community',
         link: '/community/videos',
         icon: 'heart',
