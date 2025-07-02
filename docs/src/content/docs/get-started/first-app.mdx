@@ -32,7 +32,6 @@ Aspire includes tooling to help you create and configure cloud-native apps. The 
 1. Verify the solution was created successfully. The Aspire CLI creates a new folder named _AspireApp_ in the current directory. This folder contains the solution file and several projects, including:
 
     <FileTree>
-
     - AspireApp.sln
     - AspireApp.ApiService
         - Properties/
@@ -45,7 +44,7 @@ Aspire includes tooling to help you create and configure cloud-native apps. The 
         - appsettings.Development.json
         - appsettings.json
         - AspireApp.AppHost.csproj
-        - Program.cs
+        - AppHost.cs
     - AspireApp.ServiceDefaults
         - Extensions.cs
         - AspireApp.ServiceDefaults.csproj
@@ -73,7 +72,7 @@ Aspire includes tooling to help you create and configure cloud-native apps. The 
     aspire run
     ```
 
-    When you run this command, the Aspire CLI automatically finds the app host project, builds your solution, and launches dev-time orchestration. Once the dashboard is ready, its URL (with a login token) appears in your console. You’ll also see a live, real-time view of your running resources and their current states.
+    When you run this command, the Aspire CLI automatically finds the app host project, builds your solution, and launches dev-time orchestration. Once the dashboard is ready, its URL (with a login token) appears in your console. You'll also see a live, real-time view of your running resources and their current states.
 
     ```bash title="Example output of aspire run"
     aspire run
