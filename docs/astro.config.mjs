@@ -8,6 +8,7 @@ import starlightImageZoom from 'starlight-image-zoom'
 import starlightLinksValidator from 'starlight-links-validator'
 import starlightScrollToTop from 'starlight-scroll-to-top'
 import starlightSidebarTopics from 'starlight-sidebar-topics'
+import remarkMermaid from 'astro-mermaidjs/remark-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
