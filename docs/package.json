@@ -8,6 +8,7 @@
     "start": "astro dev",
     "start:host": "astro dev --host",
     "build": "npm run update:all && astro build",
+    "build:production": "npm run update:all && astro build --mode production",
     "preview": "astro preview",
     "preview:host": "astro preview --host",
     "astro": "astro",

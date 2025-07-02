@@ -5,6 +5,7 @@ lastUpdated: true
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
+import LearnMore from '../../../components/LearnMore.astro';
 import IconAside from '../../../components/IconAside.astro';
 
 Aspire makes it easy to define everything your app needs—frontends, APIs, databases, and more—using the unified **AppHost** model. Just describe your resources in code, and Aspire handles the connections for you.
@@ -35,6 +36,10 @@ For example, if your API service depends on a database, Aspire will:
 1. Inject the connection string into your API service.
 1. Start your API service.
 </Steps>
+
+<LearnMore>
+  Learn more about [Resource Hierarchies](/aspire/architecture/resource-hierarchies) and how to represent them.
+</LearnMore>
 
 ## Resource Configuration
 
@@ -68,3 +73,7 @@ Aspire manages the complete lifecycle of your resources:
 1. **Scaling**: Resources can be scaled up or down as needed.
 1. **Cleanup**: Resources are properly disposed of when the application shuts down.
 </Steps>
+
+<LearnMore>
+  Learn more about [Built-In Resources & Lifecycle](/aspire/architecture/resource-model-overview/#built-in-resources--lifecycle).
+</LearnMore>

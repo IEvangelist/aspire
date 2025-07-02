@@ -3,24 +3,24 @@ import type { StarlightSidebarTopicsUserConfig } from "starlight-sidebar-topics"
 export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
     {
         label: 'Get Started',
-        link: 'get',
+        link: 'get-started/prerequisites',
         icon: 'rocket',
         items: [
-            { label: 'Get Aspire', slug: 'get' },
+            // { label: 'Get Aspire', slug: 'get' },
+            {
+                label: 'Setup', items: [
+                    { label: 'Prerequisites', slug: 'get-started/prerequisites' },
+                    { label: 'Installation', slug: 'get-started/installation' },
+                    { label: 'First app', slug: 'get-started/first-app', badge: 'Quickstart' }
+                ]
+            },
             {
                 label: 'Concepts', items: [
                     { label: 'Overview', slug: 'get-started/overview' },
                     { label: 'What is Aspire?', slug: 'get-started/what-is-aspire' },
                     { label: 'The AppHost', slug: 'get-started/app-host' },
                     { label: 'Understanding Resources', slug: 'get-started/resources' },
-                    { label: 'Deployment & App Topology', slug: 'get-started/deployment' }
-                ]
-            },
-            {
-                label: 'Setup', items: [
-                    { label: 'Prerequisites', slug: 'get-started/prerequisites' },
-                    { label: 'Installation', slug: 'get-started/installation' },
-                    { label: 'First app', slug: 'get-started/first-app', badge: 'Quickstart' }
+                    { label: 'Deployment and App Topology', slug: 'get-started/deployment' }
                 ]
             },
             {

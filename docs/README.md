@@ -53,3 +53,11 @@ All commands are run from the root of the project, from a terminal:
 
 Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
 
+## 🔥 Mermaid Diagrams
+
+Our integration with Mermaid has configured two icon sets:
+
+- https://icon-sets.iconify.design/logos/?keyword=logos
+- https://icon-sets.iconify.design/iconoir/?keyword=iconoir
+
+Search them for icons to use in your diagrams.
