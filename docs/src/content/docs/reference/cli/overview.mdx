@@ -12,19 +12,17 @@ The Aspire CLI is an interactive-first experience.
 
 - [Install the Aspire CLI](/aspire/get-started/installation)
 
-## Example new and run commands
-
-The following example is a playback of the `aspire new` and `aspire run` commands, which are used to create a new Aspire project and run it in development mode.
-
-import AsciinemaPlayer from '../../../../components/AsciinemaPlayer.astro';
-
-<AsciinemaPlayer src="/aspire/casts/aspire-new-run.cast" />
-
 ## Create projects
 
 The `aspire new` command is an interactive-first CLI experience, and is used to create one or more Aspire projects. As part of creating a project, Azure CLI ensures that the latest Aspire project templates are installed into the `dotnet` system.
 
 Use the `aspire new` command to create an Aspire project from a list of templates. Once a template is selected, the name of the project is set, and the output folder is chosen, `aspire` downloads the latest templates and generates one or more projects.
+
+import AsciinemaPlayer from '../../../../components/AsciinemaPlayer.astro';
+
+The following is an example of running the `aspire new` command to create a new Aspire project — select the play button to view terminal playback:
+
+<AsciinemaPlayer src="/aspire/casts/aspire-new.cast" poster="npt:0:03" />
 
 While command line parameters can be used to automate the creation of an Aspire project, the Aspire CLI is an interactive-first experience.
 
@@ -44,24 +42,9 @@ import { Steps } from '@astrojs/starlight/components';
   1. Displays a terminal-based dashboard.
 </Steps>
 
-The following snippet is an example of the terminal dashboard:
+The following is an example of running the `aspire run` command — select the play button to view terminal playback:
 
-```bash title="Example output of aspire run"
-aspire run
-
-Dashboard:
-📈  https://localhost:17076/login?t=<Your session's access token>
-
-╭─────────────┬─────────┬─────────┬────────────────────────╮
-│ Resource    │ Type    │ State   │ Endpoint(s)            │
-├─────────────┼─────────┼─────────┼────────────────────────┤
-│ apiservice  │ Project │ Running │ https://localhost:7393 │
-│             │         │         │ http://localhost:5555  │
-│ webfrontend │ Project │ Running │ https://localhost:7214 │
-│             │         │         │ http://localhost:5124  │
-╰─────────────┴─────────┴─────────┴────────────────────────╯
-Press Ctrl+C to stop the app host and exit.
-```
+<AsciinemaPlayer src="/aspire/casts/aspire-run.cast" poster="npt:0:03" />
 
 ## Add integrations
 
