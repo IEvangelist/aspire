@@ -1,0 +1,21 @@
+---
+const { owner, repo } = Astro.props;
+const codespacesUrl = `https://codespaces.new/${owner}/${repo}`;
+---
+
+<a href={codespacesUrl} target="_blank" rel="noopener" class="codespaces-button">
+    <img src='https://github.com/codespaces/badge.svg' alt='Open in GitHub Codespaces' style='max-width: 100%;'>
+</a>
+
+<style>
+    .codespaces-button {
+        display: inline-flex;
+        align-items: center;
+        padding-top: 1rem;
+    }
+    
+    .codespaces-button img {
+        height: auto;
+        width: auto;
+    }
+</style>
