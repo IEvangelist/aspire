@@ -4,65 +4,61 @@ description: Learn how Aspire simplifies the development, deployment, and debugg
 lastUpdated: true
 ---
 
-import { Aside, Code, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
-import { Kbd } from 'starlight-kbd/components'
-import IconAside from '../../../components/IconAside.astro';
-import Architecture from './three-tier-architecture.svg';
+import { CardGrid, LinkCard, Steps } from '@astrojs/starlight/components';
 
-Aspire streamlines building, running, debugging, and deploying distributed apps. Picture your app as a set of services, databases, and frontends—when they're deployed, they all work together seamlessly, but every time you develop them they need to be individually started and connected. With Aspire, you get a unified toolchain that eliminates complex configs and makes local debugging effortless. Instantly launch and debug your entire app with a single command. Ready to deploy? Aspire lets you publish anywhere—Kubernetes, the cloud, or your own servers. It's also fully extensible, so you can integrate your favorite tools and services with ease.
+Welcome to Aspire! This section will help you understand what Aspire is, how it works, and how to get started building distributed applications.
 
-## The AppHost
+Aspire streamlines building, running, debugging, and deploying distributed apps. Picture your app as a set of services, databases, and frontends—when they're deployed, they all work together seamlessly, but every time you develop them they need to be individually started and connected. With Aspire, you get a unified toolchain that eliminates complex configs and makes local debugging effortless.
 
-Aspire's **AppHost** is where you define your app's services and dependencies in code—no complex configs required. Easily map out your architecture and let Aspire handle the local orchestration, so you can focus on building features.
+## Core Concepts
 
-A simple example might represent a common three-tier architecture with a frontend that depends on an API, which in turn connects to a database:
+<CardGrid>
+  <LinkCard
+    title="What is Aspire?"
+    description="Learn about Aspire's unified approach to distributed application development and its key benefits."
+    href="/aspire/get-started/what-is-aspire"
+  />
+  <LinkCard
+    title="The AppHost"
+    description="Discover how to define your application's architecture using Aspire's code-first AppHost approach."
+    href="/aspire/get-started/app-host"
+  />
+  <LinkCard
+    title="Understanding Resources"
+    description="Explore Aspire's resource model and learn about different types of services, databases, and integrations."
+    href="/aspire/get-started/resources"
+  />
+  <LinkCard
+    title="Deployment & App Topology"
+    description="Learn how your development setup translates to production deployments across different platforms."
+    href="/aspire/get-started/deployment"
+  />
+</CardGrid>
 
-<Architecture style="border-radius: .5rem; box-shadow: var(--sl-shadow-sm); width: 100%;" />
+## Next Steps
 
-This could be represented in the AppHost as shown in the following code:
+Once you understand these core concepts, you're ready to:
 
-import SimpleAppHostCode from '../../../components/SimpleAppHostCode.astro';
+<Steps>
+1. **Check Prerequisites**: Ensure you have the required tools and SDKs installed
+1. **Install Aspire**: Get the Aspire tooling set up on your development machine  
+1. **Build Your First App**: Follow our quickstart guide to create your first Aspire application
+</Steps>
 
-<SimpleAppHostCode />
-
-Regardless of the language you choose, Aspire provides a consistent way to define your app's architecture. You can easily add services, set up dependencies, and configure how they interact—all in a straightforward, code-first manner.
-
-## Modeled as Resources
-
-Aspire makes it easy to define everything your app needs—frontends, APIs, databases, and more—using the unified **AppHost** model. Just describe your resources in code, and Aspire handles the connections for you. Resources can include:
-
-- AI Services
-- Caches
-- Containers
-- Databases
-- Executables
-- Frameworks
-- Messaging Services
-- Projects
-- Storage
-
-One resource can depend on another, and Aspire automatically wires them together. This means you can focus on building your app without worrying about the underlying infrastructure.
-
-<IconAside type="tip" icon="puzzle" title="Explore Integrations">
-    Check out the <a href="../../integrations/gallery">Integrations Gallery</a> to discover pre-built resources and services you can easily add to your app.
-</IconAside>
-
-Under-the-hood, every integration is either a **Container** or **Executable**, meaning you can add _any_ container image, codebase, script, or cloud resource to your AppHost.
-
-<Aside type="note">
-  Creating reusable Aspire integrations is just like creating a reusable UI component. It can be as simple or complex as you need, and is fully shareable. Learn more about creating custom resources for Aspire.
-</Aside>
-
-## Reusable App Topology
-
-When you compose your distributed app in Aspire's **AppHost**, you're not just defining services for local development and orchestration—you're also setting up the foundation for deployment. The same composition you use to run and debug locally is leveraged when you publish your app, ensuring consistency from development through to production. Likewise, Aspire doesn't get in the way of your existing deployment workflows.
-
-Continuing from the three-tier architecture example, you can deploy the same app topology to various environments, whether it's a local machine, a cloud provider, or your own servers. Consider the following table that illustrates how the same resources can be deployed across different platforms:
-
-| Resource | Local | Azure | AWS |
-|-|-|-|-|
-| Frontend | `npm run dev` | Container Apps | ECS or App Runner |
-| API Service | `dotnet run --project ../<API_PROJECT_NAME>.csproj` | Azure Container Apps | ECS or Lambda |
-| Database | `docker.io/library/postgres` | Azure Database for Postgres | RDS or Aurora |
-
-Aspire's deployment capabilities are flexible and extensible, allowing you to adapt to your preferred infrastructure. Aspire doesn't get in the way of your existing deployment workflows, so you can continue using your favorite tools and services.
+<CardGrid>
+  <LinkCard
+    title="Prerequisites"
+    description="Make sure you have everything needed to start developing with Aspire."
+    href="/aspire/get-started/prerequisites"
+  />
+  <LinkCard
+    title="Installation"
+    description="Install the Aspire tooling and templates on your development machine."
+    href="/aspire/get-started/installation"
+  />
+  <LinkCard
+    title="First App"
+    description="Build and run your first Aspire application with our step-by-step quickstart guide."
+    href="/aspire/get-started/first-app"
+  />
+</CardGrid>

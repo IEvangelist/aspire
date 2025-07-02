@@ -1,0 +1,511 @@
+---
+title: Resource Model Overview
+--- 
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+Aspire's AppHost represents a collection of resources, known as the "resource model". This model allows developers to define and manage the various components and services that make up their applications, providing a unified way to interact with these resources throughout the development lifecycle.
+
+The resource model is a **directed acyclic graph (DAG)**, where resources are nodes and dependencies are edges. This structure allows Aspire to manage complex relationships between resources, ensuring that they can be started, stopped, and monitored in a predictable manner.
+
+## Happy Path Example
+
+A quick "hello-world" that shows the happy path.
+
+```csharp title="C# — AppHost.cs"
+var builder = DistributedApplication.CreateBuilder(args);
+
+var db = builder.AddPostgres("pg");
+var api = builder.AddProject("api").WithReference(db);
+var web = builder.AddNpmApp("web").WithReference(api);
+
+builder.Build().Run();
+```
+
+```mermaid
+%% Graph showing resource dependencies
+graph LR
+  web --> api
+  api --> pg
+```
+
+<Steps>
+1. Use `AddXyz` helper methods to declare resources (e.g., `AddPostgres`, `AddProject`).
+1. Use `.WithReference()` (or similar) to wire explicit dependencies between resources.
+1. Call `Build().Run()` - Aspire builds the application model (graph) and executes it handling:
+
+   - Port allocation
+   - Environment variables
+   - Startup order
+</Steps>
+
+## Resource Basics
+
+In Aspire, a **resource** is the fundamental unit of modeling for distributed applications. Resources represent services, infrastructure elements, or supporting components that together compose a distributed system.
+
+Resources in Aspire implement the `IResource` interface, with most built-in resources deriving from the base `Resource` class.
+
+- Resources are **inert by default** — they are **pure data objects** that describe capabilities, configuration, and relationships. They **do not manage their own lifecycle** (e.g., starting, stopping, checking health). Resource lifecycle is coordinated externally by orchestrators and lifecycle hooks.
+- Resources are identified by a **unique name** within the application graph. This name forms the basis for referencing, wiring, and visualizing resources.
+
+### Annotations
+
+Resource metadata is expressed through **annotations**, which are strongly-typed objects implementing the `IResourceAnnotation` interface.
+
+Annotations allow attaching additional structured information to a resource without modifying its core class. They are the **primary extensibility mechanism** in Aspire, enabling:
+
+- Core system behaviors (e.g., service discovery, connection strings, health probes)
+- Custom extensions and third-party integrations
+- Layering of optional capabilities without inheritance or tight coupling
+
+<Aside type="note">
+A resource might be annotated with environment variables, endpoint information, or service discovery metadata based on what other components need.
+</Aside>
+
+### Fluent Extension Methods
+
+Resources are typically added using fluent **extension methods** such as `AddRedis`, `AddProject`, or `AddPostgres`.
+
+Extension methods encapsulate:
+
+- **Construction** of the resource object
+- **Attachment of annotations** that describe defaults, discovery hints, or runtime behavior
+- **Relationships** like wiring up dependencies (e.g., via `.WithReference()`)
+
+This pattern improves the developer experience by:
+
+- Setting **sane defaults** automatically
+- Making **required configuration obvious and discoverable**
+- Providing a **product-like feel** to adding infrastructure
+
+<Aside type="note">
+Without extension methods, adding a resource manually would require constructing it directly, setting annotations manually, and remembering to wire relationships by hand.
+</Aside>
+
+### Example: Adding Resources and Wiring Dependencies
+
+```csharp title="C# — AppHost.cs"
+var builder = DistributedApplication.CreateBuilder(args);
+
+var pg = builder.AddPostgres("pg");
+var api = builder.AddProject("backend").WithReference(pg);
+var frontend = builder.AddNpmApp("frontend").WithReference(api);
+```
+
+In this example:
+
+- A PostgreSQL database (`pg`) is created.
+- A backend service (`api`) is created and connected to the database.
+- A frontend app (`frontend`) is created and reverse-proxies traffic to the backend.
+
+Each resource participates in the application graph passively, with dependencies expressed through references.
+
+### Key Takeaways
+
+- Resources **describe** capabilities; they don't control them.
+- **Annotations** add rich, extensible metadata to resources.
+- **Fluent extension methods** guide developers toward correct and complete configurations.
+- **Names** are the identity anchors for wiring and dependency resolution.
+
+## Built-In Resources & Lifecycle
+
+In Aspire, many common infrastructure and application patterns are available as **built-in resource types**. Built-in resources simplify modeling real-world systems by providing ready-made building blocks that automatically integrate with the Aspire runtime, lifecycle management, health tracking, and dashboard visualization.
+
+Built-in resources:
+
+- Handle **lifecycle transitions** automatically.
+- Raise **lifecycle events** (like startup and readiness signals).
+- Push **status updates** to the system for real-time orchestration and monitoring.
+- Expose **endpoints, environment variables, and metadata** needed for dependent resources.
+
+They help developers express distributed applications **consistently** without needing to manually orchestrate startup, shutdown, and dependency wiring.
+
+### Known Resource States
+
+All resources in Aspire begin in the `Unknown` state when added to the application graph. This ensures that the **resource graph can be fully constructed** before any execution, dependency resolution, or publishing occurs.
+
+| State | Meaning |
+|--|--|
+| `Unknown` | Default state when first added to the graph. No execution planned yet. |
+| `NotStarted` | Defined but not yet scheduled to start. |
+| `Waiting` | Awaiting dependencies to become ready (e.g., using `WaitFor`). |
+| `Starting` | Actively starting; readiness not yet confirmed. |
+| `Running` | Successfully started; may have separate application-level health probing. |
+| `RuntimeUnhealthy` | The container or host runtime environment (e.g., Docker daemon) is unavailable, preventing start-up. |
+| `Stopping` | Resource is shutting down gracefully. |
+| `Exited` | Completed execution (typically for short-lived jobs, migrations, one-shot tasks). |
+| `Finished` | Ran to successful completion (used for batch workloads or scripts). |
+| `FailedToStart` | Failed during startup initialization. |
+| `Hidden` | Present in the model but intentionally hidden from dashboard UI (e.g., infrastructure helpers). |
+
+<Aside type="tip">
+**Terminal States:** `TerminalStates` (e.g., `Finished`, `Exited`, `FailedToStart`) represent states where the resource has stopped progressing.
+</Aside>
+
+Resource states drive:
+
+- **Readiness checks** to unblock dependent resources.
+- **Dashboard visualization** and state coloring.
+- **Orchestration sequencing** for startup and shutdown.
+- **Health monitoring** at runtime.
+
+### Built-In Types
+
+Aspire provides a set of fundamental built-in resource types that serve as the foundation for modeling execution units:
+
+| Type               | Purpose                                                 |
+|--------------------|---------------------------------------------------------|
+| `ContainerResource`  | Runs Docker containers as resources.                    |
+| `ProjectResource`    | Runs a .NET project directly (build + launch workflow). |
+| `ExecutableResource` | Launches arbitrary executables or scripts as resources. |
+
+These types are **infrastructure-oriented primitives**. They model how code and applications are packaged and executed.
+
+<Aside type="note">
+Specialized services like Redis, Postgres, or RabbitMQ are **not** true "built-in" resource types in Aspire core — they are typically provided through external packages or extensions that build on `ContainerResource` or custom resource types.
+</Aside>
+
+Built-in types:
+
+- Automatically participate in resource orchestration.
+- Raise standard lifecycle events without manual intervention.
+- Report health and readiness status.
+- Expose connection endpoints for dependent services.
+
+Custom resources must **opt-in manually** to these behaviors.
+
+### Well-Known Lifecycle Events
+
+Aspire defines standard events to orchestrate resource lifecycles:
+
+| Event | When Emitted | Purpose |
+|--|--|--|
+| `InitializeResourceEvent` | The first event fired for any resource. | Kick the resource's lifecycle. |
+| `ResourceEndpointsAllocatedEvent` | Fired when endpoints have been allocated | Can succesfully evaluate endpoint values at this point |
+| `BeforeResourceStartedEvent` | Just before execution begins. | Last-chance dynamic setup or validation before startup |
+| `ResourceReadyEvent` | When the resource is considered "ready." | Unblocks dependents waiting for readiness. |
+| `ConnectionStringAvailableEvent` | When a connection string is ready. | Enables dependent resources to be wired dynamically. |
+
+Lifecycle events allow:
+
+- Dynamic reconfiguration just before startup.
+- Dependent resource activation based on readiness.
+- Wiring services together based on runtime-generated outputs.
+
+<Aside type="caution">
+Event publishing is **synchronous and blocking** — event handlers can delay further execution.
+</Aside>
+
+### Status Reporting
+
+Beyond events, Aspire uses **asynchronous state snapshots** to report resource status continuously.
+
+- **ResourceNotificationService** handles snapshot updates.
+- Status updates involve:
+  1. Receiving the previous immutable snapshot.
+  2. Mutating to a new snapshot representing the updated state.
+  3. Publishing the new snapshot to the dashboard and orchestrators.
+
+Snapshots:
+
+- Always reflect the **latest known status**.
+- Are **non-blocking** and do not delay orchestration.
+- Drive **dashboard visualization** and orchestration decisions.
+
+<Aside type="note">
+Events represent **moment-in-time actions**. Snapshots represent **ongoing state**.
+</Aside>
+
+### Resource Health
+
+Aspire integrates with .NET health checks to monitor the status of resources after they have started. The health check mechanism is tied into the resource lifecycle:
+
+<Steps>
+1.  When a resource transitions to the `Running` state, Aspire checks if it has any associated health check annotations (typically added via `.WithHealthCheck(...)`).
+1.  **If health checks are configured:** Aspire begins executing these checks periodically. The resource is considered fully "ready" only after its health checks pass successfully. Once healthy, Aspire automatically publishes the `ResourceReadyEvent`.
+1.  **If no health checks are configured:** The resource is considered "ready" as soon as it enters the `Running` state. Aspire automatically publishes the `ResourceReadyEvent` immediately in this case.
+</Steps>
+
+This automatic handling ensures that dependent resources (using mechanisms like `WaitFor`) only proceed when the target resource is truly ready, either by simply running or by passing its defined health checks.
+
+<Aside type="caution">
+Developers should **not** manually publish the `ResourceReadyEvent`. Aspire manages the transition to the ready state based on the presence and outcome of health checks. Manually firing this event can interfere with the orchestration logic.
+</Aside>
+
+### Resource Logging
+
+Aspire supports logging output on a per-resource basis, which is displayed in the console window and can be surfaced in the dashboard. This log stream is especially useful for monitoring what a resource is doing in real time.
+
+For built-in resources, Aspire captures and forwards output from:
+
+- stdout and stderr of containers (e.g., Docker)
+- Process output from executables or .NET projects
+
+For custom resources, developers can write directly to a resource's log using the `ResourceLoggerService`.
+
+This service provides an `ILogger` scoped to the individual resource instance, enabling human-readable, contextual logging.
+
+```csharp title="C# — AppHost.cs"
+var logger = resourceLoggerService.GetLogger(myResource);
+logger.LogInformation("Starting provisioning…");
+```
+
+<Aside type="note">
+A full example demonstrating custom resource logging with the Talking Clock resource can be found in the [Full Examples](#example-custom-resource-talking-clock) section.
+</Aside>
+
+#### Key APIs
+
+| API                                          | Description                 |
+|----------------------------------------------|-----------------------------|
+| `ResourceLoggerService.GetLogger(IResource)` | Returns a scoped `ILogger`. |
+| `ResourceLoggerService.WatchAsync`           | Stream log lines.           |
+
+- Use logs for human-readable diagnostics.  
+- Use `ResourceNotificationService` for structured state.
+
+## Standard Interfaces
+
+Aspire defines a set of **optional standard interfaces** that allow resources to declare their capabilities in a structured, discoverable way. Implementing these interfaces enables **dynamic wiring, publishing, service discovery, and orchestration** without hardcoded type knowledge.
+
+These interfaces are the foundation for Aspire's polymorphic behaviors — enabling tools, publishers, and the runtime to treat resources uniformly based on what they can do, rather than what they are.
+
+### Why?
+
+- **Dynamic discovery:** Tooling and runtime systems can automatically adapt based on resource capabilities.
+- **Loose coupling:** Behaviors (like environment wiring, service discovery, or connection sharing) are opt-in.
+- **Extensibility:** New resource types can integrate seamlessly into the Aspire ecosystem by implementing one or more interfaces.
+
+### Common Interfaces
+
+| Interface | Purpose |
+|-----------|---------|
+| `IResourceWithEnvironment` | Supports setting environment variables for the resource. |
+| `IResourceWithServiceDiscovery` | Registers a service hostname and metadata for discovery by other resources. |
+| `IResourceWithEndpoints` | Exposes ports, URLs, or connection points that other resources can consume. |
+| `IResourceWithConnectionString` | Provides a connection string output for consumers to connect to the resource. |
+| `IResourceWithArgs` | Supplies additional CLI arguments when launching a project or executable. |
+| `IResourceWithWaitSupport` | This resource can wait for other resources. |
+| `IResourceWithWithoutLifetime` (>= 9.3) | This resource does not have a lifecycle. (e.g. connection string, parameter) |
+
+### Examples Per Interface
+
+**`IResourceWithEnvironment`**
+
+```csharp
+builder.WithEnvironment("MY_SETTING", "value");
+```
+Allows setting environment variables that are passed to the resource when it starts.
+
+**`IResourceWithServiceDiscovery`**
+
+```csharp
+builder.WithReference(myResourceWithDiscovery);
+```
+Exposes the resource via DNS-style service discovery. Downstream resources can refer to it by logical name.
+
+**`IResourceWithEndpoints`**
+
+```csharp
+builder.GetEndpoint("http");
+```
+When a resource implements `IResourceWithEndpoints`, it allows referencing specific endpoints (e.g., `http`, `tcp`) for reverse proxies or connection targets.
+
+**`IResourceWithConnectionString`**
+
+```csharp
+builder.WithReference(myDatabaseResource);
+```
+Allows wiring a database connection string into environment variables, configurations, or CLI arguments.
+
+**`IResourceWithArgs`**
+
+```csharp
+builder.WithArgs("2", "--url", endpoint);
+```
+Allows setting command-line arguments on the resource.
+
+**`IResourceWithWaitSupport`**
+
+```csharp
+builder.WaitFor(otherResource)
+```
+
+This resource can wait on other resources. A `ParameterResource` is an example of resources that cannot wait.
+
+<Aside type="note">
+These APIs and behaviors are defined in the [Aspire.Hosting](https://github.com/dotnet/aspire/blob/main/src/Aspire.Hosting/api/Aspire.Hosting.cs) package.
+</Aside>
+
+### Importance of Polymorphism
+
+By modeling behaviors through interfaces rather than concrete types, Aspire enables:
+
+- **Tooling flexibility:** Publishers can wire environment variables, endpoints, and arguments generically.
+- **Runtime uniformity:** Dashboards and orchestrators treat resources based on capabilities, not type-specific logic.
+- **Ecosystem extensibility:** New resource types can plug into the system without modifying core code.
+
+Interfaces allow Aspire to remain **open, flexible, and adaptable** as new types of services, platforms, and deployment targets emerge.
+
+
+
+### API surface (reference)
+
+```csharp title="C# — AppHost.cs"
+public enum EndpointProperty
+{
+    Url = 0,
+    Host = 1,
+    IPV4Host = 2,
+    Port = 3,
+    Scheme = 4,
+    TargetPort = 5,
+    HostAndPort = 6
+}
+```
+
+| Property              | Meaning                                          |
+| --------------------- | ------------------------------------------------ |
+| **Url**               | Full URL (scheme://host\:port).                  |
+| **Host / IPV4Host**   | Host name or IPv4 literal.                       |
+| **Port / TargetPort** | Allocated host port vs. container-internal port. |
+| **Scheme**            | `http`, `tcp`, etc.                              |
+| **HostAndPort**       | Convenience composite (`host:port`).             |
+
+`EndpointReference` exposes live or placeholder values for an endpoint and provides `.Property(...)` to create an **EndpointReferenceExpression**.
+
+Key members:
+
+| Member                                                   | Description                                            |
+| -------------------------------------------------------- | ------------------------------------------------------ |
+| `Url`, `Host`, `Port`, `Scheme`, `TargetPort`            | Concrete in run mode; undefined in publish mode.       |
+| `bool IsAllocated`                                       | Indicates if concrete values are available (run mode). |
+| `EndpointReferenceExpression Property(EndpointProperty)` | Creates a deferred expression for one field.           |
+
+`EndpointReferenceExpression` implements the same `IManifestExpressionProvider` / `IValueProvider` pair, so it can be embedded in a `ReferenceExpression` or resolved directly with `GetValueAsync()`.
+
+
+--- 
+
+## Context-Based Endpoint Resolution
+
+Aspire resolves endpoints differently based on the relationship between the source and target resources. This ensures proper communication across all environments.
+
+### Resolution Rules
+
+| **Source**                | **Target**                | **Resolution**                                | **Example URL**                         |
+|---------------------------|---------------------------|-----------------------------------------------|-----------------------------------------|
+| **Container**             | **Container**            | Container network (`resource name:port`).    | `redis:6379`                            |
+| **Executable/Project**    | **Container**            | Host network (`localhost:port`).             | `localhost:6379`                        |
+| **Container**             | **Executable/Project**   | Host network (`host.docker.internal:port`).  | `host.docker.internal:5000`             |
+
+--- 
+
+#### Advanced Scenario: Dynamic Endpoint Resolution Across Contexts
+
+Aspire resolves endpoints differently based on the execution context (e.g., run mode vs. publish mode, container vs. executable).  Sometimes you want to override that resolution behavior.
+
+**Scenario**
+
+Below example shows a project that is going to setup up grafana and keycloak. We need to give the project the address for container-to-container communication between grafana and keycloak even though the target resource is a project. The project isn't directly talking to keycloak or grafana, it's a mediator that is just setting URLs in the appropriate configuration of each container.
+
+
+### Example: Cross-Context Communication
+
+#### Code Example
+
+```csharp title="C# — AppHost.cs"
+var builder = DistributedApplication.CreateBuilder(args);
+
+var api = builder.AddProject<Projects.Api>("api")
+    .WithEnvironment(ctx =>
+    {
+        var keyCloakEndpoint = keycloak.GetEndpoint("http");
+        var grafanaEndpoint = grafana.GetEndpoint("http");
+
+        ctx.EnvironmentVariables["Grafana__Url"] = grafanaEndpoint;
+
+        if (ctx.ExecutionContext.IsRunMode)
+        {
+            // The project needs to get the URL for keycloak in the context of the container network,
+            // but since this is a project, it'll resolve the url in the context of the host network.
+            // We get the runtime url and change the host and port to match the container network pattern (host = resource name, port = target port ?? port)
+            var keycloakUrl = new UriBuilder(keyCloakEndpoint.Url)
+            {
+                Host = keycloak.Resource.Name,
+                Port = keyCloakEndpoint.TargetPort ?? keyCloakEndpoint.Port,
+            };
+
+            ctx.EnvironmentVariables["Keycloak__AuthServerUrl"] = keycloakUrl.ToString();
+        }
+        else
+        {
+            // In publish mode let the endpoint resolver handle the URL
+            ctx.EnvironmentVariables["Keycloak__AuthServerUrl"] = keyCloakEndpoint;
+        }
+    });
+
+builder.Build().Run();
+```
+
+## Manifest Publishing & Resource Serialization
+
+Custom resources that publish JSON manifest entries must:
+
+1. **Register a callback** using `ManifestPublishingCallbackAnnotation` in the constructor.  
+2. **Implement the callback** to write JSON via `ManifestPublishingContext.Writer`.  
+3. **Use value objects** (`IManifestExpressionProvider`) for structured fields.
+
+Resources can opt out of being included in the publishing manifest entirely by calling the `ExcludeFromManifest()` extension method on the `IResourceBuilder<T>`. Resources marked this way will be omitted when generating publishing assets like Docker Compose files or Kubernetes manifests.
+
+### Registering the Callback
+
+```csharp title="C# — AppHost.cs"
+public class AzureBicepResource : Resource, IAzureResource
+{
+    public AzureBicepResource(string name, ...) : base(name)
+    {
+        Annotations.Add(new ManifestPublishingCallbackAnnotation(WriteToManifest));
+    }
+}
+```
+
+### Writing to the Manifest
+
+```csharp title="C# — AppHost.cs"
+public virtual void WriteToManifest(ManifestPublishingContext context)
+{
+    context.Writer.WriteString("type", "azure.bicep.v0");
+    context.Writer.WriteString("path", context.GetManifestRelativePath(path));
+
+    context.Writer.WriteStartObject("params");
+    foreach (var kv in Parameters)
+    {
+        context.Writer.WritePropertyName(kv.Key);
+        var v = kv.Value is IManifestExpressionProvider p ? p.ValueExpression : kv.Value?.ToString();
+        context.Writer.WriteString(kv.Key, v ?? "");
+        context.TryAddDependentResources(kv.Value);
+    }
+    context.Writer.WriteEndObject();
+}
+```
+
+### Summary Table
+
+| Step                       | API / Call                                    | Purpose                                  |
+|----------------------------|-----------------------------------------------|------------------------------------------|
+| Register callback          | `Annotations.Add(new ManifestPublishingCallbackAnnotation(WriteToManifest))` | Hook custom JSON writer                  |
+| Implement `WriteToManifest`| Use `context.Writer` to emit JSON properties  | Define resource manifest representation  |
+| Structured fields          | `IManifestExpressionProvider.ValueExpression`| Ensure publish-time placeholders are preserved |
+
+--- 
+
+## Key Conventions
+
+| Convention                       | Rationale                                       |
+|----------------------------------|-------------------------------------------------|
+| Data-only resource classes       | Separates data model from behavior              |
+| `*BuilderExtensions` classes     | Groups all API methods per integration          |
+| Public annotations               | Allow dynamic runtime addition/removal          |
+| `[ResourceName]` attribute        | Enforces valid resource naming at compile time  |
+| Preserve parameter/value objects | Ensures deferred evaluation of secrets/outputs  |

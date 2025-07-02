@@ -78,6 +78,10 @@ pre[data-language="console"] > code {
 	line-height: initial;
 }
 
+pre.mermaid[data-processed=true] {
+	border: 1px solid var(--sl-color-gray-5);
+}
+
 .sl-markdown-content code {
 	border-radius: .25rem;
 }

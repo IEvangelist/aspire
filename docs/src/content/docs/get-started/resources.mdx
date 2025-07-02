@@ -1,0 +1,70 @@
+---
+title: Understanding Resources
+description: Learn about Aspire's resource model and how to work with different types of resources.
+lastUpdated: true
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+import IconAside from '../../../components/IconAside.astro';
+
+Aspire makes it easy to define everything your app needs—frontends, APIs, databases, and more—using the unified **AppHost** model. Just describe your resources in code, and Aspire handles the connections for you.
+
+## Types of Resources
+
+Resources can include:
+
+- **AI Services**: Large Language Models, AI endpoints, and cognitive services.
+- **Caches**: Redis, in-memory caches, and distributed caching solutions.
+- **Containers**: Docker containers for databases, message brokers, and other services.
+- **Databases**: SQL Server, PostgreSQL, MySQL, MongoDB, and other data stores.
+- **Executables**: Console applications, scripts, and background services.
+- **Frameworks**: Web applications, APIs, and microservices built with various frameworks.
+- **Messaging Services**: Service Bus, RabbitMQ, Kafka, and other messaging systems.
+- **Projects**: .NET projects, Node.js applications, Python services, and more.
+- **Storage**: Blob storage, file systems, and cloud storage services.
+
+## Resource Dependencies
+
+One resource can depend on another, and Aspire automatically wires them together. This means you can focus on building your app without worrying about the underlying infrastructure.
+
+For example, if your API service depends on a database, Aspire will:
+
+<Steps>
+1. Start the database first.
+1. Wait for it to become healthy.
+1. Inject the connection string into your API service.
+1. Start your API service.
+</Steps>
+
+## Resource Configuration
+
+Resources can be configured in various ways:
+
+- **Environment Variables**: Set configuration through environment variables.
+- **Connection Strings**: Automatically generated and injected for dependent services.
+- **Resource Parameters**: Configure ports, volumes, and other resource-specific settings.
+- **Health Checks**: Define custom health check endpoints for your services.
+
+<IconAside type="tip" icon="puzzle" title="Explore Integrations">
+    Check out the <a href="../../integrations/gallery">Integrations Gallery</a> to discover pre-built resources and services you can easily add to your app.
+</IconAside>
+
+## Custom Resources
+
+Under-the-hood, every integration is either a **Container** or **Executable**, meaning you can add _any_ container image, codebase, script, or cloud resource to your AppHost.
+
+<Aside type="note">
+  Creating reusable Aspire integrations is just like creating a reusable UI component. It can be as simple or complex as you need, and is fully shareable. Learn more about creating custom resources for Aspire.
+</Aside>
+
+## Resource Lifecycle
+
+Aspire manages the complete lifecycle of your resources:
+
+<Steps>
+1. **Provisioning**: Resources are created and configured according to your specifications.
+1. **Starting**: Resources are started in dependency order.
+1. **Monitoring**: Health and status are continuously monitored.
+1. **Scaling**: Resources can be scaled up or down as needed.
+1. **Cleanup**: Resources are properly disposed of when the application shuts down.
+</Steps>

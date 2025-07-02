@@ -1,0 +1,61 @@
+---
+title: Deployment and App Topology
+description: Learn how Aspire's unified app topology works across development and production environments.
+lastUpdated: true
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+When you compose your distributed app in Aspire's **AppHost**, you're not just defining services for local development and orchestration—you're also setting up the foundation for deployment. The same composition you use to run and debug locally is leveraged when you publish your app, ensuring consistency from development through to production.
+
+## Reusable App Topology
+
+Aspire doesn't get in the way of your existing deployment workflows. Instead, it provides a consistent way to define your application architecture that can be deployed across different environments and platforms.
+
+Continuing from the three-tier architecture example, you can deploy the same app topology to various environments, whether it's a local machine, a cloud provider, or your own servers. Consider the following table that illustrates how the same resources can be deployed across different platforms:
+
+| Resource | Local | Azure | AWS |
+|-|-|-|-|
+| Frontend | `npm run dev` | Container Apps | ECS or App Runner |
+| API Service | `dotnet run --project ../<API_PROJECT_NAME>.csproj` | Azure Container Apps | ECS or Lambda |
+| Database | `docker.io/library/postgres` | Azure Database for Postgres | RDS or Aurora |
+
+## Development to Production Consistency
+
+Aspire ensures that your local development environment closely matches your production deployment:
+
+- **Same Architecture**: The services, dependencies, and configurations defined in your AppHost are used in both environments
+- **Environment-Specific Configuration**: While the topology remains the same, environment-specific settings can be applied
+- **Deployment Flexibility**: Choose the deployment target that best fits your needs without changing your application code
+
+## Deployment Options
+
+Aspire's deployment capabilities are flexible and extensible, allowing you to adapt to your preferred infrastructure:
+
+- **Container Orchestrators**: Deploy to Kubernetes, Docker Swarm, or other container platforms
+- **Cloud Platforms**: Use Azure Container Apps, AWS ECS, Google Cloud Run, or other cloud services
+- **Traditional Hosting**: Deploy to virtual machines, bare metal servers, or on-premises infrastructure
+- **Hybrid Deployments**: Mix and match deployment targets for different parts of your application
+
+## Publishing Your Application
+
+When you're ready to deploy, Aspire provides tools to generate deployment manifests and configurations:
+
+<Steps>
+1. **Manifest Generation**: Create Kubernetes manifests, Docker Compose files, or cloud-specific configurations
+1. **Resource Mapping**: Map your local resources to production equivalents
+1. **Configuration Management**: Handle secrets, connection strings, and environment-specific settings
+1. **Deployment Scripts**: Generate scripts and workflows for your preferred deployment pipeline
+</Steps>
+
+<Aside type="tip">
+    Aspire's deployment capabilities integrate with popular DevOps tools and CI/CD pipelines, making it easy to automate your deployment process while maintaining consistency across environments.
+</Aside>
+
+## Best Practices for Production
+
+- **Environment Separation**: Use different configurations for development, staging, and production
+- **Secret Management**: Use proper secret management solutions for sensitive configuration
+- **Monitoring and Observability**: Leverage Aspire's built-in telemetry for production monitoring
+- **Scalability**: Design your resource topology with scaling in mind
+- **Security**: Follow security best practices for your deployment platform

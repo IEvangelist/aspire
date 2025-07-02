@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { sidebarTopics } from './sidebar.topics';
 import starlight from '@astrojs/starlight';
 import catppuccin from "@catppuccin/starlight";
 import starlightLlmsTxt from 'starlight-llms-txt'
@@ -8,12 +9,27 @@ import starlightImageZoom from 'starlight-image-zoom'
 import starlightLinksValidator from 'starlight-links-validator'
 import starlightScrollToTop from 'starlight-scroll-to-top'
 import starlightSidebarTopics from 'starlight-sidebar-topics'
+import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://ievangelist.github.io/',
 	base: `aspire`,
 	integrations: [
+		mermaid({
+			theme: 'forest',
+			autoTheme: true,
+			iconPacks: [
+				{
+					name: 'logos',
+					loader: () => fetch('https://unpkg.com/@iconify-json/logos@1/icons.json').then(res => res.json())
+				},
+				{
+					name: 'iconoir',
+					loader: () => fetch('https://unpkg.com/@iconify-json/iconoir@1/icons.json').then(res => res.json())
+				}
+			]
+		}),
 		starlight({
 			title: 'Aspire',
 			logo: {
@@ -60,21 +76,6 @@ export default defineConfig({
 					icon: 'twitch',
 					label: 'Twitch',
 					href: 'https://www.twitch.tv/aspiredotdev'
-				},
-				{
-					icon: 'threads',
-					label: 'Threads',
-					href: 'https://www.threads.com/@dotnet.developers'
-				},
-				{
-					icon: 'tiktok',
-					label: 'TikTok',
-					href: 'https://www.tiktok.com/@dotnetdevelopers'
-				},
-				{
-					icon: 'linkedin',
-					label: 'LinkedIn',
-					href: 'https://www.linkedin.com/groups/40949/'
 				}
 			],
 			customCss: [
@@ -98,109 +99,7 @@ export default defineConfig({
 			},
 			plugins: [
 				catppuccin(),
-				starlightSidebarTopics([
-					{
-						label: 'Get Started',
-						link: 'get',
-						icon: 'rocket',
-						items: [
-							{ label: 'Get Aspire', slug: 'get' },
-							{
-								label: 'Get Started', items: [
-									{ label: 'Overview', slug: 'get-started/overview' },
-									{ label: 'Prerequisites', slug: 'get-started/prerequisites' },
-									{ label: 'Installation', slug: 'get-started/installation' },
-									{ label: 'First app', slug: 'get-started/first-app', badge: 'Quickstart' }
-								]
-							}
-						]
-					},
-					{
-						label: 'Integrations',
-						link: '/integrations/overview',
-						icon: 'puzzle',
-						items: [
-							{
-								label: 'Explore', items: [
-									{ label: 'Overview', slug: 'integrations/overview' },
-									{ label: 'Integration Gallery', slug: 'integrations/gallery' },
-								]
-							},
-							{
-								label: 'Database', items: [
-									{ label: 'PostgreSQL', slug: 'integrations/postgres' },
-								]
-							},
-							{
-								label: 'Messaging', items: [
-									{ label: 'RabbitMQ', slug: 'integrations/rabbitmq' },
-								]
-							}
-						],
-					},
-					{
-						label: 'Dashboard',
-						link: '/dashboard/overview',
-						icon: 'list-format',
-						items: [
-							{ label: 'Explore', autogenerate: { directory: 'dashboard' } },
-						]
-					},
-					{
-						label: 'CLI Reference',
-						link: '/reference/cli/overview',
-						icon: 'forward-slash',
-						items: [
-							{ label: 'Overview', slug: 'reference/cli/overview' },
-							{ label: 'Install', slug: 'reference/cli/install' },
-							{
-								label: 'Commands', items: [
-									{ label: 'Aspire New', slug: 'reference/cli/commands/aspire-new' },
-									{ label: 'Aspire Run', slug: 'reference/cli/commands/aspire-run' },
-									{ label: 'Aspire Add', slug: 'reference/cli/commands/aspire-add' },
-									{ label: 'Aspire Publish', slug: 'reference/cli/commands/aspire-publish' },
-									{ label: 'Aspire Config', slug: 'reference/cli/commands/aspire-config' },
-									{ label: 'Aspire Exec', slug: 'reference/cli/commands/aspire-exec' },
-								]
-							}
-						]
-					},
-					{
-						label: 'API Reference',
-						link: '/reference/api/overview',
-						icon: 'document',
-						items: [
-							{
-								label: 'Aspire API', items: [
-									{ label: 'Overview', slug: 'reference/api/overview' }
-								]
-							}
-						]
-					},
-					{
-						label: 'Community',
-						link: '/community/videos',
-						icon: 'heart',
-						items: [
-							{
-								label: 'Videos',
-								slug: 'community/videos'
-							},
-							{
-								label: 'BlueSky',
-								slug: 'community/posts',
-								badge: {
-									text: '#aspire',
-									variant: 'note'
-								}
-							},
-							{
-								label: 'Contributors',
-								slug: 'community/contributors',
-							}
-						]
-					}
-				]),
+				starlightSidebarTopics(sidebarTopics),
 				starlightLinksValidator({
 					exclude: ['#', '/'],
 					errorOnRelativeLinks: false
