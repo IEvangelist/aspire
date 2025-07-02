@@ -8,6 +8,7 @@ next: false # change this to the next desired page.
 
 import { Aside, Steps, Tabs, TabItem, Icon, FileTree } from '@astrojs/starlight/components';
 import { Kbd } from 'starlight-kbd/components'
+import CodespacesButton from '../../../components/CodespacesButton.astro';
 
 Aspire includes tooling to help you create and configure cloud-native apps. The tooling includes useful starter project templates and other features to streamline getting started with Aspire for Visual Studio, Visual Studio Code, and CLI workflows. Assuming you have the [prerequisites](./prerequisites) and [Aspire CLI](./installation) installed, you can create a new Aspire solution.
 
@@ -100,3 +101,9 @@ Aspire includes tooling to help you create and configure cloud-native apps. The 
     **Congratulations! You've created your first Aspire app.**
 
 </Steps>
+
+## Next Steps
+
+Now that you have a basic understanding of how to create and run an Aspire app, give it a try in a GitHub Codespace. This will allow you to quickly set up a development environment without needing to install anything locally:
+
+<CodespacesButton owner="dotnet" repo="aspire-devcontainer" />
