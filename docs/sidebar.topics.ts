@@ -6,7 +6,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
         link: 'get-started/prerequisites',
         icon: 'rocket',
         items: [
-            // { label: 'Get Aspire', slug: 'get' },
+            { label: 'Get Aspire', slug: 'get' },
             {
                 label: 'Setup', items: [
                     { label: 'Prerequisites', slug: 'get-started/prerequisites' },
