@@ -34,7 +34,7 @@ architecture-beta
 ```
 
 <Steps>
-1. Use `AddXyz` helper methods to declare resources (e.g., `AddPostgres`, `AddProject`).
+1. Use `AddXyz` helper methods to add and declare resources (e.g., `AddPostgres`, `AddProject`).
 1. Use `.WithReference()` (or similar) to wire explicit dependencies between resources.
 1. Call `Build().Run()` - Aspire builds the application model (graph) and executes it handling:
 
