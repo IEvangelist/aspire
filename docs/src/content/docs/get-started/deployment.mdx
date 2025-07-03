@@ -4,7 +4,7 @@ description: Learn how Aspire's unified app topology works across development an
 lastUpdated: true
 ---
 
-import { Aside, Steps } from '@astrojs/starlight/components';
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
 
 When you compose your distributed app in Aspire's **AppHost**, you're not just defining services for local development and orchestration—you're also setting up the foundation for deployment. The same composition you use to run and debug locally is leveraged when you publish your app, ensuring consistency from development through to production.
 
@@ -12,13 +12,26 @@ When you compose your distributed app in Aspire's **AppHost**, you're not just d
 
 Aspire doesn't get in the way of your existing deployment workflows. Instead, it provides a consistent way to define your application architecture that can be deployed across different environments and platforms.
 
-Continuing from the three-tier architecture example, you can deploy the same app topology to various environments, whether it's a local machine, a cloud provider, or your own servers. Consider the following table that illustrates how the same resources can be deployed across different platforms:
+Continuing from the three-tier architecture example, you can deploy the same app topology to various environments, whether it's a local machine, a cloud provider, or your own servers.
 
-| Resource | Local | Azure | AWS |
-|-|-|-|-|
-| Frontend | `npm run dev` | Container Apps | ECS or App Runner |
-| API Service | `dotnet run --project ../<API_PROJECT_NAME>.csproj` | Azure Container Apps | ECS or Lambda |
-| Database | `docker.io/library/postgres` | Azure Database for Postgres | RDS or Aurora |
+```mermaid
+architecture-beta
+
+  service db(logos:postgresql)[PostgreSQL]
+  service api(logos:dotnet)[API Service]
+  service frontend(logos:react)[Frontend]
+
+  api:R --> L:db
+  frontend:R --> L:api
+```
+
+This table shows how you can deploy the same resources across different platforms:
+
+| Resource | Local | AWS | Azure | On-Premises |
+|-|-|-|-|-|
+| Frontend | `npm run dev` | Elastic Container Service | Container Apps | Custom |
+| API Service | `dotnet run --project ../<API_PROJECT_NAME>.csproj` | AWS Lambda | Functions | Custom |
+| PostgreSQL | `docker.io/library/postgres` | Relational Database Service | Database for Postgres | Custom |
 
 ## Development to Production Consistency
 

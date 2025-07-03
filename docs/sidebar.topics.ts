@@ -16,7 +16,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
             },
             {
                 label: 'Concepts', items: [
-                    { label: 'Welcome', slug: 'get-started/overview' },
+                    { label: 'Welcome', slug: 'get-started/welcome' },
                     { label: 'What is Aspire?', slug: 'get-started/what-is-aspire' },
                     { label: 'The AppHost', slug: 'get-started/app-host' },
                     { label: 'Understanding Resources', slug: 'get-started/resources' },
@@ -25,7 +25,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
             },
             {
                 label: 'Architecture', items: [
-                    { label: 'Resource Model', slug: 'architecture/resource-model-overview' },
+                    { label: 'Resource Model', slug: 'architecture/resource-model' },
                     { label: 'Resource Hierarchies', slug: 'architecture/resource-hierarchies' },
                     { label: 'Resource API Patterns', slug: 'architecture/resource-api-patterns' },
                     { label: 'Resource Examples', slug: 'architecture/resource-examples' },

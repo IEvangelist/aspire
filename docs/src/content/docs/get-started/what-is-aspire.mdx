@@ -5,6 +5,7 @@ lastUpdated: true
 ---
 
 import { Aside } from '@astrojs/starlight/components';
+import LearnMore from '../../../components/LearnMore.astro';
 
 Aspire streamlines building, running, debugging, and deploying distributed apps. Picture your app as a set of services, databases, and frontends—when they're deployed, they all work together seamlessly, but every time you develop them they need to be individually started and connected. With Aspire, you get a unified toolchain that eliminates complex configs and makes local debugging effortless. Instantly launch and debug your entire app with a single command. Ready to deploy? Aspire lets you publish anywhere—Kubernetes, the cloud, or your own servers. It's also fully extensible, so you can integrate your favorite tools and services with ease.
 
@@ -21,9 +22,13 @@ Aspire streamlines building, running, debugging, and deploying distributed apps.
 Aspire uses a **code-first approach** to define your application's architecture. Instead of managing complex configuration files, you describe your services, databases, and dependencies directly in code. This approach provides several advantages:
 
 - **Type Safety**: Catch configuration errors at compile time.
-- **IntelliSense Support**: Get code completion and documentation while defining your architecture.
+- **Statement Completion Support**: Get code completion and documentation while defining your architecture.
 - **Version Control**: Your infrastructure definition lives alongside your code.
 - **Refactoring**: Use familiar development tools to restructure your application architecture.
+
+<LearnMore>
+  Discover how Aspire powers your applications through its [`AppHost`](/aspire/get-started/app-host).
+</LearnMore>
 
 ## Development vs Production
 
@@ -33,6 +38,8 @@ Aspire bridges the gap between development and production environments:
 - **Production**: Deploy the same architecture definition to various cloud platforms and orchestrators
 - **Consistency**: Ensure your local development environment matches your production topology
 
-<Aside type="tip">
-    Aspire doesn't replace your existing deployment workflows—it enhances them by providing a consistent way to define and manage your application architecture across environments.
-</Aside>
+Aspire doesn't replace your existing deployment workflows—it enhances them by providing a consistent way to define and manage your application architecture across environments.
+
+<LearnMore>
+  Learn more about [Deployment and App Topology](/aspire/get-started/deployment).
+</LearnMore>

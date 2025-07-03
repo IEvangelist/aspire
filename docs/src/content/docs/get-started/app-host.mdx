@@ -5,13 +5,14 @@ lastUpdated: true
 ---
 
 import { Code, FileTree, Steps } from '@astrojs/starlight/components';
+import LearnMore from '../../../components/LearnMore.astro';
 import SimpleAppHostCode from '../../../components/SimpleAppHostCode.astro';
 
 Aspire's **AppHost** is where you define your app's services and dependencies in code—no complex configs required. Easily map out your architecture and let Aspire handle the local orchestration, so you can focus on building features.
 
 ## Defining Your Architecture
 
-A simple example might represent a common three-tier architecture with a frontend that depends on an API, which in turn connects to a database:
+Consider a three-tier architecture where your frontend talks to an API, and your API connects to a database:
 
 ```mermaid
 architecture-beta
@@ -20,11 +21,11 @@ architecture-beta
   service api(logos:dotnet)[API Service]
   service frontend(logos:react)[Frontend]
 
-  frontend:L <-- R:api
-  api:L <-- R:db
+  api:R --> L:db
+  frontend:R --> L:api
 ```
 
-This could be represented in the AppHost as shown in the following code:
+This could be represented in the `AppHost` as shown in the following code:
 
 <SimpleAppHostCode />
 
@@ -41,9 +42,13 @@ The AppHost project serves as the orchestration layer for your distributed appli
 1. **Health Monitoring**: Aspire monitors the health of all services and can restart them if needed
 </Steps>
 
+<LearnMore>
+  Dive deeper into Aspire's orchestration and discover how it manages your resources in the AppHost's [Resource Model](/aspire/architecture/resource-model).
+</LearnMore>
+
 ## AppHost Project Structure
 
-A typical AppHost project contains:
+The template AppHost project contains:
 
 <FileTree>
 - **AspireApp.AppHost**
@@ -57,7 +62,7 @@ A typical AppHost project contains:
 
 ## Best Practices
 
-- **Keep it Simple**: Start with a minimal AppHost and add complexity as needed
-- **Use Dependencies**: Clearly define which services depend on others using `.WithReference()`
-- **Environment Configuration**: Use different configurations for development, testing, and production
-- **Resource Naming**: Use clear, descriptive names for your resources to make debugging easier
+- **Keep it Simple**: Start with a minimal `AppHost` and add complexity as needed.
+- **Use Dependencies**: Clearly define which services depend on others using `.WithReference()`.
+- **Environment Configuration**: Use different configurations for development, testing, and production.
+- **Resource Naming**: Use clear, descriptive names for your resources to make debugging easier.

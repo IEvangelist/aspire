@@ -1,6 +1,6 @@
 ---
-title: Add and Configure Resources
-description: Learn how to add and configure resources in Aspire.
+title: Resource API Patterns
+description: Discover common API resource patterns in Aspire, including how to add and configure resources, use annotations, and implement custom value objects.
 ---
 
 import { Aside, Steps } from '@astrojs/starlight/components';
@@ -49,33 +49,43 @@ public static IResourceBuilder<TResource> AddX(
 
 ### Optional Wiring Examples
 
-- **Endpoints**:
+**Endpoints**:
 
-  ```csharp
-  .WithEndpoint(port: hostPort, targetPort: containerPort, name: endpointName)
-  ```
-- **Health checks**:  
-  ```csharp
-  .WithHealthCheck(healthCheckKey)
-  ```
-- **Container images / registries**:  
-  ```csharp
-  .WithImage(imageName, imageTag)
-  .WithImageRegistry(registryUrl)
-  ```
-- **Entrypoint & args**:  
-  ```csharp
-  .WithEntrypoint("/bin/sh")
-  .WithArgs(context => { /* build args */ return Task.CompletedTask; })
-  ```
-- **Environment variables**:  
-  ```csharp
-  .WithEnvironment(context => new("ENV_VAR", valueProvider))
-  ```
-- **Event subscriptions**:  
-  ```csharp
-  builder.Eventing.Subscribe<EventType>(resource, handler);
-  ```
+```csharp
+.WithEndpoint(port: hostPort, targetPort: containerPort, name: endpointName)
+```
+
+**Health checks**:
+
+```csharp
+.WithHealthCheck(healthCheckKey)
+```
+
+**Container images / registries**:
+
+```csharp
+.WithImage(imageName, imageTag)
+.WithImageRegistry(registryUrl)
+```
+
+**Entrypoint and args**:
+
+```csharp
+.WithEntrypoint("/bin/sh")
+.WithArgs(context => { /* build args */ return Task.CompletedTask; })
+```
+
+**Environment variables**:
+
+```csharp
+.WithEnvironment(context => new("ENV_VAR", valueProvider))
+```
+
+**Event subscriptions**:
+
+```csharp
+builder.Eventing.Subscribe<EventType>(resource, handler);
+```
 
 ### Summary Table
 
@@ -98,7 +108,7 @@ public static IResourceBuilder<TResource> AddX(
 public static IResourceBuilder<TResource> WithX(
     this IResourceBuilder<TResource> builder,
     FooOptions options) =>
-  builder.WithAnnotation(new FooAnnotation(options));
+    builder.WithAnnotation(new FooAnnotation(options));
 ```
 
 - **Target**: `IResourceBuilder<TResource>`.
@@ -107,16 +117,16 @@ public static IResourceBuilder<TResource> WithX(
 
 ### Summary Table
 
-| Method       | Target                        | Action                                      |
-|--------------|-------------------------------|---------------------------------------------|
-| `WithX(...)` | `IResourceBuilder<TResource>` | Attaches `XAnnotation` via `WithAnnotation` |
-| Returns      | `IResourceBuilder<TResource>` | Enables fluent chaining                     |
+| Method | Target | Action |
+|--|--|--|
+| `WithX(...)` | `IResourceBuilder<TResource>` | Attaches `XAnnotation` using the `WithAnnotation` API. |
+| Returns | `IResourceBuilder<TResource>` | Enables fluent chaining . |
 
 ## Annotations
 
 Annotations are **public** metadata types implementing `IResourceAnnotation`. They can be added or removed dynamically at runtime via hooks or events. Consumers can query annotations using `TryGetLastAnnotation<T>()` when necessary.
 
-### Definition & Attachment
+### Definition and Attachment
 
 ```csharp
 public sealed record PersistenceAnnotation(
@@ -158,9 +168,7 @@ builder.WithEnvironment(context =>
     new("REDIS_CONNECTION_STRING", redis.GetConnectionStringAsync));
 ```
 
-### Example: `BicepOutputReference`
-
-```csharp
+```csharp title="Example: BicepOutputReference"
 public sealed partial class BicepOutputReference : 
     IManifestExpressionProvider, 
     IValueProvider, 
@@ -170,13 +178,18 @@ public sealed partial class BicepOutputReference :
     public ValueTask<string?> GetValueAsync(CancellationToken cancellationToken = default);
     IEnumerable<object> IValueWithReferences.References { get; }
 }
+```
 
+```csharp
 public static IResourceBuilder<T> WithEnvironment<T>(
     this IResourceBuilder<T> builder,
     string name,
     BicepOutputReference bicepOutputReference)
     where T : IResourceWithEnvironment
-{ /* attaches environment variable from Bicep output */ }
+{
+    return builder.WithAnnotation(
+      new EnvironmentVariableAnnotation(name, bicepOutputReference));
+}
 ```
 
 ### Summary Table

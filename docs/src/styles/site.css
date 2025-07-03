@@ -87,7 +87,7 @@ starlight-file-tree {
 	box-shadow: var(--sl-shadow-sm);
 }
 
-.bordered {
+.bordered.shadowed {
 	border: 1px solid var(--sl-color-gray-5);
 	box-shadow: var(--sl-shadow-sm);
 	border-radius: .5rem;

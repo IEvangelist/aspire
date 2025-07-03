@@ -8,7 +8,7 @@ import { Aside, Steps } from '@astrojs/starlight/components';
 import LearnMore from '../../../components/LearnMore.astro';
 import IconAside from '../../../components/IconAside.astro';
 
-Aspire makes it easy to define everything your app needs—frontends, APIs, databases, and more—using the unified **AppHost** model. Just describe your resources in code, and Aspire handles the connections for you.
+Aspire makes it easy to define everything your app needs—frontends, APIs, databases, and more—using the **AppHost**. Just describe your resources in code, and Aspire handles the connections for you.
 
 ## Types of Resources
 
@@ -24,11 +24,15 @@ Resources can include:
 - **Projects**: .NET projects, Node.js applications, Python services, and more.
 - **Storage**: Blob storage, file systems, and cloud storage services.
 
+<IconAside type="tip" icon="puzzle" title="Explore Integrations">
+  Resources are modeled in _hosting integrations_, which are reusable components that define how your app interacts with external services. Aspire provides a rich set of [built-in integrations for common services](../../integrations/gallery?search=hosting), and you can easily create custom integrations to suit your needs.
+</IconAside>
+
 ## Resource Dependencies
 
-One resource can depend on another, and Aspire automatically wires them together. This means you can focus on building your app without worrying about the underlying infrastructure.
+Resources work together through **explicit dependencies** that you define in your AppHost. When you model these dependencies, Aspire automatically handles the wiring, startup order, and connection management—letting you focus on building your app instead of managing infrastructure.
 
-For example, if your API service depends on a database, Aspire will:
+For example, if your API service depends on a database and configures a wait strategy, Aspire can automatically inject the connection string and ensure the database is started before the API service.
 
 <Steps>
 1. Start the database first.
@@ -38,7 +42,7 @@ For example, if your API service depends on a database, Aspire will:
 </Steps>
 
 <LearnMore>
-  Learn more about [Resource Hierarchies](/aspire/architecture/resource-hierarchies) and how to represent them.
+  Discover how to model [Resource Hierarchies](/aspire/architecture/resource-hierarchies) and represent complex app structures.
 </LearnMore>
 
 ## Resource Configuration
@@ -50,30 +54,21 @@ Resources can be configured in various ways:
 - **Resource Parameters**: Configure ports, volumes, and other resource-specific settings.
 - **Health Checks**: Define custom health check endpoints for your services.
 
-<IconAside type="tip" icon="puzzle" title="Explore Integrations">
-    Check out the <a href="../../integrations/gallery">Integrations Gallery</a> to discover pre-built resources and services you can easily add to your app.
-</IconAside>
-
 ## Custom Resources
 
-Under-the-hood, every integration is either a **Container** or **Executable**, meaning you can add _any_ container image, codebase, script, or cloud resource to your AppHost.
-
-<Aside type="note">
-  Creating reusable Aspire integrations is just like creating a reusable UI component. It can be as simple or complex as you need, and is fully shareable. Learn more about creating custom resources for Aspire.
-</Aside>
+Under-the-hood, every integration is either a **Container** or **Executable**, meaning you can add _any_ container image, codebase, script, or cloud resource to your AppHost. Creating reusable Aspire integrations is just like creating a reusable UI component. It can be as simple or complex as you need, and is fully shareable. Learn more about creating custom resources for Aspire.
 
 ## Resource Lifecycle
 
-Aspire manages the complete lifecycle of your resources:
+Aspire manages the complete lifecycle of your resources during **local development**:
 
 <Steps>
-1. **Provisioning**: Resources are created and configured according to your specifications.
-1. **Starting**: Resources are started in dependency order.
-1. **Monitoring**: Health and status are continuously monitored.
-1. **Scaling**: Resources can be scaled up or down as needed.
-1. **Cleanup**: Resources are properly disposed of when the application shuts down.
+1. **Discovery**: Resources are discovered and their dependencies are analyzed.
+1. **Startup**: Resources are started in dependency order, respecting their relationships.
+1. **Health Monitoring**: Resource health and readiness are continuously monitored.
+1. **Shutdown**: Resources are gracefully stopped when the application terminates.
 </Steps>
 
 <LearnMore>
-  Learn more about [Built-In Resources & Lifecycle](/aspire/architecture/resource-model-overview/#built-in-resources--lifecycle).
+  Explore how [Built-In Resources & Lifecycle](/aspire/architecture/resource-model/#built-in-resources--lifecycle) work together to power your applications.
 </LearnMore>
