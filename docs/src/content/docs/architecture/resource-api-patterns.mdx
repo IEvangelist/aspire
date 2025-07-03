@@ -89,14 +89,12 @@ builder.Eventing.Subscribe<EventType>(resource, handler);
 
 ### Summary Table
 
-| Step               | Call/Method                         | Purpose                                          |
-|--------------------|-------------------------------------|--------------------------------------------------|
-| **Validate**       | `ArgumentNullException.ThrowIfNull(...)`                  | Ensure non-null builder, name, and args          |
-| **Instantiate**    | `new TResource(name, …)`            | Create data-only instance                        |
-| **Register**       | `builder.AddResource(resource)`     | Add resource to the application model            |
-| **Optional wiring**| `.WithEndpoint…`, `.WithHealthCheck…`, `.WithImage…`, `.WithEnvironment…`, `.WithArgs…`, `Eventing.Subscribe…` | Configure container details, wiring, and runtime hooks |
-
---- 
+| Step | Call/Method | Purpose |
+|--|--|--|
+| Validate | `ArgumentNullException.ThrowIfNull(...)` | Ensure non-null builder, name, and args |
+| Instantiate | `new TResource(name, …)` | Create data-only instance |
+| Register | `builder.AddResource(resource)` | Add resource to the application model |
+| Optional wiring | `.WithEndpoint(…)`, `.WithHealthCheck(…)`, `.WithImage(…)`, `.WithEnvironment(…)`, `.WithArgs(…)`, `Eventing.Subscribe(…)` | Configure container details, wiring, and runtime hooks |
 
 ## Configuring Resources with `WithX(...)`
 

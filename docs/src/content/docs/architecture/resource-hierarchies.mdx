@@ -429,3 +429,86 @@ builder.WithEnvironment("REDIS_URL",
 ```
 
 This pattern avoids resolving endpoint values prematurely and works in both publish and run modes.
+
+### `EndpointProperty` API Surface
+
+| Property               | Meaning                                          |
+|------------------------|--------------------------------------------------|
+| `Url`                  | Fully qualified URL (`scheme://host:port`).      |
+| `Host` or `IPV4Host`   | Host name or IPv4 literal.                       |
+| `Port` or `TargetPort` | Allocated host port vs. container-internal port. |
+| `Scheme`               | `http`, `tcp`, etc.                              |
+| `HostAndPort`          | Convenience composite (`host:port`).             |
+
+The `EndpointReference` type exposes live or placeholder values for an endpoint and provides `.Property(...)` to create an `EndpointReferenceExpression`.
+
+Key members:
+
+| Member | Description |
+|--|--|
+| `Url`, `Host`, `Port`, `Scheme`, `TargetPort` | Concrete in run mode; undefined in publish mode. |
+| `bool IsAllocated` | Indicates if concrete values are available (run mode). |
+| `EndpointReferenceExpression Property(EndpointProperty)` | Creates a deferred expression for one field. |
+
+`EndpointReferenceExpression` implements the same `IManifestExpressionProvider` / `IValueProvider` pair, so it can be embedded in a `ReferenceExpression` or resolved directly with `GetValueAsync()`.
+
+## Context-Based Endpoint Resolution
+
+Aspire resolves endpoints differently based on the relationship between the source and target resources. This ensures proper communication across all environments.
+
+### Resolution Rules
+
+| **Source** | **Target** | **Resolution** | **Example URL** |
+|--|--|--|--|
+| Container | Container | Container network (`resource name:port`). | `redis:6379` |
+| Executable / Project | Container | Host network (`localhost:port`). | `localhost:6379` |
+| Container | Executable / Project | Host network (`host.docker.internal:port`). | `host.docker.internal:5000` |
+
+#### Advanced Scenario: Dynamic Endpoint Resolution Across Contexts
+
+Aspire resolves endpoints differently based on the execution context (e.g., run mode vs. publish mode, container vs. executable). Sometimes you want to override that resolution behavior.
+
+Consider the following scenario, where the example shows a project that is going to setup up grafana and keycloak. We need to give the project the address for container-to-container communication between grafana and keycloak even though the target resource is a project. The project isn't directly talking to keycloak or grafana, it's a mediator that is just setting URLs in the appropriate configuration of each container.
+
+### Cross-Context Communication Example
+
+The following code demonstrates how to set environment variables for a project that needs to communicate with other resources like Grafana and Keycloak. It ensures that the URLs are correctly resolved based on the execution context (run mode vs. publish mode).
+
+```csharp title="C# — AppHost.cs"
+var builder = DistributedApplication.CreateBuilder(args);
+
+var keycloak = builder.AddKeycloak("keycloak", 8080);
+var grafana = builder.AddContainer("grafana", "grafana/grafana");
+
+var api = builder.AddProject<Projects.Api>("api")
+    .WithEnvironment(ctx =>
+    {
+        var keyCloakEndpoint = keycloak.GetEndpoint("http");
+        var grafanaEndpoint = grafana.GetEndpoint("http");
+
+        ctx.EnvironmentVariables["Grafana__Url"] = grafanaEndpoint;
+
+        if (ctx.ExecutionContext.IsRunMode)
+        {
+            // The project needs to get the URL for keycloak in the context 
+            // of the container network, but since this is a project, it'll
+            // resolve the url in the context of the host network. We get 
+            // the runtime url and change the host and port to match the 
+            // container network pattern (host = resource name, port = target port ?? port)
+            var keycloakUrl = new UriBuilder(keyCloakEndpoint.Url)
+            {
+                Host = keycloak.Resource.Name,
+                Port = keyCloakEndpoint.TargetPort ?? keyCloakEndpoint.Port,
+            };
+
+            ctx.EnvironmentVariables["Keycloak__AuthServerUrl"] = keycloakUrl.ToString();
+        }
+        else
+        {
+            // In publish mode let the endpoint resolver handle the URL
+            ctx.EnvironmentVariables["Keycloak__AuthServerUrl"] = keyCloakEndpoint;
+        }
+    });
+
+builder.Build().Run();
+```

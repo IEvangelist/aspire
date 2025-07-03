@@ -28,6 +28,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
                     { label: 'Resource Model', slug: 'architecture/resource-model' },
                     { label: 'Resource Hierarchies', slug: 'architecture/resource-hierarchies' },
                     { label: 'Resource API Patterns', slug: 'architecture/resource-api-patterns' },
+                    { label: 'Resource Publishing', slug: 'architecture/resource-publishing' },
                     { label: 'Resource Examples', slug: 'architecture/resource-examples' },
                     { label: 'Glossary', slug: 'architecture/glossary' },
                 ]

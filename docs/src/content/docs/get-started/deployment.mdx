@@ -5,6 +5,7 @@ lastUpdated: true
 ---
 
 import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+import LearnMore from '../../../components/LearnMore.astro';
 
 When you compose your distributed app in Aspire's **AppHost**, you're not just defining services for local development and orchestration—you're also setting up the foundation for deployment. The same composition you use to run and debug locally is leveraged when you publish your app, ensuring consistency from development through to production.
 
@@ -76,3 +77,7 @@ When you're ready to deploy, Aspire provides tools to generate deployment manife
 - **Monitoring and Observability**: Leverage Aspire's built-in telemetry for production monitoring
 - **Scalability**: Design your resource topology with scaling in mind
 - **Security**: Follow security best practices for your deployment platform
+
+<LearnMore>
+  Learn more about [resource publishing and deployment manifests](/aspire/architecture/resource-publishing/).
+</LearnMore>
