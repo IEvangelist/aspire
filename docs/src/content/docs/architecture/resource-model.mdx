@@ -10,21 +10,21 @@ Aspire's AppHost represents a collection of resources, known as the "resource mo
 
 The resource model is a **directed acyclic graph (DAG)**, where resources are nodes and dependencies are edges. This structure allows Aspire to manage complex relationships between resources, ensuring that they can be started, stopped, and monitored in a predictable manner.
 
-## Happy Path Example
+## Basic Example
 
-A quick "hello-world" that shows the happy path.
+A quick example that shows the basic usage:
 
 ```csharp title="C# — AppHost.cs"
 var builder = DistributedApplication.CreateBuilder(args);
 
-var db = builder.AddPostgres("pg");
+var db = builder.AddPostgres("pg").AddDatabase("appdata");
 var api = builder.AddProject<Projects.Api>("api").WithReference(db);
 var web = builder.AddNpmApp("web", "../web").WithReference(api);
 
 builder.Build().Run();
 ```
 
-The preceding `AppHost` code defines a simple application with three resources:
+The preceding `AppHost` code defines an architecture with three resources:
 
 ```mermaid
 architecture-beta
@@ -38,8 +38,8 @@ architecture-beta
 ```
 
 <Steps>
-1. Use `AddXyz` helper methods to add and declare resources (e.g., `AddPostgres`, `AddProject`).
-1. Use `.WithReference()` (or similar) to wire explicit dependencies between resources.
+1. Use `.AddXyz(...)` helper methods to add and declare resources (e.g., `.AddPostgres(...)`, `.AddProject(...)`).
+1. Use `.WithReference(...)` (or similar) to represent explicit dependencies between resources.
 1. Call `Build().Run()` - Aspire builds the application model (graph) and executes it handling:
 
    - Port allocation
@@ -49,7 +49,7 @@ architecture-beta
 
 ## Resource Basics
 
-In Aspire, a **resource** is the fundamental unit of modeling for distributed applications. Resources represent services, infrastructure elements, or supporting components that together compose a distributed system.
+In Aspire, a **resource** is the fundamental unit for modeling your distributed applications. Resources represent services, infrastructure elements, or supporting components that together compose a distributed system.
 
 Resources in Aspire implement the `IResource` interface, with most built-in resources deriving from the base `Resource` class.
 
@@ -66,7 +66,7 @@ Annotations allow attaching additional structured information to a resource with
 - Custom extensions and third-party integrations.
 - Layering of optional capabilities without inheritance or tight coupling.
 
-<Aside type="note">
+<Aside type="tip">
   Resources might have annotations for environment variables, endpoint information, or service discovery metadata that other resources require.
 </Aside>
 
@@ -76,39 +76,39 @@ Annotations allow attaching additional structured information to a resource with
 
 ### Fluent Extension Methods
 
-Resources are typically added using fluent **extension methods** such as `AddRedis`, `AddProject`, or `AddPostgres`.
+Resources are typically added using fluent **extension methods** such as `.AddRedis(...)`, `.AddProject(...)`, or `.AddPostgres(...)`. Extension methods encapsulate:
 
-Extension methods encapsulate:
-
-- **Construction** of the resource object
-- **Attachment of annotations** that describe defaults, discovery hints, or runtime behavior
-- **Relationships** like wiring up dependencies (e.g., via `.WithReference()`)
+- **Construction** of the resource object.
+- **Attachment of annotations** that describe defaults, discovery hints, or runtime behavior.
+- **Relationships** like wiring up dependencies (e.g., via `.WithReference(...)`).
 
 This pattern improves the developer experience by:
 
-- Setting **sane defaults** automatically
-- Making **required configuration obvious and discoverable**
-- Providing a **product-like feel** to adding infrastructure
+- Setting **sane defaults** automatically.
+- Making **required configuration obvious and discoverable**.
+- Providing a **product-like feel** to adding infrastructure.
 
 <Aside type="note">
-Without extension methods, adding a resource manually would require constructing it directly, setting annotations manually, and remembering to wire relationships by hand.
+  Without extension methods, adding a resource manually would require constructing it directly, setting annotations manually, and remembering to wire relationships by hand.
 </Aside>
 
-### Example: Adding Resources and Wiring Dependencies
+### Adding Resources and Wiring Dependencies
+
+To continue from the previous example, here's how you can add resources and wire them together in the `AppHost`:
 
 ```csharp title="C# — AppHost.cs"
 var builder = DistributedApplication.CreateBuilder(args);
 
-var pg = builder.AddPostgres("pg");
-var api = builder.AddProject("backend").WithReference(pg);
-var frontend = builder.AddNpmApp("frontend").WithReference(api);
+var db = builder.AddPostgres("pg").AddDatabase("appdata");
+var api = builder.AddProject<Projects.Api>("api").WithReference(db);
+var web = builder.AddNpmApp("web", "../web").WithReference(api);
 ```
 
-In this example:
+The preceding example:
 
-- A PostgreSQL database (`pg`) is created.
+- A PostgreSQL server (`pg`) is created and configured with a database named `appdata`.
 - A backend service (`api`) is created and connected to the database.
-- A frontend app (`frontend`) is created and reverse-proxies traffic to the backend.
+- A frontend app (`web`) is created and reverse-proxies traffic to the backend.
 
 Each resource participates in the application graph passively, with dependencies expressed through references.
 
@@ -119,7 +119,7 @@ Each resource participates in the application graph passively, with dependencies
 - **Fluent extension methods** guide developers toward correct and complete configurations.
 - **Names** are the identity anchors for wiring and dependency resolution.
 
-## Built-In Resources & Lifecycle
+## Built-In Resources and Lifecycle
 
 In Aspire, many common infrastructure and application patterns are available as **built-in resource types**. Built-in resources simplify modeling real-world systems by providing ready-made building blocks that automatically integrate with the Aspire runtime, lifecycle management, health tracking, and dashboard visualization.
 
@@ -134,25 +134,22 @@ They help developers express distributed applications **consistently** without n
 
 ### Known Resource States
 
-All resources in Aspire begin in the `Unknown` state when added to the application graph. This ensures that the **resource graph can be fully constructed** before any execution, dependency resolution, or publishing occurs.
+All resources in Aspire begin in an `Unknown` state when added to the application graph. This ensures that the **resource graph can be fully constructed** before any execution, dependency resolution, or publishing occurs.
 
 | State | Meaning |
 |--|--|
-| `Unknown` | Default state when first added to the graph. No execution planned yet. |
+| `Exited` | Completed execution (typically for short-lived jobs, migrations, one-shot tasks). |
+| `FailedToStart` | Failed during startup initialization. |
+| `Finished` | Ran to successful completion (used for batch workloads or scripts). |
+| `Hidden` | Present in the model but intentionally hidden from dashboard UI (e.g., infrastructure helpers). |
 | `NotStarted` | Defined but not yet scheduled to start. |
-| `Waiting` | Awaiting dependencies to become ready (e.g., using `WaitFor`). |
-| `Starting` | Actively starting; readiness not yet confirmed. |
 | `Running` | Successfully started; may have separate application-level health probing. |
 | `RuntimeUnhealthy` | The container or host runtime environment (e.g., Docker daemon) is unavailable, preventing start-up. |
+| `Starting` | Actively starting; readiness not yet confirmed. |
 | `Stopping` | Resource is shutting down gracefully. |
-| `Exited` | Completed execution (typically for short-lived jobs, migrations, one-shot tasks). |
-| `Finished` | Ran to successful completion (used for batch workloads or scripts). |
-| `FailedToStart` | Failed during startup initialization. |
-| `Hidden` | Present in the model but intentionally hidden from dashboard UI (e.g., infrastructure helpers). |
-
-<Aside type="tip">
-**Terminal States:** `TerminalStates` (e.g., `Finished`, `Exited`, `FailedToStart`) represent states where the resource has stopped progressing.
-</Aside>
+| `Unknown` | Default state when first added to the graph. No execution planned yet. |
+| `TerminalStates` | List of terminal states (e.g., `Finished`, `Exited`, `FailedToStart`). |
+| `Waiting` | Awaiting dependencies to become ready (e.g., using `.WaitFor(...)`). |
 
 Resource states drive:
 
@@ -165,16 +162,16 @@ Resource states drive:
 
 Aspire provides a set of fundamental built-in resource types that serve as the foundation for modeling execution units:
 
-| Type               | Purpose                                                 |
-|--------------------|---------------------------------------------------------|
+| Type                 | Purpose                                                 |
+|----------------------|---------------------------------------------------------|
 | `ContainerResource`  | Runs Docker containers as resources.                    |
-| `ProjectResource`    | Runs a .NET project directly (build + launch workflow). |
 | `ExecutableResource` | Launches arbitrary executables or scripts as resources. |
+| `ProjectResource`    | Runs a .NET project directly (build + launch workflow). |
 
 These types are **infrastructure-oriented primitives**. They model how code and applications are packaged and executed.
 
 <Aside type="note">
-Specialized services like Redis, Postgres, or RabbitMQ are **not** true "built-in" resource types in Aspire core — they are typically provided through external packages or extensions that build on `ContainerResource` or custom resource types.
+  Specialized services like Redis, Postgres, or RabbitMQ are **not** true "built-in" resource types in Aspire core — they are typically provided through external packages or extensions that build on `ContainerResource` or custom resource types.
 </Aside>
 
 Built-in types:
@@ -188,15 +185,15 @@ Custom resources must **opt-in manually** to these behaviors.
 
 ### Well-Known Lifecycle Events
 
-Aspire defines standard events to orchestrate resource lifecycles:
+Aspire defines standard events to orchestrate resource lifecycles, in the following order:
 
-| Event | When Emitted | Purpose |
-|--|--|--|
-| `InitializeResourceEvent` | The first event fired for any resource. | Kick the resource's lifecycle. |
-| `ResourceEndpointsAllocatedEvent` | Fired when endpoints have been allocated | Can succesfully evaluate endpoint values at this point |
-| `BeforeResourceStartedEvent` | Just before execution begins. | Last-chance dynamic setup or validation before startup |
-| `ResourceReadyEvent` | When the resource is considered "ready." | Unblocks dependents waiting for readiness. |
-| `ConnectionStringAvailableEvent` | When a connection string is ready. | Enables dependent resources to be wired dynamically. |
+<Steps>
+1. `InitializeResourceEvent`: Fired when a resource is first created to kick off the resource's lifecycle.
+1. `ConnectionStringAvailableEvent`: Fired when a connection string is ready, enabling dependent resources to wire themselves dynamically based on the resource's outputs.
+1. `ResourceEndpointsAllocatedEvent`: Fired when endpoints have been allocated and can be evaluated successfully.
+1. `BeforeResourceStartedEvent`: Fired just before the resource starts executing as a last-chance dynamic setup or validation point.
+1. `ResourceReadyEvent`: Fired when the resource is considered "ready," unblocking any dependents waiting for the resource.
+</Steps>
 
 Lifecycle events allow:
 
@@ -205,14 +202,14 @@ Lifecycle events allow:
 - Wiring services together based on runtime-generated outputs.
 
 <Aside type="caution">
-Event publishing is **synchronous and blocking** — event handlers can delay further execution.
+  Event publishing is **synchronous and blocking** — event handlers can delay further execution.
 </Aside>
 
 ### Status Reporting
 
 Beyond events, Aspire uses **asynchronous state snapshots** to report resource status continuously.
 
-- **ResourceNotificationService** handles snapshot updates.
+- `ResourceNotificationService` handles snapshot updates.
 - Status updates involve:
   1. Receiving the previous immutable snapshot.
   2. Mutating to a new snapshot representing the updated state.

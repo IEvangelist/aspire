@@ -82,6 +82,10 @@ pre.mermaid[data-processed=true] {
 	border: 1px solid var(--sl-color-gray-5);
 }
 
+aside {
+	border-radius: .5rem;
+}
+
 starlight-file-tree {
 	border-radius: .5rem !important;
 	box-shadow: var(--sl-shadow-sm);

@@ -34,7 +34,7 @@ Visual relationships:
 - **Do not affect lifecycle** — the resources are independent operationally.
 - Improve **clarity** by logically grouping related components.
 
-<Aside type="note">
+<Aside type="tip">
 A Redis database container and a Redis Commander admin UI container can be grouped visually, even though they start independently.
 </Aside>
 
@@ -336,18 +336,18 @@ builder.Build().Run();
 
 The preceding code will output different results depending on whether the application is running in **run mode** or **publish mode**:
 
-- **Run Mode**:
+**Run Mode**:
 
-  ```bash title="Run Mode — Console Output"
-  IsAllocated: True
-  Resolved Url: http://localhost:6379
-  ```
-- **Publish Mode**:
+```bash title="Run Mode — Console Output"
+IsAllocated: True
+Resolved Url: http://localhost:6379
+```
+**Publish Mode**:
 
-  ```bash title="Publish Mode — Console Output"
-  IsAllocated: False
-  Error accessing Url: Endpoint has not been allocated.
-  ```
+```bash title="Publish Mode — Console Output"
+IsAllocated: False
+Error accessing Url: Endpoint has not been allocated.
+```
 
 <Aside type="tip">
   The overloads of `WithEnvironment` that take a callback run after endpoints have been allocated.

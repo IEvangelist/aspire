@@ -33,6 +33,10 @@ This table shows how you can deploy the same resources across different platform
 | API Service | `dotnet run --project ../<API_PROJECT_NAME>.csproj` | AWS Lambda | Functions | Custom |
 | PostgreSQL | `docker.io/library/postgres` | Relational Database Service | Database for Postgres | Custom |
 
+<Aside type="note">
+    Aspire's AppHost allows you to define your app's architecture in a way that is platform-agnostic, meaning you can run the same code locally or deploy it to any environment without changes.
+</Aside>
+
 ## Development to Production Consistency
 
 Aspire ensures that your local development environment closely matches your production deployment:

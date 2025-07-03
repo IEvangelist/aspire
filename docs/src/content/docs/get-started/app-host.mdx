@@ -60,9 +60,23 @@ The template AppHost project contains:
     - AppHost.cs
 </FileTree>
 
+## AppHost Lifecycle Events
+
+The AppHost provides several lifecycle events that you can subscribe to for custom behavior during the app's startup process. These events allow you to hook into key moments in the lifecycle of your application, such as before the app starts or after resources are created.
+
+<Steps>
+1. `BeforeStartEvent`: Raised before the app host starts.
+1. `AfterEndpointsAllocatedEvent`: Raised after the app host has allocated endpoints for all services.
+1. `AfterResourcesCreatedEvent`: Raised after all resources have been created.
+</Steps>
+
+<LearnMore>
+  For more granular control over resource lifecycles, explore the [well-known lifecycle events](/aspire/architecture/resource-model/#well-known-lifecycle-events) available in Aspire's Resource Model.
+</LearnMore>
+
 ## Best Practices
 
 - **Keep it Simple**: Start with a minimal `AppHost` and add complexity as needed.
-- **Use Dependencies**: Clearly define which services depend on others using `.WithReference()`.
+- **Use Dependencies**: Clearly define which services depend on others using `.WithReference(...)`.
 - **Environment Configuration**: Use different configurations for development, testing, and production.
 - **Resource Naming**: Use clear, descriptive names for your resources to make debugging easier.
