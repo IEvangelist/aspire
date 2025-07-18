@@ -19,7 +19,7 @@ The RabbitMQ hosting integration models a RabbitMQ server as the `RabbitMQServer
 
 In your app host project, call `AddRabbitMQ` on the `builder` instance to add a RabbitMQ server resource:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var rabbitmq = builder.AddRabbitMQ("messaging");
@@ -47,7 +47,7 @@ builder.AddProject<Projects.ExampleProject>()
 
 To add a data volume to the RabbitMQ server resource, call the `WithDataVolume` method on the RabbitMQ server resource:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var rabbitmq = builder.AddRabbitMQ("messaging")
@@ -65,7 +65,7 @@ The data volume is used to persist the RabbitMQ server data outside the lifecycl
 
 To add a data bind mount to the RabbitMQ server resource, call the `WithDataBindMount` method:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var rabbitmq = builder.AddRabbitMQ("messaging")
@@ -89,7 +89,7 @@ Data bind mounts rely on the host machine's filesystem to persist the RabbitMQ s
 
 When you want to explicitly provide the username and password used by the container image, you can provide these credentials as parameters. Consider the following alternative example:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var username = builder.AddParameter("username", secret: true);
@@ -107,7 +107,7 @@ builder.AddProject<Projects.ExampleProject>()
 
 To add the [RabbitMQ management plugin](https://www.rabbitmq.com/docs/management) to the RabbitMQ server resource, call the `WithManagementPlugin` method. Remember to use parameters to set the credentials for the container. You'll need these credentials to log into the management plugin:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var username = builder.AddParameter("username", secret: true);

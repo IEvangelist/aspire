@@ -65,7 +65,7 @@ In Aspire, configuration, connectivity details, and dependencies between distrib
 
 Aspire represents these relationships through a **heterogeneous Directed Acyclic Graph (DAG)**. This graph tracks not only dependency ordering but also how **structured values** are passed between resources at multiple abstraction levels: configuration, connection, and runtime behavior.
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var db = builder.AddPostgres("pg");
@@ -183,7 +183,7 @@ Aspire evaluates the model in **two distinct modes**:
 
 **Example — Using `ReferenceExpression`:**
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var ep = api.GetEndpoint("http");
 
 builder.WithEnvironment("HEALTH_URL",
@@ -210,7 +210,7 @@ HEALTH_URL=https://localhost:5000/health
 
 ### Alternate pattern using `ExecutionContext`
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var ep = api.GetEndpoint("http");
 
 if (builder.ExecutionContext.IsRunMode)
@@ -361,7 +361,7 @@ This section covers how to reference endpoints from other resources in Aspire, a
 
 The `WithReference` API allows you to pass an endpoint reference directly to a target resource.
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var redis = builder.AddContainer("redis", "redis")
@@ -474,7 +474,7 @@ Consider the following scenario, where the example shows a project that is going
 
 The following code demonstrates how to set environment variables for a project that needs to communicate with other resources like Grafana and Keycloak. It ensures that the URLs are correctly resolved based on the execution context (run mode vs. publish mode).
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var keycloak = builder.AddKeycloak("keycloak", 8080);

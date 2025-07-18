@@ -26,7 +26,7 @@ To access these types and APIs for expressing them as resources in your [AppHost
 
 In your app host project, call `AddPostgres` on the `builder` instance to add a PostgreSQL server resource then call `AddDatabase` on the `postgres` instance to add a database resource as shown in the following example:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres");
@@ -64,7 +64,7 @@ CREATE DATABASE "<QUOTED_DATABASE_NAME>"
 
 To alter the default script, chain a call to the `WithCreationScript` method on the database resource builder:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres");
@@ -96,7 +96,7 @@ The preceding example creates a database named `app_db`. The script is run when 
 
 When adding PostgreSQL resources to the `builder` with the `AddPostgres` method, you can chain calls to `WithPgAdmin` to add the [**dpage/pgadmin4**](https://www.pgadmin.org/) container. This container is a cross-platform client for PostgreSQL databases, that serves a web-based admin dashboard. Consider the following example:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -116,7 +116,7 @@ The preceding code adds a container based on the `docker.io/dpage/pgadmin4` imag
 
 To configure the host port for the pgAdmin container, call the `WithHostPort` method on the PostgreSQL server resource. The following example shows how to configure the host port for the pgAdmin container:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -136,7 +136,7 @@ The preceding code adds and configures the host port for the pgAdmin container. 
 
 When adding PostgreSQL resources to the `builder` with the `AddPostgres` method, you can chain calls to `WithPgWeb` to add the [**sosedoff/pgweb**](https://sosedoff.github.io/pgweb/) container. This container is a cross-platform client for PostgreSQL databases, that serves a web-based admin dashboard. Consider the following example:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -156,7 +156,7 @@ The preceding code adds a container based on the `docker.io/sosedoff/pgweb` imag
 
 To configure the host port for the pgWeb container, call the `WithHostPort` method on the PostgreSQL server resource. The following example shows how to configure the host port for the pgAdmin container:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -176,7 +176,7 @@ The preceding code adds and configures the host port for the pgWeb container. Th
 
 To add a data volume to the PostgreSQL server resource, call the `WithDataVolume` method on the PostgreSQL server resource:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -197,7 +197,7 @@ The data volume is used to persist the PostgreSQL server data outside the lifecy
 
     You can resolve the problem by using the managed service **Azure Database for PostgreSQL** to host the deployed database instead of a container in ACA, which is the recommended approach regardless of this issue. The following App Host code shows how to deploy a database to Azure Database for PostgreSQL, but run it as a container, with a data volume, during development:
 
-    ```csharp title="C# — AppHost.cs"
+    ```csharp title="AppHost.aspire"
     var builder = DistributedApplication.CreateBuilder(args);
 
     var postgres = builder.AddAzurePostgresFlexibleServer("postgres")
@@ -214,7 +214,7 @@ The data volume is used to persist the PostgreSQL server data outside the lifecy
 
 To add a data bind mount to the PostgreSQL server resource, call the `WithDataBindMount` method:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -240,7 +240,7 @@ Data bind mounts rely on the host machine's filesystem to persist the PostgreSQL
 
 To add an init bind mount to the PostgreSQL server resource, call the `WithInitBindMount` method:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
@@ -260,7 +260,7 @@ The init bind mount relies on the host machine's filesystem to initialize the Po
 
 When you want to explicitly provide the username and password used by the container image, you can provide these credentials as parameters. Consider the following alternative example:
 
-```csharp title="C# — AppHost.cs"
+```csharp title="AppHost.aspire"
 var builder = DistributedApplication.CreateBuilder(args);
 
 var username = builder.AddParameter("username", secret: true);
