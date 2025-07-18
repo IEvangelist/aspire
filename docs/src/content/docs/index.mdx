@@ -53,6 +53,22 @@ import AppHostBuilder from '../../components/AppHostBuilder.astro';
 
 <AppHostBuilder />
 
+## Polyglot, multi-language support
+
+**Works with your existing stack** — Aspire orchestrates applications written in C#, Java, Python, JavaScript, TypeScript, Go, PHP, Ruby, and more. Your team can keep using the languages and frameworks you know.
+
+import LanguagesSupported from '../../components/LanguagesSupported.astro';
+
+<LanguagesSupported />
+
+Aspire supports a wide range of languages and frameworks, allowing you to build applications in the languages you love while benefiting from Aspire's orchestration capabilities.
+
+<Card title="Language Flexibility" icon="seti:json">
+  **Frontend**: React, Vue, Angular, Blazor, Next.js, and more  
+  **Backend**: C#, Node.js, Python (FastAPI/Django), Go, PHP (Laravel/Symfony), Ruby on Rails, Java (Spring Boot)  
+  **Any Container**: Docker containers work seamlessly with Aspire orchestration
+</Card>
+
 ## Local-first, Production-ready
 
 **Aspire is designed to be local-first**, meaning you develop and test your applications on your local machine and Aspire strives to closely mirror production. This approach reduces the "works on my machine" problem and ensures a smoother transition to production.
@@ -132,25 +148,22 @@ import TestimonialCarousel from '../../components/TestimonialCarousel.astro';
 
 <TestimonialCarousel />
 
-## Polyglot, multi-language support
-
-**Works with your existing stack** — Aspire orchestrates applications written in C#, Java, Python, JavaScript, TypeScript, Go, PHP, Ruby, and more. Your team can keep using the languages and frameworks you know.
-
-import LanguagesSupported from '../../components/LanguagesSupported.astro';
-
-<LanguagesSupported />
-
-Aspire supports a wide range of languages and frameworks, allowing you to build applications in the languages you love while benefiting from Aspire's orchestration capabilities.
-
-<Card title="Language Flexibility" icon="seti:json">
-  **Frontend**: React, Vue, Angular, Blazor, Next.js, and more  
-  **Backend**: C#, Node.js, Python (FastAPI/Django), Go, PHP (Laravel/Symfony), Ruby on Rails, Java (Spring Boot)  
-  **Any Container**: Docker containers work seamlessly with Aspire orchestration
-</Card>
-
 ## Free, open source, and community-first
 
 Aspire thrives on community contributions and feedback. Join our community forums, contribute to the codebase, or simply share your experiences. Together, we can make Aspire even better.
+
+import { ContributorList } from "starlight-contributor-list";
+
+export const ignore = [
+    "github-actions[bot]",
+    "dependabot[bot]",
+    "dependabot",
+    "dotnet-maestro[bot]",
+    "copilot-swe-agent",
+    "microsoftopensource"
+];
+
+<ContributorList githubRepo="dotnet/aspire" ignore={ignore} />
 
 ## Ready for liftoff?
 
