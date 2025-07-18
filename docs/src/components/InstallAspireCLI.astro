@@ -1,0 +1,79 @@
+---
+import {
+    Aside,
+    Code,
+    Steps,
+    Tabs,
+    TabItem,
+} from "@astrojs/starlight/components";
+import AsciinemaPlayer from "./AsciinemaPlayer.astro";
+import SynchedTabs from "./SynchedTabs.astro";
+---
+
+<Steps>
+    <ol>
+        <li>
+            <p>Install the Aspire CLI:</p>
+
+            <SynchedTabs id="os">
+                <Tabs>
+                    <TabItem label="Unix">
+                        <Code
+                            lang="bash"
+                            title="Install the Aspire CLI globally"
+                            code="curl -sSL https://github.com/dotnet/aspire/raw/refs/heads/main/eng/scripts/get-aspire-cli.sh | bash"
+                        />
+                    </TabItem>
+                    <TabItem label="Windows">
+                        <Code
+                            lang="powershell"
+                            title="Install the Aspire CLI globally"
+                            code='iex "& { $(irm https://github.com/dotnet/aspire/raw/refs/heads/main/eng/scripts/get-aspire-cli.ps1) }"'
+                        />
+                    </TabItem>
+                </Tabs>
+            </SynchedTabs>
+
+            <Aside type="note">
+                The Aspire CLI is currently in preview, hence the `--prerelease`
+                flag is used.
+            </Aside>
+        </li>
+        <li>
+            <p>Verify the installation by checking the Aspire CLI version:</p>
+
+            <SynchedTabs id="os">
+                <Tabs>
+                    <TabItem label="Unix">
+                        <Code
+                            lang="bash"
+                            title="Check Aspire CLI version"
+                            code="aspire --version"
+                        />
+                    </TabItem>
+                    <TabItem label="Windows">
+                        <Code
+                            lang="powershell"
+                            title="Check Aspire CLI version"
+                            code="aspire --version"
+                        />
+                    </TabItem>
+                </Tabs>
+            </SynchedTabs>
+
+            You should see the version number of the Aspire CLI, which indicates
+            that it's installed correctly.
+        </li>
+        <li>
+            <p>
+                To see the available commands and options, run the help command
+                — select the play button below to see a demo:
+            </p>
+
+            <AsciinemaPlayer
+                src="/aspire/casts/aspire-help.cast"
+                poster="npt:0:03"
+            />
+        </li>
+    </ol>
+</Steps>

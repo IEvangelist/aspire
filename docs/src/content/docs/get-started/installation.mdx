@@ -5,35 +5,8 @@ lastUpdated: true
 tableOfContents: true
 ---
 
-import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
-import { Kbd } from 'starlight-kbd/components'
-import Link from '../../../components/Link.astro';
-import AsciinemaPlayer from '../../../components/AsciinemaPlayer.astro';
+import InstallAspireCLI from '../../../components/InstallAspireCLI.astro';
 
 Aspire includes tooling to help you create and configure cloud-native apps. The tooling includes useful starter project templates and other features to streamline getting started with Aspire for Visual Studio, Visual Studio Code, and CLI workflows. Assuming you have the [prerequisites](./prerequisites) installed, you can install the Aspire CLI and create a new project.
 
-<Steps>
-
-1. Install the Aspire CLI:
-
-    ```bash title="Install the Aspire CLI globally"
-    dotnet tool install --global aspire.cli --prerelease
-    ```
-
-    <Aside type='note'>
-      The Aspire CLI is currently in preview, hence the `--prerelease` flag is used.
-    </Aside>
-
-1. Verify the installation by checking the Aspire CLI version:
-
-    ```bash title="Check Aspire CLI version"
-    aspire --version
-    ```
-    You should see the version number of the Aspire CLI, which indicates that it's installed correctly.
-
-1. To see the available commands and options, run the help command — select the play button below to see a demo:    
-
-    <AsciinemaPlayer src="/aspire/casts/aspire-help.cast" poster="npt:0:03" />
-
-</Steps>
-
+<InstallAspireCLI />
