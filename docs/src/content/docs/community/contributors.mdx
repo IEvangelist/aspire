@@ -6,7 +6,7 @@ lastUpdated: false
 editUrl: false
 ---
 
-import { CardGrid, LinkCard, LinkButton } from '@astrojs/starlight/components';
+import { Aside, CardGrid, LinkCard, LinkButton } from '@astrojs/starlight/components';
 import { ContributorList } from "starlight-contributor-list";
 import GitHubRepoStats from '../../../components/GitHubRepoStats.astro';
 
@@ -17,26 +17,37 @@ Aspire wouldn't be what it is today without the amazing contributions from our c
 </LinkButton>
 
 export const ignore = [
-    "github-actions[bot]",
-    "dependabot[bot]",
-    "dependabot",
-    "dotnet-maestro[bot]",
-    "copilot-swe-agent",
-    "microsoftopensource"
+  "github-actions[bot]",
+  "dependabot[bot]",
+  "dependabot",
+  "dotnet-maestro[bot]",
+  "copilot-swe-agent",
+  "microsoftopensource"
 ];
 
 import stats from '../../../data/github-stats.json';
 
 ## Aspire Contributors 🙏
 
-Thank you to all the community members who have contributed to Aspire! Your efforts help shape the future of this project.
+Thank you to all the community members who have contributed to Aspire! Your efforts help shape the future of this project. Collaborating on Aspire means joining a vibrant community that's building the next evolution of cloud-native .NET applications. Aspire is the successor to Microsoft's experimental "Project Tye"—originally called "Astra"—and its ambitions are far reaching and extensible. By contributing, you're helping to define new patterns, unlock extensibility, and drive innovation for developers everywhere. Jump in and help us push the boundaries of what's possible!
 
 <ContributorList githubRepo="dotnet/aspire" ignore={ignore} />
 <GitHubRepoStats stats={stats} repoName="dotnet/aspire" />
 
 ## Aspire Samples Contributors 💜
 
-Thank you to all the community members who have contributed to Aspire Samples! Your contributions help showcase the power and flexibility of Aspire in real-world scenarios.
+Thank you to all the community members who have contributed to Aspire Samples! Your contributions help showcase the power and flexibility of Aspire in real-world scenarios. By sharing your solutions and examples, you empower others to learn, experiment, and build with confidence. Every sample you contribute can inspire new ideas and help fellow developers overcome challenges. Join us in collaborating and contributing—your real-world scenarios make a difference and help the entire community grow!
 
 <ContributorList githubRepo="dotnet/aspire-samples" ignore={ignore} />
 <GitHubRepoStats stats={stats} repoName="dotnet/aspire-samples" />
+
+## Aspire Docs Contributors 📚
+
+Thank you to all the community members who have contributed to Aspire Docs! Your work helps make our documentation more helpful, approachable, and accessible for everyone. Dive into our docs to explore architecture guidance, design patterns, and conceptual articles that illuminate how Aspire works. Whether you're just getting started or looking for advanced, in-depth end-to-end tutorials, you'll find practical how-to guides, API reference material, and code samples interleaved throughout. Discover new ideas, learn best practices, and unlock the full potential of Aspire by reading and engaging with our documentation!
+
+<ContributorList githubRepo="dotnet/docs-aspire" ignore={ignore} />
+<GitHubRepoStats stats={stats} repoName="dotnet/docs-aspire" />
+
+<Aside variant="info" icon="celebration">
+  Aspire Docs is proudly part of the annual <a href="https://github.com/topics/hacktoberfest" target="_blank" rel="noopener">Hacktoberfest</a>! Join us and contribute during October to help improve our documentation and support the open source community.
+</Aside>
