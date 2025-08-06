@@ -9,6 +9,7 @@ import starlightImageZoom from 'starlight-image-zoom'
 import starlightLinksValidator from 'starlight-links-validator'
 import starlightScrollToTop from 'starlight-scroll-to-top'
 import starlightSidebarTopics from 'starlight-sidebar-topics'
+import starlightGiscus from 'starlight-giscus'
 import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
@@ -88,6 +89,7 @@ export default defineConfig({
 				Search: './src/components/starlight/Search.astro',
 				Footer: './src/components/starlight/Footer.astro',
 				MarkdownContent: './src/components/starlight/MarkdownContent.astro',
+				Pagination: './src/components/starlight/Pagination.astro',
 			},
 			expressiveCode: {
 				/* TODO: decide which themes we want
@@ -124,6 +126,20 @@ export default defineConfig({
 						{ id: 'linux', label: 'Linux' },
 					],
 				}),
+				starlightGiscus({
+					repo: 'IEvangelist/aspire-docs-discussions',
+					repoId: 'R_kgDOPYdXEQ',
+					category: 'General',
+					categoryId: 'DIC_kwDOPYdXEc4Ctyny',
+					mapping: 'pathname',
+					inputPosition: 'bottom',
+					reactions: true,
+					lazy: true,
+					theme: {
+						light: 'catppuccin_latte',
+						dark: 'catppuccin_mocha'
+					}
+				})
 			],
 		}),
 	],

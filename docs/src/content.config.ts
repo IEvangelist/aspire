@@ -9,6 +9,7 @@ export const collections = {
 			{
 				extend: ({ image }) => z.object({
 					renderBlocking: z.string().optional(),
+					giscus: z.boolean().optional().default(true),
 					category: z.enum([
 						'conceptual',
 						'quickstart',

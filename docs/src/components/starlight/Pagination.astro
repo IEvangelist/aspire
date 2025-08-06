@@ -1,0 +1,40 @@
+---
+import Comments from "starlight-giscus/components/Comments.astro";
+import Default from "@astrojs/starlight/components/Pagination.astro";
+---
+
+<Default />
+<Comments />
+
+<script>
+  function syncStarlightThemeWithDataTheme() {
+    const dataTheme = document.documentElement.getAttribute("data-theme");
+    if (!dataTheme) return;
+
+    const currentStored = localStorage.getItem("starlight-theme");
+    if (currentStored !== dataTheme) {
+      console.log("Updating localStorage starlight-theme:", dataTheme);
+      localStorage.setItem("starlight-theme", dataTheme);
+
+      // Dispatch change event manually
+      const themeSelect = document.querySelector("starlight-theme-select");
+      if (themeSelect) {
+        const event = new Event("change", { bubbles: true });
+        themeSelect.dispatchEvent(event);
+      }
+    }
+  }
+
+  window.addEventListener("load", () => {
+    syncStarlightThemeWithDataTheme();
+
+    const observer = new MutationObserver(() => {
+      syncStarlightThemeWithDataTheme();
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["data-theme"]
+    });
+  });
+</script>

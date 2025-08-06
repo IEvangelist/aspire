@@ -38,5 +38,13 @@
         "text": "Aspire was easy to integrate with our existing container orchestration.",
         "avatar": "../assets/testimonials/sean-killeen.jpg",
         "link": "https://www.linkedin.com/in/seankilleen/"
+    },
+    {
+        "name": "Dan Clarke",
+        "company": "Everstack",
+        "role": "Developer & Podcaster",
+        "text": "OpenTelemetry out-of-the-box in the Aspire dashboard is a game changer for observability!",
+        "avatar": "../assets/testimonials/dan-clarke.jpg",
+        "link": "https://bsky.app/profile/danclarke.com"
     }
 ]
