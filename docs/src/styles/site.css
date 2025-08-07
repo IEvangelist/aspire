@@ -1,10 +1,52 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+.poppins-light {
+	font-family: "Poppins", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+}
+
+.poppins-regular {
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.poppins-medium {
+	font-family: "Poppins", sans-serif;
+	font-weight: 500;
+	font-style: normal;
+}
+
+.poppins-semibold {
+	font-family: "Poppins", sans-serif;
+	font-weight: 600;
+	font-style: normal;
+}
+
+.poppins-bold {
+	font-family: "Poppins", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+}
+
+:root {
+	--aspire-color-primary: #7455DD;
+	--aspire-color-black: #1F1E33;
+	--aspire-color-secondary: #B9AAEE;
+	--aspire-color-grey: #DCE0E8;
+	--aspire-color-muted: #DCD5F6;
+	--aspire-color-white: #FFFFFF;
+}
 
 /* Dark theme variables (default) */
 :root {
 	/* Fonts */
-	--__sl-font-mono: 'Fira Code'; /* https://betterwebtype.com/5-monospaced-fonts-with-coding-ligatures/ */
-	--font-heading: 'Outfit', system-ui, -apple-system, sans-serif;
+	--sl-font-system: "Poppins", sans-serif;
+	--sl-font-system-mono: 'Fira Code';
+	/* https://betterwebtype.com/5-monospaced-fonts-with-coding-ligatures/ */
+	--font-heading: var(--sl-font-system);
 
 	/* Starlight color overrides */
 	--sl-color-accent-low: #0F042C;
@@ -72,9 +114,9 @@
 }
 
 /* Code blocks */
-pre[data-language="bash"] > code,
-pre[data-language="powershell"] > code,
-pre[data-language="console"] > code {
+pre[data-language="bash"]>code,
+pre[data-language="powershell"]>code,
+pre[data-language="console"]>code {
 	line-height: initial;
 }
 
@@ -123,7 +165,12 @@ video {
 	border-radius: 0.5rem;
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .hero #_top,
 .tagline,
 .site-title {
@@ -140,23 +187,24 @@ h1, h2, h3, h4, h5, h6,
 	color: var(--sl-color-white);
 }
 
+.hero {
+	padding-block: clamp(2rem, calc(1rem + 7.5vmin), 7.5rem);
+}
+
 .hero * {
 	z-index: 2;
 }
 
 .hero #_top {
-	font-size: calc(var(--sl-text-6xl) * 1.8);
-	background: var(--aspire-color);
-	background: radial-gradient(ellipse 100% 80% at 50% 20%,
-			var(--aspire-color-light) 0%,
-			var(--aspire-color) 100%);
+	font-size: var(--sl-text-2xl);
+	background: var(--aspire-color-white);
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
 .hero .tagline {
-	font-size: 1.6rem;
+	font-size: 4rem;
 }
 
 .hero .sl-link-button {
@@ -168,9 +216,9 @@ h1, h2, h3, h4, h5, h6,
 	transform: translateY(-10%);
 }
 
-.hero > img {
+.hero>img {
 	max-width: 100%;
-	max-height: 17rem;
+	max-height: 15rem;
 	height: auto;
 }
 
@@ -243,6 +291,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* Light theme overrides */
 :root[data-theme='light'] {
+
 	/* Sidebar topics */
 	.starlight-sidebar-topics {
 		background: var(--sl-color-bg-nav);
@@ -282,13 +331,26 @@ h1, h2, h3, h4, h5, h6,
 /* Hero page specific styles */
 :root[data-has-hero] {
 	.tagline {
-		font-size: 1.6rem;
+		font-size: 4rem;
+		line-height: 1.2;
+		color: var(--aspire-color-white);
+	}
+
+	.tagline p {
+		font-size: 1rem;
+		max-width: 72%;
+		line-height: 1.5;
+		font-weight: initial;
+		margin-top: .75rem;
+		margin-bottom: 1.25rem;
+		;
 	}
 
 	.sl-link-button {
-		font-size: 1.5rem;
-		padding: 1.5rem 2.5rem;
+		font-size: .75rem;
+		padding: .75rem 1.5rem;
 	}
+
 }
 
 /* Card icon sizing - ensure icons match Starlight defaults */

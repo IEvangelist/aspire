@@ -84,7 +84,6 @@ export default defineConfig({
 				'@fontsource-variable/outfit'
 			],
 			components: {
-				ContentPanel: './src/components/starlight/ContentPanel.astro',
 				SocialIcons: './src/components/starlight/SocialIcons.astro',
 				Search: './src/components/starlight/Search.astro',
 				Footer: './src/components/starlight/Footer.astro',

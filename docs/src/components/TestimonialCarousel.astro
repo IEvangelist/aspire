@@ -339,9 +339,10 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     });
                     
                     // Add keyboard navigation for accessibility
-                    card.addEventListener("keydown", (event: KeyboardEvent) => {
-                        if (event.key === 'Enter' || event.key === ' ') {
-                            event.preventDefault();
+                    card.addEventListener("keydown", (event: Event) => {
+                        const keyboardEvent = event as KeyboardEvent;
+                        if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
+                            keyboardEvent.preventDefault();
                             const index = parseInt(item.getAttribute('data-index') || '0', 10);
                             stopAutoRotate();
                             goToSlide(index);
@@ -419,7 +420,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
         left: 50%;
         transform: translateX(-50%) scale(0.8);
         width: 100%;
-        max-width: 500px;
+        max-width: 35rem;
         opacity: 0;
         filter: blur(3px);
         pointer-events: none;
@@ -476,7 +477,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
         justify-content: center;
         min-height: 280px;
         width: 100%;
-        max-width: 500px;
+        max-width: 35rem;
         margin: 0 auto;
         background-color: var(--carousel-card-bg);
         backdrop-filter: blur(5px);
@@ -592,7 +593,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="6"] {
-        background: 
+        background:
             radial-gradient(
                 circle at 10% 10%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #e7b346) 0%,
