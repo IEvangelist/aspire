@@ -38,82 +38,89 @@
 	--aspire-color-grey: #DCE0E8;
 	--aspire-color-muted: #DCD5F6;
 	--aspire-color-white: #FFFFFF;
-}
 
-/* Dark theme variables (default) */
-:root {
-	/* Fonts */
 	--sl-font-system: "Poppins", sans-serif;
 	--sl-font-system-mono: 'Fira Code';
-	/* https://betterwebtype.com/5-monospaced-fonts-with-coding-ligatures/ */
 	--font-heading: var(--sl-font-system);
 
-	/* Starlight color overrides */
-	--sl-color-accent-low: #0F042C;
-	--sl-color-accent: #9B5DE5;
-	--sl-color-accent-high: #B9AAEE;
-	--sl-color-white: #FDF0DA;
-	--sl-color-gray-1: #EEEAFB;
-	--sl-color-gray-2: #E7F0FF;
-	--sl-color-gray-3: #9DC4FF;
-	--sl-color-gray-4: #70511D;
-	--sl-color-gray-5: #311A7F;
-	--sl-color-gray-6: #190649;
-	--sl-color-black: #14053A;
+	--sl-color-accent-low: #231d41;
+	--sl-color-accent: var(--aspire-color-primary);
+	--sl-color-accent-high: #c6c2f2;
+	--sl-color-white: var(--aspire-color-white);
+	--sl-color-gray-1: #eceef1;
+	--sl-color-gray-2: #c6c8cc;
+	--sl-color-gray-3: #a0a4ab;
+	--sl-color-gray-4: #55585f;
+	--sl-color-gray-5: #35383e;
+	--sl-color-gray-6: #24272d;
+	--sl-color-black: var(--aspire-color-black);
 
-	/* Custom brand colors */
+	--sl-color-bg: var(--aspire-color-black);
+	--sl-color-text: var(--aspire-color-white);
+
 	--aspire-color: #7455DD;
 	--aspire-color-light: #DCD5F6;
 	--color-dotnet-purple: #2c256b;
 
-	/* Theme colors */
-	--color-purple: #9B5DE5;
+	--color-purple: var(--aspire-color-primary);
 	--color-magenta: #D600AA;
 	--color-flamingo: #F65163;
 	--color-blue: #0078D7;
 	--color-cyan: #28C2D1;
 
-	/* Gradients */
-	--background-gradient: linear-gradient(to bottom,
-			var(--sl-color-bg) 0%,
-			var(--color-dotnet-purple) 85%,
-			var(--sl-color-bg-nav) 95%,
-			var(--sl-color-bg) 100%);
 	--gradient-purple-magenta: linear-gradient(90deg, var(--color-purple), var(--color-magenta));
 	--gradient-magenta-flamingo: linear-gradient(90deg, var(--color-magenta), var(--color-flamingo));
 	--gradient-flamingo-purple: linear-gradient(90deg, var(--color-flamingo), var(--color-purple));
 	--gradient-purple-blue: linear-gradient(90deg, var(--color-purple), var(--color-blue));
 	--gradient-blue-purple: linear-gradient(90deg, var(--color-blue), var(--color-purple));
+
+	.sl-link-button.primary {
+		color: var(--sl-color-text);
+		--sl-color-text-accent: var(--aspire-color);
+	}
+
+	--sl-color-text-accent: var(--aspire-color-secondary);
+
+	.site-title span {
+		color: var(--aspire-color-light);
+	}
 }
 
-/* Light theme variables */
 :root[data-theme='light'] {
-	--sl-color-accent-low: #EEEAFB;
-	--sl-color-accent: #9B5DE5;
-	--sl-color-accent-high: #311A7F;
-	--sl-color-white: #14053A;
-	--sl-color-gray-1: #24272F;
-	--sl-color-gray-2: #311A7F;
-	--sl-color-gray-3: #70511D;
-	--sl-color-gray-4: #888B96;
-	--sl-color-gray-5: #E7F0FF;
-	--sl-color-gray-6: #EEEAFB;
-	--sl-color-gray-7: #FDF0DA;
-	--sl-color-black: #FFFFFF;
+	--sl-color-accent-low: #d5d2f6;
+	--sl-color-accent: var(--aspire-color-primary);
+	--sl-color-accent-high: #322660;
+	--sl-color-white: var(--aspire-color-black);
+	--sl-color-gray-1: #24272d;
+	--sl-color-gray-2: #35383e;
+	--sl-color-gray-3: #55585f;
+	--sl-color-gray-4: #888c93;
+	--sl-color-gray-5: #c0c2c6;
+	--sl-color-gray-6: #eceef1;
+	--sl-color-gray-7: #f5f6f8;
+	--sl-color-black: var(--aspire-color-white);
 
-	--background-gradient: linear-gradient(to bottom,
-			var(--sl-color-bg) 0%,
-			var(--sl-color-bg-nav) 95%,
-			var(--sl-color-bg) 100%);
+	--sl-color-bg: var(--aspire-color-white);
+	--sl-color-text: var(--aspire-color-black);
 
 	--gradient-purple-magenta: linear-gradient(90deg, var(--color-purple), var(--color-magenta));
 	--gradient-magenta-flamingo: linear-gradient(90deg, var(--color-magenta), var(--color-flamingo));
 	--gradient-flamingo-purple: linear-gradient(90deg, var(--color-flamingo), var(--color-purple));
 	--gradient-purple-cyan: linear-gradient(90deg, var(--color-purple), var(--color-cyan));
 	--gradient-cyan-purple: linear-gradient(90deg, var(--color-cyan), var(--color-purple));
+
+	.sl-link-button.primary {
+		color: var(--aspire-color-white);
+		--sl-color-text-accent: var(--aspire-color);
+	}
+
+	--sl-color-text-accent: var(--aspire-color-primary);
+
+	.site-title span {
+		color: var(--aspire-color);
+	}
 }
 
-/* Code blocks */
 pre[data-language="bash"]>code,
 pre[data-language="powershell"]>code,
 pre[data-language="console"]>code {
@@ -122,6 +129,10 @@ pre[data-language="console"]>code {
 
 pre.mermaid[data-processed=true] {
 	border: 1px solid var(--sl-color-gray-5);
+}
+
+.sl-markdown-content code {
+	border-radius: .25rem;
 }
 
 aside {
@@ -139,14 +150,28 @@ starlight-file-tree {
 	border-radius: .5rem;
 }
 
-.sl-markdown-content code {
-	border-radius: .25rem;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.hero #_top,
+.tagline,
+.site-title {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	color: var(--sl-color-text);
 }
 
-/* Interactive elements */
-a:not(:disabled),
-select:not(:disabled) option:not(:disabled) {
-	cursor: pointer;
+.sl-link-button {
+	font-family: var(--font-heading);
+	font-weight: 600;
+}
+
+a:not(:disabled):hover,
+select:not(:disabled) option:not(:disabled):hover {
+	cursor: pointer !important;
 	--transition-property: transform;
 	--transition-duration: 180ms;
 	transition: var(--transition-property) var(--transition-duration) ease-in-out;
@@ -160,31 +185,8 @@ a:not(:disabled):hover {
 	cursor: pointer;
 }
 
-/* Media elements */
 video {
 	border-radius: 0.5rem;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.hero #_top,
-.tagline,
-.site-title {
-	font-family: var(--font-heading);
-	font-weight: 600;
-}
-
-.sl-link-button {
-	font-family: var(--font-heading);
-	font-weight: 600;
-}
-
-.site-title span {
-	color: var(--sl-color-white);
 }
 
 .hero {
@@ -195,9 +197,17 @@ h6,
 	z-index: 2;
 }
 
-.hero #_top {
+:root[data-theme="light"] .hero #_top {
 	font-size: var(--sl-text-2xl);
-	background: var(--sl-color-white);
+	background: var(--aspire-color-black);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+:root[data-theme="dark"] .hero #_top {
+	font-size: var(--sl-text-2xl);
+	background: var(--aspire-color-white);
 	background-clip: text;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -289,10 +299,27 @@ h6,
 	background: initial;
 }
 
-/* Light theme overrides */
-:root[data-theme='light'] {
+.card-grid .card .icon {
+	width: 2rem;
+	height: 2rem;
+	flex-shrink: 0;
+}
 
-	/* Sidebar topics */
+.card-grid .card .icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.sl-card .sl-card-icon,
+.card .icon,
+[data-icon] {
+	width: 2rem !important;
+	height: 2rem !important;
+	min-width: 2rem;
+	min-height: 2rem;
+}
+
+:root[data-theme='light'] {
 	.starlight-sidebar-topics {
 		background: var(--sl-color-bg-nav);
 		border: 1px solid var(--sl-color-gray-6);
@@ -314,26 +341,21 @@ h6,
 		color: var(--sl-color-accent);
 	}
 
-	/* Hero adjustments */
-	.hero #_top {
-		background: var(--aspire-color);
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-
 	/* Link hover effects */
 	a:hover {
 		filter: brightness(110%);
 	}
 }
 
-/* Hero page specific styles */
+/* Hero page specific styling */
 :root[data-has-hero] {
+	.header {
+		border: none;
+	}
+
 	.tagline {
 		font-size: 4rem;
 		line-height: 1.2;
-		color: var(--sl-color-white);
 	}
 
 	.tagline p {
@@ -343,36 +365,38 @@ h6,
 		font-weight: initial;
 		margin-top: .75rem;
 		margin-bottom: 1.25rem;
-		;
 	}
 
 	.sl-link-button {
-		font-size: .75rem;
+		font-size: 1rem;
 		padding: .75rem 1.5rem;
 	}
-
 }
 
-/* Card icon sizing - ensure icons match Starlight defaults */
-.card-grid .card .icon {
-	width: 2rem;
-	height: 2rem;
-	flex-shrink: 0;
+:root[data-has-hero][data-theme="light"] {
+	--sl-color-text: var(--aspire-color-black);
+	--sl-color-bg: var(--aspire-color-white);
+
+	header.header {
+		--sl-color-bg-nav: var(--aspire-color-white);
+	}
+
+	.tagline {
+		color: var(--aspire-color-black);
+	}
 }
 
-.card-grid .card .icon svg {
-	width: 100%;
-	height: 100%;
-}
+:root[data-has-hero][data-theme="dark"] {
+	--sl-color-text: var(--aspire-color-white);
+	--sl-color-bg: var(--aspire-color-black);
 
-/* Alternative selectors in case the structure is different */
-.sl-card .sl-card-icon,
-.card .icon,
-[data-icon] {
-	width: 2rem !important;
-	height: 2rem !important;
-	min-width: 2rem;
-	min-height: 2rem;
+	header.header {
+		--sl-color-bg-nav: var(--aspire-color-black);
+	}
+
+	.tagline {
+		color: var(--aspire-color-white);
+	}
 }
 
 @media (min-width: 72rem) {

@@ -80,8 +80,8 @@ export default defineConfig({
 				}
 			],
 			customCss: [
+				'@fontsource-variable/outfit',
 				'./src/styles/site.css',
-				'@fontsource-variable/outfit'
 			],
 			components: {
 				SocialIcons: './src/components/starlight/SocialIcons.astro',
@@ -89,12 +89,10 @@ export default defineConfig({
 				Footer: './src/components/starlight/Footer.astro',
 				MarkdownContent: './src/components/starlight/MarkdownContent.astro',
 				Pagination: './src/components/starlight/Pagination.astro',
+				Header: './src/components/starlight/Header.astro',
 			},
 			expressiveCode: {
-				/* TODO: decide which themes we want
-				   https://expressive-code.com/guides/themes/#using-bundled-themes
-				*/
-				//themes: ['dark-plus', 'light-plus'],
+				// https://expressive-code.com/guides/themes/#using-bundled-themes
 				themes: ['laserwave', 'slack-ochin'],
 				styleOverrides: { borderRadius: '0.5rem', codeFontSize: '1rem' },
 			},

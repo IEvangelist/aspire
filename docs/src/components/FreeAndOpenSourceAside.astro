@@ -10,19 +10,22 @@
 <style>
     .aside-title {
         margin-bottom: 1rem;
-        font-size: 1.25rem;
+        font-size: 1.5rem;
         font-weight: 600;
     }
 
     .free-open-source-aside {
-        font-size: 1rem;
+        font-size: 1.25rem;
         line-height: 1.5;
         background: var(--aspire-color-primary);
         padding: 2rem 4rem;
         border-radius: 1rem;
         margin-bottom: 2rem;
-        margin-left: -4rem;
-        margin-right: -4rem;
+        
+        @media (min-width: 768px) {
+            width: calc(100% + 8rem);
+            transform: translateX(-4rem);
+        }
     }
 
     .free-open-source-aside,
