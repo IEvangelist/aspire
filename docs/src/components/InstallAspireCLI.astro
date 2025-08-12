@@ -21,14 +21,14 @@ import SynchedTabs from "./SynchedTabs.astro";
                         <Code
                             lang="bash"
                             title="Install the Aspire CLI globally"
-                            code="curl -sSL https://github.com/dotnet/aspire/raw/refs/heads/main/eng/scripts/get-aspire-cli.sh | bash"
+                            code="curl -sSL https://aspire.dev/install.sh | bash"
                         />
                     </TabItem>
                     <TabItem label="Windows">
                         <Code
                             lang="powershell"
                             title="Install the Aspire CLI globally"
-                            code='iex "& { $(irm https://github.com/dotnet/aspire/raw/refs/heads/main/eng/scripts/get-aspire-cli.ps1) }"'
+                            code='Invoke-Expression "& { $(Invoke-RestMethod https://aspire.dev/install.ps1) }"'
                         />
                     </TabItem>
                 </Tabs>
@@ -68,6 +68,7 @@ import SynchedTabs from "./SynchedTabs.astro";
             <AsciinemaPlayer
                 src="/aspire/casts/aspire-help.cast"
                 poster="npt:0:03"
+                rows="20"
             />
         </li>
     </ol>
