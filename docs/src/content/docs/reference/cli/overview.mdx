@@ -26,17 +26,17 @@ The following is an example of running the `aspire new` command to create a new 
 
 While command line parameters can be used to automate the creation of an Aspire project, the Aspire CLI is an interactive-first experience.
 
-## Run the app host project
+## Run the AppHost project
 
-The `aspire run` command runs the app host project in development mode, which configures the Aspire environment, builds the app host, launches the web dashboard, and displays a terminal-based dashboard. This is similar to running the app host project in your IDE of choice, however, a terminal dashboard is also visible.
+The `aspire run` command runs the AppHost project in development mode, which configures the Aspire environment, builds the app host, launches the web dashboard, and displays a terminal-based dashboard. This is similar to running the AppHost project in your IDE of choice, however, a terminal dashboard is also visible.
 
-When `aspire run` starts, it searches the current directory for an app host. If an app host isn't found, the sub directories are searched until an app host is found. If no app host is found, Aspire stops. Once an app host is found, Aspire CLI takes the following steps:
+When `aspire run` starts, it searches the current directory for an app host. If an AppHost isn't found, the sub directories are searched until an AppHost is found. If no AppHost is found, Aspire stops. Once an AppHost is found, Aspire CLI takes the following steps:
 
 import { Steps } from '@astrojs/starlight/components';
 
 <Steps>
   1. Installs or verifies that Aspires local hosting certificates are installed and trusted.
-  1. Builds the app host project.
+  1. Builds the AppHost project.
   1. Starts the app host.
   1. Starts the dashboard.
   1. Displays a terminal-based dashboard.

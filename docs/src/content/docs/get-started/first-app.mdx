@@ -67,13 +67,13 @@ Aspire includes tooling to help you create and configure cloud-native apps. The 
     cd ./AspireApp
     ```
 
-1. Run the Aspire app host project:
+1. Run the Aspire AppHost project:
 
     ```bash title="Run dev-time orchestration"
     aspire run
     ```
 
-    When you run this command, the Aspire CLI automatically finds the app host project, builds your solution, and launches dev-time orchestration. Once the dashboard is ready, its URL (with a login token) appears in your console. You'll also see a live, real-time view of your running resources and their current states.
+    When you run this command, the Aspire CLI automatically finds the AppHost project, builds your solution, and launches dev-time orchestration. Once the dashboard is ready, its URL (with a login token) appears in your console. You'll also see a live, real-time view of your running resources and their current states.
 
     ```bash title="Example output of aspire run"
     aspire run
@@ -89,14 +89,14 @@ Aspire includes tooling to help you create and configure cloud-native apps. The 
     │ webfrontend │ Project │ Running │ https://localhost:7214 │
     │             │         │         │ http://localhost:5124  │
     ╰─────────────┴─────────┴─────────┴────────────────────────╯
-    Press Ctrl+C to stop the app host and exit.
+    Press Ctrl+C to stop the AppHost and exit.
     ```
 
 1. Explore the running distributed application. From the dashboard, open the `HTTPS` endpoint from each resource.
 
     ![Aspire dashboard Resources page displaying two running resources: apiservice and webfrontend. Both are marked as Running with green check icons. The table lists columns for Name, State, Start time, Source, URLs, and Actions. apiservice uses AspireApp.ApiService.csproj and has URLs https://localhost:7393 and webfrontend uses AspireApp.Web.csproj with URL https://localhost:7214. The interface has a dark theme with navigation options for Resources, Console, Structured, Traces, and Metrics on the left.](../../../assets/get-started/aspire-dashboard.png)
 
-1. Stop the app host and close the dashboard by pressing <Kbd windows="Ctrl+C" mac="⌘+C" />.
+1. Stop the AppHost and close the dashboard by pressing <Kbd windows="Ctrl+C" mac="⌘+C" />.
 
     **Congratulations! You've created your first Aspire app.**
 
