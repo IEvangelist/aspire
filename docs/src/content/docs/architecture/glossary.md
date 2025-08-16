@@ -1,6 +1,7 @@
 ---
 title: Glossary
 description: A glossary of key terms and concepts in Aspire.
+giscus: false
 next: false
 prev: false
 ---

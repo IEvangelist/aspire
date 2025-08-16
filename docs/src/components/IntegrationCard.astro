@@ -78,7 +78,7 @@ const { pkg } = Astro.props;
                 <Icon name="download" size="2rem" />
                 <span class="count">{formatDownloads(pkg.downloads)}</span>
             </div>
-            <div>Version: {pkg.version}</div>
+            <div class="version">Version: {pkg.version}</div>
             <div>
                 <a
                     href={pkg.href}
@@ -178,6 +178,10 @@ const { pkg } = Astro.props;
             flex: 1;
             min-height: 0;
             gap: 0.75em;
+        }
+
+        .card .version {
+            color: var(--sl-color-gray-2);
         }
 
         .card .desc {

@@ -18,7 +18,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
                 label: 'Concepts', items: [
                     { label: 'Welcome', slug: 'get-started/welcome' },
                     { label: 'What is Aspire?', slug: 'get-started/what-is-aspire' },
-                    { label: 'The AppHost', slug: 'get-started/app-host' },
+                    { label: 'What is the AppHost?', slug: 'get-started/app-host' },
                     { label: 'Understanding Resources', slug: 'get-started/resources' },
                     { label: 'Deployment and App Topology', slug: 'get-started/deployment' }
                 ]
@@ -85,6 +85,19 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
             }
         ]
     },
+    // {
+    //     label: 'API Reference',
+    //     id: 'reference-api',
+    //     link: '/api',
+    //     icon: 'document',
+    //     items: [
+    //         { 
+    //             label: 'API Reference', 
+    //             collapsed: false, 
+    //             autogenerate: { directory: '/reference/api', collapsed: true }
+    //         },
+    //     ]
+    // },
     {
         label: 'Community',
         link: '/community/videos',

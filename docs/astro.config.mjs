@@ -112,6 +112,11 @@ export default defineConfig({
 				starlightLlmsTxt({
 					projectName: 'Aspire',
 					description: 'Aspire is a polyglot local dev-time orchestration tool chain for building, running, debugging, and deploying distributed applications.',
+					exclude: [
+						'reference/api/**',
+						'/reference/api/**',
+						'**/api/**'
+					]
 				}),
 				starlightImageZoom({
 					showCaptions: true
