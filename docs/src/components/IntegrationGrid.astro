@@ -28,6 +28,7 @@ import denoIcon from "../assets/icons/deno-icon.png";
 import elasticIcon from "../assets/icons/elastic-icon.png";
 import eventStoreIcon from "../assets/icons/eventstore-icon.png";
 import garnetIcon from "../assets/icons/garnet-icon.png";
+import gitHubIcon from "../assets/icons/github-icon.png";
 import k6Icon from "../assets/icons/k6-icon.png";
 import lavinMqIcon from "../assets/icons/lavinmq-icon.png";
 import mailpitIcon from "../assets/icons/mailpit-icon.png";
@@ -55,46 +56,75 @@ import valkeyIcon from "../assets/icons/valkey-icon.png";
 const icons = [
   { meta: activeMqIcon, alt: "ActiveMQ", search: "activemq" },
   { meta: awsIcon, alt: "AWS", search: "aws" },
-  { meta: azureAppconfigIcon, alt: "Azure App Configuration", search: "appconfig" },
-  { meta: azureAppinsightsIcon, alt: "Azure Application Insights", search: "applicationinsights" },
-  { meta: azureBlobpagestorageIcon, alt: "Azure Blob/Page Storage", search: "blob" },
+  {
+    meta: azureAppconfigIcon,
+    alt: "Azure App Configuration",
+    search: "appconfig",
+  },
+  {
+    meta: azureAppinsightsIcon,
+    alt: "Azure Application Insights",
+    search: "applicationinsights",
+  },
+  {
+    meta: azureBlobpagestorageIcon,
+    alt: "Azure Blob/Page Storage",
+    search: "blob",
+  },
   { meta: azureCacheredisIcon, alt: "Azure Cache for Redis", search: "redis" },
   { meta: azureCosmosdbIcon, alt: "Azure Cosmos DB", search: "cosmos" },
   { meta: azureEventhubsIcon, alt: "Azure Event Hubs", search: "eventhubs" },
-  { meta: azureFunctionappsIcon, alt: "Azure Function Apps", search: "functions" },
+  {
+    meta: azureFunctionappsIcon,
+    alt: "Azure Function Apps",
+    search: "functions",
+  },
   { meta: azureIcon, alt: "Microsoft Azure", search: "azure" },
   { meta: azureKeyvaultIcon, alt: "Azure Key Vault", search: "keyvault" },
-  { meta: azureLoganalyticsIcon, alt: "Azure Log Analytics", search: "operationalinsights" },
+  {
+    meta: azureLoganalyticsIcon,
+    alt: "Azure Log Analytics",
+    search: "operationalinsights",
+  },
   { meta: azureOpenaiIcon, alt: "Azure OpenAI", search: "openai" },
-  { meta: azurePostgresqlIcon, alt: "Azure Database for PostgreSQL", search: "postgresql" },
+  {
+    meta: azurePostgresqlIcon,
+    alt: "Azure Database for PostgreSQL",
+    search: "postgresql",
+  },
   { meta: azureSearchIcon, alt: "Azure Cognitive Search", search: "search" },
   { meta: azureServicebusIcon, alt: "Azure Service Bus", search: "servicebus" },
   { meta: azureSignalrIcon, alt: "Azure SignalR", search: "signalr" },
   { meta: azureSqlserverIcon, alt: "Azure SQL Server", search: "sql" },
-  { meta: azureStoragecontainerIcon, alt: "Azure Storage Container", search: "storage" },
+  {
+    meta: azureStoragecontainerIcon,
+    alt: "Azure Storage Container",
+    search: "storage",
+  },
   { meta: azureStoragequeueIcon, alt: "Azure Storage Queue", search: "queue" },
   { meta: azureTableIcon, alt: "Azure Table Storage", search: "table" },
   { meta: azureWebpubsubIcon, alt: "Azure Web PubSub", search: "pubsub" },
   { meta: bunIcon, alt: "Bun", search: "bun" },
-  { meta: daprIcon, alt: "Dapr", search: "dapr" },
+  { meta: daprIcon, alt: "Dapr", search: "dapr", class: "pop" },
   { meta: dbGateIcon, alt: "DbGate", search: "dbgate" },
   { meta: denoIcon, alt: "Deno", search: "deno" },
   { meta: elasticIcon, alt: "Elasticsearch", search: "elasticsearch" },
-  { meta: eventStoreIcon, alt: "EventStore", search: "eventstore" },
+  { meta: eventStoreIcon, alt: "EventStore", search: "eventstore", class: "pop" },
   { meta: garnetIcon, alt: "Garnet", search: "garnet" },
+  { meta: gitHubIcon, alt: "GitHub", search: "github", class: "pop" },
   { meta: k6Icon, alt: "k6", search: "k6" },
   { meta: lavinMqIcon, alt: "LavinMQ", search: "lavinmq" },
   { meta: mailpitIcon, alt: "Mailpit", search: "mailpit" },
-  { meta: meilisearchIcon, alt: "Meilisearch", search: "meilisearch" },
+  { meta: meilisearchIcon, alt: "Meilisearch", search: "meilisearch", class: "pop" },
   { meta: milvusIcon, alt: "Milvus Vector Database", search: "milvus" },
-  { meta: minioIcon, alt: "MinIO", search: "minio" },
+  { meta: minioIcon, alt: "MinIO", search: "minio", class: "pop" },
   { meta: mongodbIcon, alt: "MongoDB", search: "mongodb" },
   { meta: mysqlconnectorIcon, alt: "MySQL Connector", search: "mysql" },
   { meta: natsIcon, alt: "NATS Messaging", search: "nats" },
-  { meta: ngrokIcon, alt: "ngrok", search: "ngrok" },
-  { meta: nodeJsIcon, alt: "Node.js", search: "nodejs" },
+  { meta: ngrokIcon, alt: "ngrok", search: "ngrok", class: "pop" },
+  { meta: nodeJsIcon, alt: "Node.js", search: "nodejs", class: "pop" },
   { meta: ollamaIcon, alt: "Ollama", search: "ollama" },
-  { meta: papercutIcon, alt: "Papercut", search: "papercut" },
+  { meta: papercutIcon, alt: "Papercut", search: "papercut", class: "pop" },
   { meta: postgresqlIcon, alt: "PostgreSQL", search: "postgresql" },
   { meta: powershellIcon, alt: "PowerShell", search: "powershell" },
   { meta: qdrantIcon, alt: "Qdrant Vector Database", search: "qdrant" },
@@ -113,8 +143,20 @@ const randomizedIcons = icons.sort(() => Math.random() - 0.5);
 <div class="layout-grid">
   {
     randomizedIcons.map(
-      (icon: { meta: ImageMetadata; alt: string; search: string }, i: number) => (
-        <a href={`/aspire/integrations/gallery?search=${encodeURIComponent(icon.search)}`} class="img" title={icon.alt}>
+      (
+        icon: {
+          meta: ImageMetadata;
+          alt: string;
+          search: string;
+          class?: string;
+        },
+        i: number,
+      ) => (
+        <a
+          href={`/aspire/integrations/gallery?search=${encodeURIComponent(icon.search)}`}
+          class={`img ${icon.class}`}
+          title={icon.alt}
+        >
           <img src={icon.meta.src} alt={icon.alt} title={icon.alt} />
         </a>
       ),
@@ -160,5 +202,25 @@ const randomizedIcons = icons.sort(() => Math.random() - 0.5);
     filter: brightness(1.2);
     border: 1px solid var(--sl-color-gray-5);
     z-index: 1;
+  }
+
+  .img.pop img {
+    --stroke: rgb(255, 255, 255);
+    /*background: rgb(255, 255, 255);*/
+
+
+grid-area: 1 / 1;
+  display: block;       /* removes whitespace gaps */
+  width: 200px;         /* set your size */
+  height: auto;
+
+  /* 1px outline around opaque pixels */
+  filter:
+    drop-shadow(1px 0 0 var(--stroke))
+    drop-shadow(-1px 0 0 var(--stroke))
+    drop-shadow(0 1px 0 var(--stroke))
+    drop-shadow(0 -1px 0 var(--stroke));
+
+
   }
 </style>
