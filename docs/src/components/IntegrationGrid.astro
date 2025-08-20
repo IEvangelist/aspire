@@ -1,6 +1,7 @@
 ---
 import activeMqIcon from "../assets/icons/activemq-icon.png";
 import awsIcon from "../assets/icons/aws-icon.png";
+import azureAiFoundryIcon from "../assets/icons/azure-ai-foundry-icon.png";
 import azureAppconfigIcon from "../assets/icons/azure-appconfig-icon.png";
 import azureAppinsightsIcon from "../assets/icons/azure-appinsights-icon.png";
 import azureBlobpagestorageIcon from "../assets/icons/azure-blobpagestorage-icon.png";
@@ -25,10 +26,12 @@ import bunIcon from "../assets/icons/bun-icon.png";
 import daprIcon from "../assets/icons/dapr-icon.png";
 import dbGateIcon from "../assets/icons/dbgate-icon.jpeg";
 import denoIcon from "../assets/icons/deno-icon.png";
+import denoLightIcon from "../assets/icons/deno-light-icon.png";
 import elasticIcon from "../assets/icons/elastic-icon.png";
 import eventStoreIcon from "../assets/icons/eventstore-icon.png";
 import garnetIcon from "../assets/icons/garnet-icon.png";
 import gitHubIcon from "../assets/icons/github-icon.png";
+import gitHubLightIcon from "../assets/icons/github-light-icon.png";
 import k6Icon from "../assets/icons/k6-icon.png";
 import lavinMqIcon from "../assets/icons/lavinmq-icon.png";
 import mailpitIcon from "../assets/icons/mailpit-icon.png";
@@ -41,6 +44,8 @@ import natsIcon from "../assets/icons/nats-icon.png";
 import ngrokIcon from "../assets/icons/ngrok-icon.png";
 import nodeJsIcon from "../assets/icons/nodejs-icon.png";
 import ollamaIcon from "../assets/icons/ollama-icon.png";
+import openAiIcon from "../assets/icons/openai-icon.png";
+import openAiLightIcon from "../assets/icons/openai-light-icon.png";
 import papercutIcon from "../assets/icons/papercut-icon.png";
 import postgresqlIcon from "../assets/icons/postgresql-icon.png";
 import powershellIcon from "../assets/icons/powershell-icon.png";
@@ -56,6 +61,7 @@ import valkeyIcon from "../assets/icons/valkey-icon.png";
 const icons = [
   { meta: activeMqIcon, alt: "ActiveMQ", search: "activemq" },
   { meta: awsIcon, alt: "AWS", search: "aws" },
+  { meta: azureAiFoundryIcon, alt: "Azure AI Foundry", search: "aifoundry" },
   {
     meta: azureAppconfigIcon,
     alt: "Azure App Configuration",
@@ -105,26 +111,27 @@ const icons = [
   { meta: azureTableIcon, alt: "Azure Table Storage", search: "table" },
   { meta: azureWebpubsubIcon, alt: "Azure Web PubSub", search: "pubsub" },
   { meta: bunIcon, alt: "Bun", search: "bun" },
-  { meta: daprIcon, alt: "Dapr", search: "dapr", class: "pop" },
+  { meta: daprIcon, alt: "Dapr", search: "dapr" },
   { meta: dbGateIcon, alt: "DbGate", search: "dbgate" },
-  { meta: denoIcon, alt: "Deno", search: "deno" },
+  { meta: denoIcon, alt: "Deno", search: "deno", light: denoLightIcon },
   { meta: elasticIcon, alt: "Elasticsearch", search: "elasticsearch" },
-  { meta: eventStoreIcon, alt: "EventStore", search: "eventstore", class: "pop" },
+  { meta: eventStoreIcon, alt: "EventStore", search: "eventstore" },
   { meta: garnetIcon, alt: "Garnet", search: "garnet" },
-  { meta: gitHubIcon, alt: "GitHub", search: "github", class: "pop" },
+  { meta: gitHubIcon, alt: "GitHub", search: "github", light: gitHubLightIcon },
   { meta: k6Icon, alt: "k6", search: "k6" },
   { meta: lavinMqIcon, alt: "LavinMQ", search: "lavinmq" },
   { meta: mailpitIcon, alt: "Mailpit", search: "mailpit" },
-  { meta: meilisearchIcon, alt: "Meilisearch", search: "meilisearch", class: "pop" },
+  { meta: meilisearchIcon, alt: "Meilisearch", search: "meilisearch" },
   { meta: milvusIcon, alt: "Milvus Vector Database", search: "milvus" },
-  { meta: minioIcon, alt: "MinIO", search: "minio", class: "pop" },
+  { meta: minioIcon, alt: "MinIO", search: "minio" },
   { meta: mongodbIcon, alt: "MongoDB", search: "mongodb" },
   { meta: mysqlconnectorIcon, alt: "MySQL Connector", search: "mysql" },
   { meta: natsIcon, alt: "NATS Messaging", search: "nats" },
-  { meta: ngrokIcon, alt: "ngrok", search: "ngrok", class: "pop" },
-  { meta: nodeJsIcon, alt: "Node.js", search: "nodejs", class: "pop" },
+  { meta: ngrokIcon, alt: "ngrok", search: "ngrok" },
+  { meta: nodeJsIcon, alt: "Node.js", search: "nodejs" },
   { meta: ollamaIcon, alt: "Ollama", search: "ollama" },
-  { meta: papercutIcon, alt: "Papercut", search: "papercut", class: "pop" },
+  { meta: openAiIcon, alt: "OpenAI", search: "openai", light: openAiLightIcon },
+  { meta: papercutIcon, alt: "Papercut", search: "papercut" },
   { meta: postgresqlIcon, alt: "PostgreSQL", search: "postgresql" },
   { meta: powershellIcon, alt: "PowerShell", search: "powershell" },
   { meta: qdrantIcon, alt: "Qdrant Vector Database", search: "qdrant" },
@@ -149,6 +156,7 @@ const randomizedIcons = icons.sort(() => Math.random() - 0.5);
           alt: string;
           search: string;
           class?: string;
+          light?: ImageMetadata;
         },
         i: number,
       ) => (
@@ -157,7 +165,16 @@ const randomizedIcons = icons.sort(() => Math.random() - 0.5);
           class={`img ${icon.class}`}
           title={icon.alt}
         >
-          <img src={icon.meta.src} alt={icon.alt} title={icon.alt} />
+          {icon.light ? (
+            <>
+              {/* Default (dark theme) */}
+              <img class="icon dark" src={icon.meta.src} alt={icon.alt} title={icon.alt} />
+              {/* Light theme variant */}
+              <img class="icon light" src={icon.light.src} alt={icon.alt} title={icon.alt} />
+            </>
+          ) : (
+            <img class="icon" src={icon.meta.src} alt={icon.alt} title={icon.alt} />
+          )}
         </a>
       ),
     )
@@ -196,31 +213,17 @@ const randomizedIcons = icons.sort(() => Math.random() - 0.5);
     object-fit: contain;
   }
 
+  /* Theme-aware icon switching when a light variant exists */
+  .img .icon.light { display: none; }
+  .img .icon.dark { display: block; }
+  :global([data-theme="light"]) .img .icon.light { display: block; }
+  :global([data-theme="light"]) .img .icon.dark { display: none; }
+
   .img:hover {
     cursor: pointer;
     transform: scale(1.1);
     filter: brightness(1.2);
     border: 1px solid var(--sl-color-gray-5);
     z-index: 1;
-  }
-
-  .img.pop img {
-    --stroke: rgb(255, 255, 255);
-    /*background: rgb(255, 255, 255);*/
-
-
-grid-area: 1 / 1;
-  display: block;       /* removes whitespace gaps */
-  width: 200px;         /* set your size */
-  height: auto;
-
-  /* 1px outline around opaque pixels */
-  filter:
-    drop-shadow(1px 0 0 var(--stroke))
-    drop-shadow(-1px 0 0 var(--stroke))
-    drop-shadow(0 1px 0 var(--stroke))
-    drop-shadow(0 -1px 0 var(--stroke));
-
-
   }
 </style>
