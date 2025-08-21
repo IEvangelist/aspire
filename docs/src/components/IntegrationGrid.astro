@@ -1,6 +1,7 @@
 ---
 import activeMqIcon from "../assets/icons/activemq-icon.png";
 import awsIcon from "../assets/icons/aws-icon.png";
+import awsLightIcon from "../assets/icons/aws-light-icon.png";
 import azureAiFoundryIcon from "../assets/icons/azure-ai-foundry-icon.png";
 import azureAppconfigIcon from "../assets/icons/azure-appconfig-icon.png";
 import azureAppinsightsIcon from "../assets/icons/azure-appinsights-icon.png";
@@ -42,7 +43,9 @@ import mongodbIcon from "../assets/icons/mongodb-icon.png";
 import mysqlconnectorIcon from "../assets/icons/mysqlconnector-icon.png";
 import natsIcon from "../assets/icons/nats-icon.png";
 import ngrokIcon from "../assets/icons/ngrok-icon.png";
+import ngrokLightIcon from "../assets/icons/ngrok-light-icon.png";
 import nodeJsIcon from "../assets/icons/nodejs-icon.png";
+import nodeJsLightIcon from "../assets/icons/nodejs-light-icon.png";
 import ollamaIcon from "../assets/icons/ollama-icon.png";
 import openAiIcon from "../assets/icons/openai-icon.png";
 import openAiLightIcon from "../assets/icons/openai-light-icon.png";
@@ -60,7 +63,7 @@ import valkeyIcon from "../assets/icons/valkey-icon.png";
 
 const icons = [
   { meta: activeMqIcon, alt: "ActiveMQ", search: "activemq" },
-  { meta: awsIcon, alt: "AWS", search: "aws" },
+  { meta: awsIcon, alt: "AWS", search: "aws", light: awsLightIcon },
   { meta: azureAiFoundryIcon, alt: "Azure AI Foundry", search: "aifoundry" },
   {
     meta: azureAppconfigIcon,
@@ -127,8 +130,8 @@ const icons = [
   { meta: mongodbIcon, alt: "MongoDB", search: "mongodb" },
   { meta: mysqlconnectorIcon, alt: "MySQL Connector", search: "mysql" },
   { meta: natsIcon, alt: "NATS Messaging", search: "nats" },
-  { meta: ngrokIcon, alt: "ngrok", search: "ngrok" },
-  { meta: nodeJsIcon, alt: "Node.js", search: "nodejs" },
+  { meta: ngrokIcon, alt: "ngrok", search: "ngrok", light: ngrokLightIcon },
+  { meta: nodeJsIcon, alt: "Node.js", search: "nodejs", light: nodeJsLightIcon },
   { meta: ollamaIcon, alt: "Ollama", search: "ollama" },
   { meta: openAiIcon, alt: "OpenAI", search: "openai", light: openAiLightIcon },
   { meta: papercutIcon, alt: "Papercut", search: "papercut" },
@@ -211,6 +214,10 @@ const randomizedIcons = icons.sort(() => Math.random() - 0.5);
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .img * {
+    margin-top: initial;
   }
 
   /* Theme-aware icon switching when a light variant exists */
