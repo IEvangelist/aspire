@@ -13,7 +13,7 @@
       "azure",
       "ai"
     ],
-    "downloads": 659,
+    "downloads": 691,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -31,7 +31,7 @@
       "ai",
       "openai"
     ],
-    "downloads": 237817,
+    "downloads": 240069,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -49,7 +49,7 @@
       "tables",
       "table"
     ],
-    "downloads": 189506,
+    "downloads": 192393,
     "version": "9.4.1"
   },
   {
@@ -67,7 +67,7 @@
       "eventhubs",
       "amqp"
     ],
-    "downloads": 77885,
+    "downloads": 79757,
     "version": "9.4.1"
   },
   {
@@ -85,7 +85,7 @@
       "servicebus",
       "amqp"
     ],
-    "downloads": 289099,
+    "downloads": 294637,
     "version": "9.4.1"
   },
   {
@@ -104,7 +104,7 @@
       "websocket",
       "pubsub"
     ],
-    "downloads": 15767,
+    "downloads": 15943,
     "version": "9.4.1"
   },
   {
@@ -124,7 +124,7 @@
       "npgsql",
       "sql"
     ],
-    "downloads": 9324,
+    "downloads": 9547,
     "version": "9.4.1"
   },
   {
@@ -151,7 +151,7 @@
       "npgsql",
       "sql"
     ],
-    "downloads": 15804,
+    "downloads": 16616,
     "version": "9.4.1"
   },
   {
@@ -168,7 +168,7 @@
       "azure",
       "search"
     ],
-    "downloads": 79033,
+    "downloads": 80172,
     "version": "9.4.1"
   },
   {
@@ -186,7 +186,7 @@
       "keyvault",
       "secrets"
     ],
-    "downloads": 281714,
+    "downloads": 285648,
     "version": "9.4.1"
   },
   {
@@ -205,7 +205,7 @@
       "blobs",
       "blob"
     ],
-    "downloads": 699397,
+    "downloads": 712952,
     "version": "9.4.1"
   },
   {
@@ -224,7 +224,7 @@
       "queue",
       "queues"
     ],
-    "downloads": 188616,
+    "downloads": 190698,
     "version": "9.4.1"
   },
   {
@@ -236,7 +236,7 @@
       "aspire",
       "cli"
     ],
-    "downloads": 23610,
+    "downloads": 24955,
     "version": "9.4.1"
   },
   {
@@ -252,7 +252,7 @@
       "cloud",
       "kafka"
     ],
-    "downloads": 152625,
+    "downloads": 155458,
     "version": "9.4.1"
   },
   {
@@ -268,7 +268,7 @@
       "cloud",
       "elasticsearch"
     ],
-    "downloads": 14569,
+    "downloads": 14709,
     "version": "9.2.1-preview.1.25222.1"
   },
   {
@@ -280,7 +280,7 @@
       "aspire",
       "hosting"
     ],
-    "downloads": 5137973,
+    "downloads": 5233931,
     "version": "9.4.1"
   },
   {
@@ -294,7 +294,7 @@
       "hosting",
       "aws"
     ],
-    "downloads": 91236,
+    "downloads": 92616,
     "version": "9.2.6"
   },
   {
@@ -307,7 +307,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 1234981,
+    "downloads": 1256669,
     "version": "9.4.1"
   },
   {
@@ -325,7 +325,7 @@
       "aifoundry",
       "foundry"
     ],
-    "downloads": 208,
+    "downloads": 240,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -339,7 +339,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 68340,
+    "downloads": 69437,
     "version": "9.4.1"
   },
   {
@@ -353,7 +353,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 86275,
+    "downloads": 89130,
     "version": "9.4.1"
   },
   {
@@ -367,7 +367,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 185543,
+    "downloads": 187789,
     "version": "9.4.1"
   },
   {
@@ -382,7 +382,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 1151,
+    "downloads": 1189,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -401,7 +401,7 @@
       "cognitive",
       "services"
     ],
-    "downloads": 225031,
+    "downloads": 227041,
     "version": "9.4.1"
   },
   {
@@ -417,7 +417,7 @@
       "container",
       "registry"
     ],
-    "downloads": 1376,
+    "downloads": 1491,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -431,7 +431,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 185685,
+    "downloads": 189412,
     "version": "9.4.1"
   },
   {
@@ -446,7 +446,7 @@
       "azure",
       "eventhubs"
     ],
-    "downloads": 48409,
+    "downloads": 49223,
     "version": "9.4.1"
   },
   {
@@ -461,7 +461,7 @@
       "azure",
       "functions"
     ],
-    "downloads": 148805,
+    "downloads": 153741,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -475,7 +475,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 264993,
+    "downloads": 272205,
     "version": "9.4.1"
   },
   {
@@ -489,7 +489,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 187968,
+    "downloads": 191086,
     "version": "9.4.1"
   },
   {
@@ -503,7 +503,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 91810,
+    "downloads": 93329,
     "version": "9.4.1"
   },
   {
@@ -517,7 +517,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 93141,
+    "downloads": 94799,
     "version": "9.4.1"
   },
   {
@@ -531,7 +531,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 64274,
+    "downloads": 64935,
     "version": "9.4.1"
   },
   {
@@ -546,7 +546,7 @@
       "azure",
       "servicebus"
     ],
-    "downloads": 174608,
+    "downloads": 178410,
     "version": "9.4.1"
   },
   {
@@ -560,7 +560,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 37131,
+    "downloads": 37662,
     "version": "9.4.1"
   },
   {
@@ -574,7 +574,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 129593,
+    "downloads": 131842,
     "version": "9.4.1"
   },
   {
@@ -588,7 +588,7 @@
       "hosting",
       "azure"
     ],
-    "downloads": 724117,
+    "downloads": 738284,
     "version": "9.4.1"
   },
   {
@@ -605,7 +605,7 @@
       "pubsub",
       "websocket"
     ],
-    "downloads": 10814,
+    "downloads": 10934,
     "version": "9.4.1"
   },
   {
@@ -619,7 +619,7 @@
       "docker",
       "docker-compose"
     ],
-    "downloads": 26578,
+    "downloads": 27943,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -633,7 +633,7 @@
       "hosting",
       "elasticsearch"
     ],
-    "downloads": 29196,
+    "downloads": 29901,
     "version": "9.2.1-preview.1.25222.1"
   },
   {
@@ -647,7 +647,7 @@
       "hosting",
       "garnet"
     ],
-    "downloads": 22331,
+    "downloads": 22599,
     "version": "9.4.1"
   },
   {
@@ -663,7 +663,7 @@
       "models",
       "ai"
     ],
-    "downloads": 202,
+    "downloads": 206,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -677,7 +677,7 @@
       "hosting",
       "kafka"
     ],
-    "downloads": 140394,
+    "downloads": 143325,
     "version": "9.4.1"
   },
   {
@@ -691,7 +691,7 @@
       "hosting",
       "keycloak"
     ],
-    "downloads": 91223,
+    "downloads": 93107,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -704,7 +704,7 @@
       "hosting",
       "kubernetes"
     ],
-    "downloads": 6317,
+    "downloads": 6538,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -721,7 +721,7 @@
       "vector",
       "search"
     ],
-    "downloads": 3467,
+    "downloads": 3469,
     "version": "9.4.1"
   },
   {
@@ -735,7 +735,7 @@
       "hosting",
       "mongodb"
     ],
-    "downloads": 147610,
+    "downloads": 149937,
     "version": "9.4.1"
   },
   {
@@ -749,7 +749,7 @@
       "hosting",
       "mysql"
     ],
-    "downloads": 64630,
+    "downloads": 65570,
     "version": "9.4.1"
   },
   {
@@ -763,7 +763,7 @@
       "hosting",
       "nats"
     ],
-    "downloads": 18102,
+    "downloads": 18464,
     "version": "9.4.1"
   },
   {
@@ -778,7 +778,7 @@
       "node",
       "nodejs"
     ],
-    "downloads": 907103,
+    "downloads": 922645,
     "version": "9.4.1"
   },
   {
@@ -793,7 +793,7 @@
       "oracle",
       "sql"
     ],
-    "downloads": 12851,
+    "downloads": 12940,
     "version": "9.4.1"
   },
   {
@@ -807,7 +807,7 @@
       "hosting",
       "orleans"
     ],
-    "downloads": 117924,
+    "downloads": 118643,
     "version": "9.4.1"
   },
   {
@@ -824,7 +824,7 @@
       "npgsql",
       "sql"
     ],
-    "downloads": 878348,
+    "downloads": 893864,
     "version": "9.4.1"
   },
   {
@@ -838,7 +838,7 @@
       "hosting",
       "python"
     ],
-    "downloads": 56518,
+    "downloads": 57452,
     "version": "9.4.1"
   },
   {
@@ -852,7 +852,7 @@
       "hosting",
       "qdrant"
     ],
-    "downloads": 42926,
+    "downloads": 43309,
     "version": "9.4.1"
   },
   {
@@ -866,7 +866,7 @@
       "hosting",
       "rabbitmq"
     ],
-    "downloads": 505728,
+    "downloads": 513560,
     "version": "9.4.1"
   },
   {
@@ -880,7 +880,7 @@
       "hosting",
       "redis"
     ],
-    "downloads": 1017381,
+    "downloads": 1035796,
     "version": "9.4.1"
   },
   {
@@ -893,7 +893,7 @@
       "hosting",
       "sdk"
     ],
-    "downloads": 1673230,
+    "downloads": 1686399,
     "version": "9.0.0-preview.3.24210.17"
   },
   {
@@ -907,7 +907,7 @@
       "hosting",
       "seq"
     ],
-    "downloads": 60320,
+    "downloads": 62240,
     "version": "9.4.1"
   },
   {
@@ -922,7 +922,7 @@
       "sqlserver",
       "sql"
     ],
-    "downloads": 987825,
+    "downloads": 1007625,
     "version": "9.4.1"
   },
   {
@@ -934,7 +934,7 @@
       "aspire",
       "testing"
     ],
-    "downloads": 1061834,
+    "downloads": 1082947,
     "version": "9.4.1"
   },
   {
@@ -948,7 +948,7 @@
       "hosting",
       "valkey"
     ],
-    "downloads": 46739,
+    "downloads": 48369,
     "version": "9.4.1"
   },
   {
@@ -963,7 +963,7 @@
       "yarp",
       "reverse-proxy"
     ],
-    "downloads": 5523,
+    "downloads": 5868,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -979,7 +979,7 @@
       "cloud",
       "keycloak"
     ],
-    "downloads": 64481,
+    "downloads": 66162,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -1000,7 +1000,7 @@
       "database",
       "db"
     ],
-    "downloads": 214512,
+    "downloads": 219224,
     "version": "9.4.1"
   },
   {
@@ -1019,7 +1019,7 @@
       "sqlserver",
       "sql"
     ],
-    "downloads": 199291,
+    "downloads": 204125,
     "version": "9.4.1"
   },
   {
@@ -1045,7 +1045,7 @@
       "cosmos",
       "cosmosdb"
     ],
-    "downloads": 58120,
+    "downloads": 58797,
     "version": "9.4.1"
   },
   {
@@ -1070,7 +1070,7 @@
       "sqlserver",
       "sql"
     ],
-    "downloads": 1124564,
+    "downloads": 1149553,
     "version": "9.4.1"
   },
   {
@@ -1088,7 +1088,7 @@
       "configuration",
       "appconfiguration"
     ],
-    "downloads": 3341,
+    "downloads": 3819,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -1107,7 +1107,7 @@
       "vector",
       "search"
     ],
-    "downloads": 2509,
+    "downloads": 2513,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -1125,7 +1125,7 @@
       "database",
       "mongodb"
     ],
-    "downloads": 122982,
+    "downloads": 123980,
     "version": "9.4.1"
   },
   {
@@ -1143,7 +1143,7 @@
       "database",
       "mongodb"
     ],
-    "downloads": 23118,
+    "downloads": 24107,
     "version": "9.4.1"
   },
   {
@@ -1163,7 +1163,7 @@
       "mysql",
       "sql"
     ],
-    "downloads": 36676,
+    "downloads": 37026,
     "version": "9.4.1"
   },
   {
@@ -1180,7 +1180,7 @@
       "nats",
       "messaging"
     ],
-    "downloads": 23418,
+    "downloads": 23715,
     "version": "9.4.1"
   },
   {
@@ -1201,7 +1201,7 @@
       "npgsql",
       "sql"
     ],
-    "downloads": 435493,
+    "downloads": 440625,
     "version": "9.4.1"
   },
   {
@@ -1228,7 +1228,7 @@
       "npgsql",
       "sql"
     ],
-    "downloads": 1111651,
+    "downloads": 1135210,
     "version": "9.4.1"
   },
   {
@@ -1245,7 +1245,7 @@
       "ai",
       "openai"
     ],
-    "downloads": 142758,
+    "downloads": 144861,
     "version": "9.4.1-preview.1.25408.4"
   },
   {
@@ -1270,7 +1270,7 @@
       "oracle",
       "sql"
     ],
-    "downloads": 38965,
+    "downloads": 39277,
     "version": "9.4.1"
   },
   {
@@ -1296,7 +1296,7 @@
       "mysql",
       "sql"
     ],
-    "downloads": 42113,
+    "downloads": 53430,
     "version": "9.4.1"
   },
   {
@@ -1312,7 +1312,7 @@
       "cloud",
       "qdrant"
     ],
-    "downloads": 25735,
+    "downloads": 26112,
     "version": "9.4.1"
   },
   {
@@ -1331,7 +1331,7 @@
       "rabbitmq",
       "amqp"
     ],
-    "downloads": 336130,
+    "downloads": 338397,
     "version": "9.4.1"
   },
   {
@@ -1350,7 +1350,7 @@
       "rabbitmq",
       "amqp"
     ],
-    "downloads": 47529,
+    "downloads": 50018,
     "version": "9.4.1"
   },
   {
@@ -1366,7 +1366,7 @@
       "cloud",
       "seq"
     ],
-    "downloads": 132087,
+    "downloads": 135753,
     "version": "9.4.1"
   },
   {
@@ -1384,7 +1384,7 @@
       "caching",
       "redis"
     ],
-    "downloads": 1249656,
+    "downloads": 1271103,
     "version": "9.4.1"
   },
   {
@@ -1404,7 +1404,7 @@
       "distributedcache",
       "redis"
     ],
-    "downloads": 603141,
+    "downloads": 616136,
     "version": "9.4.1"
   },
   {
@@ -1425,7 +1425,7 @@
       "outputcache",
       "redis"
     ],
-    "downloads": 278237,
+    "downloads": 281670,
     "version": "9.4.1"
   },
   {
@@ -1441,7 +1441,7 @@
       "eventstore",
       "client"
     ],
-    "downloads": 22993,
+    "downloads": 23118,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1457,7 +1457,7 @@
       "gofeatureflag",
       "client"
     ],
-    "downloads": 18521,
+    "downloads": 18573,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1473,7 +1473,7 @@
       "hosting",
       "activemq"
     ],
-    "downloads": 23312,
+    "downloads": 23442,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1489,7 +1489,7 @@
       "hosting",
       "adminer"
     ],
-    "downloads": 12241,
+    "downloads": 12626,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1506,7 +1506,7 @@
       "dapr",
       "azure"
     ],
-    "downloads": 16485,
+    "downloads": 16595,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1520,7 +1520,7 @@
       "communitytoolkit",
       "dotnetcommunitytoolkit"
     ],
-    "downloads": 14450,
+    "downloads": 14561,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1537,7 +1537,7 @@
       "dataapibuilder",
       "hosting"
     ],
-    "downloads": 26785,
+    "downloads": 26863,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1554,7 +1554,7 @@
       "staticwebapps",
       "hosting"
     ],
-    "downloads": 24331,
+    "downloads": 24413,
     "version": "9.5.1-beta.315"
   },
   {
@@ -1571,7 +1571,7 @@
       "bun",
       "javascript"
     ],
-    "downloads": 25729,
+    "downloads": 25841,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1587,7 +1587,7 @@
       "hosting",
       "dapr"
     ],
-    "downloads": 78208,
+    "downloads": 81131,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1601,7 +1601,7 @@
       "communitytoolkit",
       "dotnetcommunitytoolkit"
     ],
-    "downloads": 1882,
+    "downloads": 1891,
     "version": "9.1.1-beta.197"
   },
   {
@@ -1617,7 +1617,7 @@
       "hosting",
       "dbgate"
     ],
-    "downloads": 29817,
+    "downloads": 30625,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1633,7 +1633,7 @@
       "hosting",
       "deno"
     ],
-    "downloads": 25871,
+    "downloads": 25950,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1649,7 +1649,7 @@
       "hosting",
       "eventstore"
     ],
-    "downloads": 22663,
+    "downloads": 22823,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1665,7 +1665,7 @@
       "hosting",
       "gofeatureflag"
     ],
-    "downloads": 18190,
+    "downloads": 18256,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1681,7 +1681,7 @@
       "hosting",
       "golang"
     ],
-    "downloads": 28176,
+    "downloads": 28298,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1697,7 +1697,7 @@
       "hosting",
       "java"
     ],
-    "downloads": 27651,
+    "downloads": 27757,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1713,7 +1713,7 @@
       "hosting",
       "k6"
     ],
-    "downloads": 10953,
+    "downloads": 11053,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1729,7 +1729,7 @@
       "hosting",
       "lavinmq"
     ],
-    "downloads": 16713,
+    "downloads": 16769,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1746,7 +1746,7 @@
       "smtp",
       "hosting"
     ],
-    "downloads": 24868,
+    "downloads": 25194,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1764,7 +1764,7 @@
       "debugging",
       "hosting"
     ],
-    "downloads": 3001,
+    "downloads": 3055,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1780,7 +1780,7 @@
       "hosting",
       "meilisearch"
     ],
-    "downloads": 28993,
+    "downloads": 29111,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1798,7 +1798,7 @@
       "cloud",
       "storage"
     ],
-    "downloads": 2415,
+    "downloads": 2632,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1815,7 +1815,7 @@
       "mongodb",
       "dbgate"
     ],
-    "downloads": 20249,
+    "downloads": 20616,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1832,7 +1832,7 @@
       "mysql",
       "dbgate"
     ],
-    "downloads": 5336,
+    "downloads": 5395,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1849,7 +1849,7 @@
       "ngrok",
       "tunnels"
     ],
-    "downloads": 22552,
+    "downloads": 22720,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1869,7 +1869,7 @@
       "pnpm",
       "npm"
     ],
-    "downloads": 101251,
+    "downloads": 104086,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1886,7 +1886,7 @@
       "ollama",
       "ai"
     ],
-    "downloads": 88332,
+    "downloads": 89376,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1903,7 +1903,7 @@
       "smtp",
       "hosting"
     ],
-    "downloads": 18702,
+    "downloads": 18772,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1920,7 +1920,7 @@
       "postgres",
       "dbgate"
     ],
-    "downloads": 22062,
+    "downloads": 22176,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1939,7 +1939,7 @@
       "script",
       "hosting"
     ],
-    "downloads": 3605,
+    "downloads": 3665,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1956,7 +1956,7 @@
       "uvicorn",
       "python"
     ],
-    "downloads": 25567,
+    "downloads": 25751,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1972,7 +1972,7 @@
       "hosting",
       "ravendb"
     ],
-    "downloads": 21970,
+    "downloads": 22161,
     "version": "9.7.1-beta.348"
   },
   {
@@ -1989,7 +1989,7 @@
       "redis",
       "dbgate"
     ],
-    "downloads": 20617,
+    "downloads": 20818,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2005,7 +2005,7 @@
       "hosting",
       "rust"
     ],
-    "downloads": 23854,
+    "downloads": 23934,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2022,7 +2022,7 @@
       "sql",
       "sqlproj"
     ],
-    "downloads": 43892,
+    "downloads": 44798,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2039,7 +2039,7 @@
       "sql",
       "sqlite"
     ],
-    "downloads": 23604,
+    "downloads": 23825,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2056,7 +2056,7 @@
       "sqlserver",
       "dbgate"
     ],
-    "downloads": 21323,
+    "downloads": 21657,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2072,7 +2072,7 @@
       "hosting",
       "surrealdb"
     ],
-    "downloads": 1251,
+    "downloads": 1317,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2089,7 +2089,7 @@
       "masstransit",
       "rabbitmq"
     ],
-    "downloads": 25360,
+    "downloads": 25687,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2105,7 +2105,7 @@
       "meilisearch",
       "client"
     ],
-    "downloads": 31679,
+    "downloads": 31821,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2123,7 +2123,7 @@
       "data",
       "ado.net"
     ],
-    "downloads": 20990,
+    "downloads": 21057,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2144,7 +2144,7 @@
       "ef",
       "orm"
     ],
-    "downloads": 23735,
+    "downloads": 23980,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2162,7 +2162,7 @@
       "cloud",
       "storage"
     ],
-    "downloads": 2135,
+    "downloads": 2211,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2180,7 +2180,7 @@
       "ollamasharp",
       "client"
     ],
-    "downloads": 81534,
+    "downloads": 82602,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2196,7 +2196,7 @@
       "client",
       "ravendb"
     ],
-    "downloads": 20910,
+    "downloads": 21098,
     "version": "9.7.1-beta.348"
   },
   {
@@ -2212,7 +2212,7 @@
       "surrealdb",
       "client"
     ],
-    "downloads": 1278,
+    "downloads": 1327,
     "version": "9.7.1-beta.348"
   }
 ]

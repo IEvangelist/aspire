@@ -1,15 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import { sidebarTopics } from './sidebar.topics';
-import starlight from '@astrojs/starlight';
 import catppuccin from "@catppuccin/starlight";
-import starlightLlmsTxt from 'starlight-llms-txt'
-import starlightKbd from 'starlight-kbd'
+import starlight from '@astrojs/starlight';
+import starlightGiscus from 'starlight-giscus'
 import starlightImageZoom from 'starlight-image-zoom'
+import starlightKbd from 'starlight-kbd'
 import starlightLinksValidator from 'starlight-links-validator'
+import starlightLlmsTxt from 'starlight-llms-txt'
 import starlightScrollToTop from 'starlight-scroll-to-top'
 import starlightSidebarTopics from 'starlight-sidebar-topics'
-import starlightGiscus from 'starlight-giscus'
+import starlightGitHubAlerts from 'starlight-github-alerts'
 import mermaid from 'astro-mermaid';
 
 // https://astro.build/config
@@ -109,6 +110,7 @@ export default defineConfig({
 					showTooltip: true,
 					threshold: 10
 				}),
+				starlightGitHubAlerts(),
 				starlightLlmsTxt({
 					projectName: 'Aspire',
 					description: 'Aspire is a polyglot local dev-time orchestration tool chain for building, running, debugging, and deploying distributed applications.',

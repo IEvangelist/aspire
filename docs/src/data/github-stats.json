@@ -1,17 +1,17 @@
 [
   {
     "name": "dotnet/aspire",
-    "stars": 4779,
+    "stars": 4784,
     "description": "Tools, templates, and packages to accelerate building observable, production-ready apps",
-    "license": "https://github.com/dotnet/aspire/blob/main/LICENSE.TXT",
+    "license": "https://api.github.com/licenses/mit",
     "licenseName": "MIT License",
     "repo": "https://github.com/dotnet/aspire"
   },
   {
     "name": "dotnet/aspire-samples",
-    "stars": 989,
+    "stars": 991,
     "description": null,
-    "license": "https://github.com/dotnet/aspire-samples/blob/main/LICENSE",
+    "license": "https://api.github.com/licenses/mit",
     "licenseName": "MIT License",
     "repo": "https://github.com/dotnet/aspire-samples"
   },
@@ -19,7 +19,7 @@
     "name": "dotnet/docs-aspire",
     "stars": 143,
     "description": "The official repository for the .NET Aspire documentation—describing a set of tools, templates, and packages for building observable, production ready apps.",
-    "license": "https://github.com/dotnet/docs-aspire/blob/main/LICENSE",
+    "license": "https://api.github.com/licenses/mit",
     "licenseName": "MIT License",
     "repo": "https://github.com/dotnet/docs-aspire"
   }

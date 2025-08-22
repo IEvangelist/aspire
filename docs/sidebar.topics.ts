@@ -2,7 +2,7 @@ import type { StarlightSidebarTopicsUserConfig } from "starlight-sidebar-topics"
 
 export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
     {
-        label: 'Get Started',
+        label: 'Docs',
         link: 'get-started/prerequisites',
         icon: 'rocket',
         items: [
@@ -37,13 +37,13 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
     },
     {
         label: 'Integrations',
-        link: '/integrations/overview',
+        link: '/integrations/gallery',
         icon: 'puzzle',
         items: [
             {
                 label: 'Explore', items: [
+                    { label: 'Gallery', slug: 'integrations/gallery' },
                     { label: 'Overview', slug: 'integrations/overview' },
-                    { label: 'Integration Gallery', slug: 'integrations/gallery' },
                 ]
             },
             {

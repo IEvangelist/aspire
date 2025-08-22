@@ -44,7 +44,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     }`}
                     data-index={index}
                 >
-                    <div class="card" data-card-index={index} tabindex={index === initialIndex || index === prevIndex || index === nextIndex ? 0 : -1} role="button" aria-label={`Select testimonial from ${testimonial.name}`}>
+                    <div class="card" data-card-index={index}>
                         <img
                             class="avatar"
                             src={
@@ -61,17 +61,23 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                         <div class="name">
                             {(() => {
                                 // Helper to check if name ends with a parenthesis
-                                const endsWithParen = (name: string) => /\)\s*$/.test(name);
+                                const endsWithParen = (name: string) =>
+                                    /\)\s*$/.test(name);
 
                                 // Compose the extra info if available
-                                const extraInfo = [testimonial.role, testimonial.company]
+                                const extraInfo = [
+                                    testimonial.role,
+                                    testimonial.company,
+                                ]
                                     .filter(Boolean)
                                     .join(", ");
 
                                 // Only show extra info if name doesn't already end with a parenthesis and extraInfo exists
-                                const displayName = !endsWithParen(testimonial.name) && extraInfo
-                                    ? `${testimonial.name} (${extraInfo})`
-                                    : testimonial.name;
+                                const displayName =
+                                    !endsWithParen(testimonial.name) &&
+                                    extraInfo
+                                        ? `${testimonial.name} (${extraInfo})`
+                                        : testimonial.name;
 
                                 return testimonial.link ? (
                                     <a
@@ -213,25 +219,74 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     (state.currentIndex + 1) % state.testimonials.length;
 
                 items.forEach((item, i) => {
-                    const index = parseInt(item.getAttribute('data-index') || '0', 10);
-                    const card = item.querySelector('.card');
-                    
+                    const index = parseInt(
+                        item.getAttribute("data-index") || "0",
+                        10,
+                    );
+                    // Manage tab order within each slide so only current slide is tabbable
+                    const focusables = item.querySelectorAll<HTMLElement>(
+                        "a, button, input, select, textarea, [tabindex]",
+                    );
+
                     // Remove all classes first
-                    item.classList.remove('current', 'prev', 'next', 'hidden');
-                    
+                    item.classList.remove("current", "prev", "next", "hidden");
+
                     // Add appropriate class based on new state
                     if (index === state.currentIndex) {
-                        item.classList.add('current');
-                        if (card) card.setAttribute('tabindex', '0');
+                        item.classList.add("current");
+                        item.removeAttribute("aria-hidden");
+                        focusables.forEach((el) => {
+                            // Restore natural tab order
+                            if (el.hasAttribute("data-prev-tabindex")) {
+                                const prev =
+                                    el.getAttribute("data-prev-tabindex");
+                                if (prev && prev !== "") {
+                                    el.setAttribute("tabindex", prev);
+                                } else {
+                                    el.removeAttribute("tabindex");
+                                }
+                                el.removeAttribute("data-prev-tabindex");
+                            } else {
+                                el.removeAttribute("tabindex");
+                            }
+                        });
                     } else if (index === prevIndex) {
-                        item.classList.add('prev');
-                        if (card) card.setAttribute('tabindex', '0');
+                        item.classList.add("prev");
+                        item.removeAttribute("aria-hidden");
+                        // Make non-current slides not tabbable
+                        focusables.forEach((el) => {
+                            if (!el.hasAttribute("data-prev-tabindex")) {
+                                el.setAttribute(
+                                    "data-prev-tabindex",
+                                    el.getAttribute("tabindex") ?? "",
+                                );
+                            }
+                            el.setAttribute("tabindex", "-1");
+                        });
                     } else if (index === nextIndex) {
-                        item.classList.add('next');
-                        if (card) card.setAttribute('tabindex', '0');
+                        item.classList.add("next");
+                        item.removeAttribute("aria-hidden");
+                        focusables.forEach((el) => {
+                            if (!el.hasAttribute("data-prev-tabindex")) {
+                                el.setAttribute(
+                                    "data-prev-tabindex",
+                                    el.getAttribute("tabindex") ?? "",
+                                );
+                            }
+                            el.setAttribute("tabindex", "-1");
+                        });
                     } else {
-                        item.classList.add('hidden');
-                        if (card) card.setAttribute('tabindex', '-1');
+                        item.classList.add("hidden");
+                        item.setAttribute("aria-hidden", "true");
+                        focusables.forEach((el) => {
+                            if (!el.hasAttribute("data-prev-tabindex")) {
+                                el.setAttribute(
+                                    "data-prev-tabindex",
+                                    el.getAttribute("tabindex") ?? "",
+                                );
+                            }
+                            el.setAttribute("tabindex", "-1");
+                        });
                     }
                 });
 
@@ -270,27 +325,27 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                 const touch = event.touches[0];
                 state.touchStartX = touch.clientX;
                 state.touchStartY = touch.clientY;
-                
+
                 // Stop auto-rotation when user interacts
                 stopAutoRotate();
             }
 
             function handleTouchEnd(event: TouchEvent): void {
                 const state = carousel._state as CarouselState;
-                
+
                 // Skip if the touch didn't start properly
                 if (state.touchStartX === null || state.touchStartY === null) {
                     return;
                 }
-                
+
                 const touch = event.changedTouches[0];
                 const endX = touch.clientX;
                 const endY = touch.clientY;
-                
+
                 // Calculate horizontal and vertical distances
                 const diffX = state.touchStartX - endX;
                 const diffY = state.touchStartY - endY;
-                
+
                 // Only respond to horizontal swipes that are more significant than vertical movement
                 // This prevents accidental swipes when scrolling vertically
                 if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
@@ -302,7 +357,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                         navigate(-1);
                     }
                 }
-                
+
                 // Reset touch state
                 state.touchStartX = null;
                 state.touchStartY = null;
@@ -327,26 +382,26 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
                     goToSlide(index);
                 });
             });
-            
-            // Add click event listeners to the cards themselves
+
+            // Add click event listeners to the cards themselves (mouse only)
             items.forEach((item) => {
-                const card = item.querySelector('.card');
+                const card = item.querySelector(".card");
                 if (card) {
-                    card.addEventListener("click", () => {
-                        const index = parseInt(item.getAttribute('data-index') || '0', 10);
+                    card.addEventListener("click", (event: Event) => {
+                        // Ignore clicks originating from interactive descendants (e.g., links)
+                        const target = event.target as HTMLElement | null;
+                        if (
+                            target &&
+                            target.closest("a, button, input, select, textarea")
+                        ) {
+                            return;
+                        }
+                        const index = parseInt(
+                            item.getAttribute("data-index") || "0",
+                            10,
+                        );
                         stopAutoRotate();
                         goToSlide(index);
-                    });
-                    
-                    // Add keyboard navigation for accessibility
-                    card.addEventListener("keydown", (event: Event) => {
-                        const keyboardEvent = event as KeyboardEvent;
-                        if (keyboardEvent.key === 'Enter' || keyboardEvent.key === ' ') {
-                            keyboardEvent.preventDefault();
-                            const index = parseInt(item.getAttribute('data-index') || '0', 10);
-                            stopAutoRotate();
-                            goToSlide(index);
-                        }
                     });
                 }
             });
@@ -356,10 +411,6 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
 
             // Start auto-rotation
             startAutoRotate();
-
-            console.log(
-                "Carousel initialized successfully with direct approach",
-            );
         } catch (err) {
             console.error(
                 "Error initializing carousel with direct approach:",
@@ -389,7 +440,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
 
 <style>
     .testimonial-carousel {
-        --carousel-primary: var(--sl-color-accent, #8d46e7);
+        --carousel-primary: var(--sl-color-accent, var(--aspire-color-primary));
         --carousel-text: var(--sl-color-text, #333);
         --carousel-background: var(--sl-color-bg, #fff);
         --carousel-card-bg: var(--sl-color-bg-sidebar, #f5f5f5);
@@ -486,7 +537,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             transform 0.3s ease,
             box-shadow 0.3s ease;
     }
-    
+
     .carousel-item.prev .card:hover,
     .carousel-item.next .card:hover,
     .carousel-item.current .card:hover {
@@ -496,7 +547,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             0 10px 10px rgba(0, 0, 0, 0.15),
             0 0 0 1px rgba(0, 0, 0, 0.05);
     }
-    
+
     .carousel-item.prev .card:focus-visible,
     .carousel-item.next .card:focus-visible,
     .carousel-item.current .card:focus-visible {
@@ -509,10 +560,14 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
     }
 
     .card[data-card-index="0"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 20% 35%,
-                color-mix(in srgb, var(--carousel-card-bg) 99.5%, var(--carousel-primary)) 0%,
+                color-mix(
+                        in srgb,
+                        var(--carousel-card-bg) 99.5%,
+                        var(--carousel-primary)
+                    )
+                    0%,
                 transparent 35%
             ),
             radial-gradient(
@@ -523,8 +578,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="1"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 65% 15%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #46e7b6) 0%,
                 transparent 38%
@@ -537,8 +591,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="2"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 55% 8%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #e7e746) 0%,
                 transparent 35%
@@ -551,8 +604,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="3"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 12% 65%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #e74646) 0%,
                 transparent 40%
@@ -565,8 +617,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="4"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 65% 65%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #b346e7) 0%,
                 transparent 45%
@@ -579,8 +630,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="5"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 45% 85%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #46e7e7) 0%,
                 transparent 40%
@@ -593,8 +643,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="6"] {
-        background:
-            radial-gradient(
+        background: radial-gradient(
                 circle at 10% 10%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #e7b346) 0%,
                 transparent 38%
@@ -607,8 +656,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="7"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 65% 12%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #e746e7) 0%,
                 transparent 35%
@@ -621,8 +669,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="8"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 85% 55%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #46b3e7) 0%,
                 transparent 45%
@@ -635,8 +682,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     .card[data-card-index="9"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 55% 55%,
                 color-mix(in srgb, var(--carousel-card-bg) 99.5%, #e7467a) 0%,
                 transparent 42%
@@ -648,7 +694,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             ),
             var(--carousel-card-bg);
     }
-    
+
     @supports not (background: color-mix(in srgb, red, blue)) {
         .card {
             background-color: var(--carousel-card-bg);
@@ -656,10 +702,14 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
     }
 
     html[data-theme="dark"] .card[data-card-index="0"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 20% 35%,
-                color-mix(in srgb, var(--carousel-card-bg) 92%, var(--carousel-primary)) 0%,
+                color-mix(
+                        in srgb,
+                        var(--carousel-card-bg) 92%,
+                        var(--carousel-primary)
+                    )
+                    0%,
                 transparent 35%
             ),
             radial-gradient(
@@ -670,8 +720,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="1"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 65% 15%,
                 color-mix(in srgb, var(--carousel-card-bg) 93%, #46e7b6) 0%,
                 transparent 38%
@@ -684,8 +733,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="2"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 55% 8%,
                 color-mix(in srgb, var(--carousel-card-bg) 92%, #e7e746) 0%,
                 transparent 35%
@@ -698,8 +746,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="3"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 12% 65%,
                 color-mix(in srgb, var(--carousel-card-bg) 93%, #e74646) 0%,
                 transparent 40%
@@ -712,8 +759,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="4"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 65% 65%,
                 color-mix(in srgb, var(--carousel-card-bg) 93%, #b346e7) 0%,
                 transparent 45%
@@ -726,8 +772,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="5"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 45% 85%,
                 color-mix(in srgb, var(--carousel-card-bg) 93%, #46e7e7) 0%,
                 transparent 40%
@@ -740,8 +785,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="6"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 10% 10%,
                 color-mix(in srgb, var(--carousel-card-bg) 93%, #e7b346) 0%,
                 transparent 38%
@@ -754,8 +798,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="7"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 65% 12%,
                 color-mix(in srgb, var(--carousel-card-bg) 93%, #e746e7) 0%,
                 transparent 35%
@@ -768,8 +811,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="8"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 85% 55%,
                 color-mix(in srgb, var(--carousel-card-bg) 92%, #46b3e7) 0%,
                 transparent 45%
@@ -782,8 +824,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             var(--carousel-card-bg);
     }
     html[data-theme="dark"] .card[data-card-index="9"] {
-        background: 
-            radial-gradient(
+        background: radial-gradient(
                 circle at 55% 55%,
                 color-mix(in srgb, var(--carousel-card-bg) 92%, #e7467a) 0%,
                 transparent 42%
@@ -827,7 +868,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
         pointer-events: none;
         z-index: 1;
     }
-    
+
     .text {
         position: relative;
         z-index: 2;
@@ -875,7 +916,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
         background-color: var(--carousel-primary);
         color: white;
         border: none;
-        border-radius: .8rem;
+        border-radius: 0.8rem;
         width: 40px;
         height: 40px;
         display: flex;
@@ -932,7 +973,7 @@ const nextIndex = (initialIndex + 1) % testimonials.length;
             padding: 2rem;
             min-height: 260px;
         }
-        
+
         .controls {
             margin-top: 2rem;
         }
