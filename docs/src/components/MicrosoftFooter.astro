@@ -1,0 +1,69 @@
+---
+
+---
+
+<section class="sl-flex" role="contentinfo" aria-label="Microsoft footer">
+    <a
+        class="footer-text-link"
+        href="https://go.microsoft.com/fwlink/?linkid=2259814"
+        target="_blank"
+        rel="noopener noreferrer">Consumer Health Privacy</a
+    >
+    <a
+        class="footer-text-link"
+        href="https://support.microsoft.com/en-US/contactus/"
+        target="_blank"
+        rel="noopener noreferrer">Contact Microsoft</a
+    >
+    <a
+        class="footer-text-link"
+        href="https://dotnet.microsoft.com/platform/support/policy/aspire"
+        target="_blank"
+        rel="noopener noreferrer">Support</a
+    >
+    <a
+        class="footer-text-link"
+        href="https://go.microsoft.com/fwlink/?LinkId=521839"
+        target="_blank"
+        rel="noopener noreferrer">Privacy & Cookies</a
+    >
+    <a
+        class="footer-text-link"
+        href="https://go.microsoft.com/fwlink/?LinkID=206977"
+        target="_blank"
+        rel="noopener noreferrer">Terms of Use</a
+    >
+    <a
+        class="footer-text-link"
+        href="https://go.microsoft.com/fwlink/?LinkId=521839"
+        target="_blank"
+        rel="noopener noreferrer">Privacy</a
+    >
+    <span class="copyright">© Microsoft <span id="year">2025</span></span>
+</section>
+
+<script is:inline>
+    const el = document.getElementById("year");
+    if (el) el.textContent = String(new Date().getFullYear());
+</script>
+
+<style>
+    section {
+        justify-content: center;
+        padding-top: 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        font-size: var(--sl-text-xs);
+    }
+
+    a, .copyright {
+        align-items: center;
+        text-decoration: none;
+        gap: 0.5rem;
+        color: var(--sl-color-gray-2);
+    }
+
+    a:hover {
+        color: var(--sl-color-white);
+    }
+</style>
