@@ -8,7 +8,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
         items: [
             { label: 'Get Aspire', slug: 'get' },
             {
-                label: 'Setup', items: [
+                label: 'Get Started', items: [
                     { label: 'Prerequisites', slug: 'get-started/prerequisites' },
                     { label: 'Installation', slug: 'get-started/installation' },
                     { label: 'First app', slug: 'get-started/first-app', badge: 'Quickstart' }
