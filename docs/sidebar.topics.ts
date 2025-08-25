@@ -3,12 +3,12 @@ import type { StarlightSidebarTopicsUserConfig } from "starlight-sidebar-topics"
 export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
   {
     label: 'Docs',
-    link: 'get-started/prerequisites',
+    link: 'get-started/welcome',
     icon: 'open-book',
     items: [
       { label: 'Get Aspire', slug: 'get' },
       {
-        label: "What's new", items: [
+        label: "What's new", collapsed: true, items: [
           { label: 'Aspire 9.5', slug: 'whats-new/aspire-9-5' }
         ]
       },
@@ -29,7 +29,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
         ]
       },
       {
-        label: 'Architecture', items: [
+        label: 'Architecture', collapsed: true, items: [
           { label: 'Resource Model', slug: 'architecture/resource-model' },
           { label: 'Resource Hierarchies', slug: 'architecture/resource-hierarchies' },
           { label: 'Resource API Patterns', slug: 'architecture/resource-api-patterns' },
@@ -63,14 +63,14 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
       }
     ],
   },
-  {
-    label: 'Dashboard',
-    link: '/dashboard/overview',
-    icon: 'seti:happenings',
-    items: [
-      { label: 'Explore', autogenerate: { directory: 'dashboard' } },
-    ]
-  },
+  // {
+  //   label: 'Dashboard',
+  //   link: '/dashboard/overview',
+  //   icon: 'seti:happenings',
+  //   items: [
+  //     { label: 'Explore', autogenerate: { directory: 'dashboard' } },
+  //   ]
+  // },
   {
     label: 'CLI Reference',
     link: '/reference/cli/overview',
@@ -118,10 +118,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
     link: '/community/videos',
     icon: 'heart',
     items: [
-      {
-        label: 'Videos',
-        slug: 'community/videos'
-      },
+      { label: 'Contributors', slug: 'community/contributors' },
       {
         label: 'BlueSky',
         slug: 'community/posts',
@@ -130,10 +127,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
           variant: 'note'
         }
       },
-      {
-        label: 'Contributors',
-        slug: 'community/contributors',
-      }
+      { label: 'Videos', slug: 'community/videos' },
     ]
   }
 ];
