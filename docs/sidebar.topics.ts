@@ -115,7 +115,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
   // },
   {
     label: 'Community',
-    link: '/community/videos',
+    link: '/community/contributors',
     icon: 'heart',
     items: [
       { label: 'Contributors', slug: 'community/contributors' },
