@@ -75,12 +75,22 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
             { label: 'Install', slug: 'reference/cli/install' },
             {
                 label: 'Commands', items: [
-                    { label: 'Aspire New', slug: 'reference/cli/commands/aspire-new' },
-                    { label: 'Aspire Run', slug: 'reference/cli/commands/aspire-run' },
-                    { label: 'Aspire Add', slug: 'reference/cli/commands/aspire-add' },
-                    { label: 'Aspire Publish', slug: 'reference/cli/commands/aspire-publish' },
-                    { label: 'Aspire Config', slug: 'reference/cli/commands/aspire-config' },
-                    { label: 'Aspire Exec', slug: 'reference/cli/commands/aspire-exec' },
+                    { label: 'aspire', slug: 'reference/cli/commands/aspire' },
+                    { label: 'aspire add', slug: 'reference/cli/commands/aspire-add' },
+                    { label: 'aspire deploy', slug: 'reference/cli/commands/aspire-deploy' },
+                    { 
+                        label: 'aspire config', items: [
+                            { label: 'aspire config', slug: 'reference/cli/commands/aspire-config' },
+                            { label: 'aspire config list', slug: 'reference/cli/commands/aspire-config-list' },
+                            { label: 'aspire config get', slug: 'reference/cli/commands/aspire-config-get' },
+                            { label: 'aspire config set', slug: 'reference/cli/commands/aspire-config-set' },
+                            { label: 'aspire config delete', slug: 'reference/cli/commands/aspire-config-delete' },
+                        ]
+                    },                    
+                    { label: 'aspire exec', slug: 'reference/cli/commands/aspire-exec' },
+                    { label: 'aspire new', slug: 'reference/cli/commands/aspire-new' },
+                    { label: 'aspire run', slug: 'reference/cli/commands/aspire-run' },
+                    { label: 'aspire publish', slug: 'reference/cli/commands/aspire-publish' },
                 ]
             }
         ]

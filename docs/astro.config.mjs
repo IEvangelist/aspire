@@ -99,7 +99,9 @@ export default defineConfig({
 			},
 			plugins: [
 				catppuccin(),
-				starlightSidebarTopics(sidebarTopics),
+				starlightSidebarTopics(sidebarTopics, {
+					exclude: [ '**/includes/**/*' ]
+				}),
 				starlightLinksValidator({
 					exclude: ['#', '/'],
 					errorOnRelativeLinks: false
