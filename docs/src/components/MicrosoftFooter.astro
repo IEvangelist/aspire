@@ -1,8 +1,14 @@
 ---
-
+import YourChoiceSvg from "../assets/icons/your-choices.svg";
 ---
 
 <section class="sl-flex" role="contentinfo" aria-label="Microsoft footer">
+    <a 
+        class="footer-text-link sl-flex"
+        href="https://aka.ms/yourcaliforniaprivacychoices"
+        target="_blank"
+        rel="noopener noreferrer"><YourChoiceSvg /> <span>Your Privacy Choices</span>
+    </a>
     <a
         class="footer-text-link"
         href="https://go.microsoft.com/fwlink/?linkid=2259814"
@@ -56,7 +62,8 @@
         font-size: var(--sl-text-xs);
     }
 
-    a, .copyright {
+    a,
+    .copyright {
         align-items: center;
         text-decoration: none;
         gap: 0.5rem;
