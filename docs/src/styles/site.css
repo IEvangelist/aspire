@@ -513,6 +513,10 @@ video {
 	}
 }
 
+.d-inline {
+	display: inline;
+}
+
 @media (min-width: 72rem) {
 	:root {
 		--sl-content-width: 68rem;

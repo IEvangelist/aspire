@@ -2,7 +2,7 @@
 title: aspire deploy command
 description: Learn about the aspire deploy command and its usage. This command first runs publishing mode, then invokes resource deployments declared by the AppHost.
 sidebar:
-  badge: preview
+  badge: Preview
 ---
 
 import Include from '../../../../../components/Include.astro';
@@ -16,7 +16,7 @@ import Include from '../../../../../components/Include.astro';
 > aspire config set features.deployCommandEnabled true
 > ```
 >
-> For more information, see [aspire config command](aspire-config.md).
+> For more information, see [aspire config command](../aspire-config).
 
 ## Name
 
@@ -32,9 +32,9 @@ aspire deploy [options] [[--] <additional arguments>...]
 
 ## Description
 
-The `aspire deploy` command first invokes the [`aspire publish`](./aspire-publish.md) command. After which, Aspire invokes all `DeployingCallbackAnnotation` resource annotations, in the order they're declared.
+The `aspire deploy` command first invokes the [`aspire publish`](../aspire-publish) command. After which, Aspire invokes all `DeployingCallbackAnnotation` resource annotations, in the order they're declared.
 
-[!INCLUDE [project-search-logic-description](includes/project-search-logic-description.md)]
+<Include relativePath="reference/cli/includes/project-search-logic-description.md" />
 
 The command performs the following steps to deploy an app orchestrated with Aspire:
 
