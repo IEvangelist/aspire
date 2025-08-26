@@ -258,7 +258,7 @@
   {
     "title": "Aspire.Elastic.Clients.Elasticsearch",
     "description": "A Elasticsearch client that integrates with Aspire, including health checks, logging, and telemetry.",
-    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.elastic.clients.elasticsearch/9.2.1-preview.1.25222.1/icon",
+    "icon": "https://www.nuget.org/Content/gallery/img/default-package-icon.svg",
     "href": "https://www.nuget.org/packages/Aspire.Elastic.Clients.Elasticsearch",
     "tags": [
       "aspire",
@@ -269,7 +269,7 @@
       "elasticsearch"
     ],
     "downloads": 14709,
-    "version": "9.2.1-preview.1.25222.1"
+    "version": "9.4.1"
   },
   {
     "title": "Aspire.Hosting",
@@ -625,7 +625,7 @@
   {
     "title": "Aspire.Hosting.Elasticsearch",
     "description": "Elasticsearch support for .NET Aspire.",
-    "icon": "https://api.nuget.org/v3-flatcontainer/aspire.hosting.elasticsearch/9.2.1-preview.1.25222.1/icon",
+    "icon": "https://www.nuget.org/Content/gallery/img/default-package-icon.svg",
     "href": "https://www.nuget.org/packages/Aspire.Hosting.Elasticsearch",
     "tags": [
       "aspire",
@@ -634,7 +634,7 @@
       "elasticsearch"
     ],
     "downloads": 29901,
-    "version": "9.2.1-preview.1.25222.1"
+    "version": "9.4.1"
   },
   {
     "title": "Aspire.Hosting.Garnet",
