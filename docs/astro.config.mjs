@@ -100,7 +100,7 @@ export default defineConfig({
 			plugins: [
 				catppuccin(),
 				starlightSidebarTopics(sidebarTopics, {
-					exclude: [ '**/includes/**/*' ]
+					exclude: ['**/includes/**/*']
 				}),
 				starlightLinksValidator({
 					exclude: ['#', '/'],
@@ -149,4 +149,9 @@ export default defineConfig({
 			],
 		}),
 	],
+	vite: {
+		optimizeDeps: {
+			include: ['leaflet'],
+		}
+	},
 });
