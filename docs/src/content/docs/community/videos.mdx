@@ -1,17 +1,19 @@
 ---
 title: Community Videos 📺
 description: A collection of community videos showcasing Aspire in action.
-tableOfContents: false
+tableOfContents: true
 lastUpdated: false
 editUrl: false
 giscus: false
 ---
 
 import YouTubeGrid from '../../../components/YouTubeGrid.astro';
+import VimeoGrid from '../../../components/VimeoGrid.astro';
+import { Badge, Icon } from '@astrojs/starlight/components';
 
-<p>
-    Dive into our vibrant developer community with these curated <strong>YouTube</strong> videos! Discover how others are building amazing things with Aspire, get inspired by real-world projects, and join the excitement as the community grows.
-</p>
+## YouTube <Icon name="youtube" label='YouTube' size='1.5rem !important' class="d-inline" />
+
+Dive into our vibrant developer community with these curated <strong>YouTube</strong> videos! Discover how others are building amazing things with Aspire, get inspired by real-world projects, and join the excitement as the community grows.
 
 <YouTubeGrid
 	videos={[
@@ -101,3 +103,20 @@ import YouTubeGrid from '../../../components/YouTubeGrid.astro';
         }
 	]}
 />
+
+## Vimeo <Icon name="seti:video" label='Vimeo' size='1.5rem !important' class="d-inline" />
+
+<VimeoGrid videos={[
+    {
+        href: 'https://vimeo.com/1093996516',
+        title: '.NET Aspire - Chris Klug',
+        description: 'Microsoft MVP, Chris Klug, provides insights on how modern apps are complex, often distributed and reliant on services like Redis and SQL.',
+        tags: ['Community', '.NET']
+    },
+    {
+        href: 'https://vimeo.com/986279577',
+        title: 'Aspire Deep Dive',
+        description: 'Kolomiiets Mykola, solution architect gives a deep dive on Aspire, detailing containerization and microservices.',
+        tags: ['Community', 'Deep Dive']
+    }
+]} />
