@@ -2,7 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-	--aspire-color-primary: #7455DD; /* rgb(116, 85, 221) */
+	--aspire-color-primary: #7455DD;
+	/* rgb(116, 85, 221) */
 	--aspire-color-black: #1F1E33;
 	--aspire-color-secondary: #B9AAEE;
 	--aspire-color-grey: #DCE0E8;
@@ -515,6 +516,29 @@ video {
 
 .d-inline {
 	display: inline;
+}
+
+/* Optional: help alignment if anchors are flex/inline elements */
+li a.external-link {
+	/* remove this if it interferes with your layout */
+	align-items: center;
+}
+
+/* external link icon (uses mask so the icon inherits currentColor) */
+li a.external-link::after {
+	content: "";
+	display: inline-block;
+	width: 0.8em;
+	height: 0.8em;
+	margin-left: 0.35em;
+	vertical-align: text-bottom;
+	flex: 0 0 auto;
+	background-color: currentColor;
+	pointer-events: none;
+	transition: transform 120ms ease;
+
+	-webkit-mask: no-repeat center / contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z'/><path d='M5 5h7v2H7v10h10v-5h2v7H5z'/></svg>");
+	mask: no-repeat center / contain url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3z'/><path d='M5 5h7v2H7v10h10v-5h2v7H5z'/></svg>");
 }
 
 @media (min-width: 72rem) {

@@ -114,6 +114,11 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
   //     ]
   // },
   {
+    label: 'Samples',
+    link: 'https://github.com/dotnet/aspire-samples',
+    icon: 'seti:c-sharp',
+  },
+  {
     label: 'Community',
     link: '/community/contributors',
     icon: 'heart',
