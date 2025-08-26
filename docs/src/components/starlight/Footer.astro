@@ -2,11 +2,24 @@
 import Default from "@astrojs/starlight/components/Footer.astro";
 import FooterLinks from "../FooterLinks.astro";
 import MicrosoftFooter from "../MicrosoftFooter.astro";
+import Expand from "../Expand.astro";
+
+const isHomepage = Astro.locals.starlightRoute.id === "";
 ---
 
-<Default><slot /></Default>
-<FooterLinks />
-<MicrosoftFooter />
+{
+    isHomepage ? (
+        <Default><slot /></Default>
+        <FooterLinks />
+        <Expand summary="Made with 💜 by Aspire">          
+        </Expand>
+        <MicrosoftFooter />
+    ) : (
+        <Default><slot /></Default>
+        <FooterLinks />
+        <MicrosoftFooter />
+    )
+}
 
 <script is:inline>
     (() => {
