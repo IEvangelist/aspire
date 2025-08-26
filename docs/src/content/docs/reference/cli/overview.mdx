@@ -2,15 +2,16 @@
 title: Aspire CLI Overview
 prev: false
 sidebar:
-  order: 0
   label: Overview
 ---
+
+import { LinkButton } from "@astrojs/starlight/components";
 
 The Aspire CLI (`aspire` command) is a .NET global tool that provides command-line functionality to create, manage, run, and publish Aspire projects. Use the  Aspire CLI to streamline development workflows for distributed applications.
 
 The Aspire CLI is an interactive-first experience.
 
-- [Install the Aspire CLI](../install)
+<LinkButton href="../install" variant="primary">Install the Aspire CLI</LinkButton>
 
 ## Create projects
 
@@ -59,7 +60,7 @@ Dashboard:  https://localhost:17244/login?t=9db79f2885dae24ee06c6ef10290b8b2
 
 The `aspire add` command is an easy way to add official integration packages to your AppHost project. Use this as an alternative to a NuGet search through your IDE. You can run `aspire add <name|id>` if you know the name or NuGet ID of the integration package. If you omit a name or ID, the tool provides a list of packages to choose from. If you provide a partial name or ID, the tool filters the list of packages with items that match the provided value.
 
-## Publish Aspire applications (preview)
+## Publish Aspire solutions (preview)
 
 [_Command reference: `aspire publish`_](../commands/aspire-publish)
 
@@ -71,7 +72,7 @@ Some integrations automatically register a `PublishingCallbackAnnotation` for yo
 - `DockerComposeEnvironmentResource` generates docker-compose yaml.
 - `KubernetesEnvironmentResource` generates Kubernetes Helm charts.
 
-## Deploy Aspire applications (preview)
+## Deploy Aspire solutions (preview)
 
 [_Command reference: `aspire deploy`_](../commands/aspire-deploy)
 
@@ -82,7 +83,7 @@ As of Aspire 9.4, Aspire doesn't include any default deployment annotations for 
 > [!TIP]
 > Consider this a good way to deploy your Aspire solution to a staging or testing environment.
 
-## Manage Aspire configuration (preview)
+## Manage Aspire configuration
 
 [_Command reference: `aspire config`_](../commands/aspire-config)
 
