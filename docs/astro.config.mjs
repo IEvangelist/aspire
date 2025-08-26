@@ -67,7 +67,7 @@ export default defineConfig({
 				{
 					icon: 'blueSky',
 					label: 'BlueSky',
-					href: 'https://bsky.app/profile/dot.net'
+					href: 'https://bsky.app/profile/aspire.dev'
 				},
 				{
 					icon: 'youtube',
