@@ -116,7 +116,7 @@ export const sidebarTopics: StarlightSidebarTopicsUserConfig = [
   {
     label: 'Samples',
     link: 'https://github.com/dotnet/aspire-samples',
-    icon: 'seti:c-sharp',
+    icon: 'vscode',
   },
   {
     label: 'Community',
